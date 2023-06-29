@@ -14,6 +14,7 @@
 		1B3D753B2A4D5F0000235968 /* NewsApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1B3D75392A4D5F0000235968 /* NewsApp.xcdatamodeld */; };
 		1B3D753D2A4D5F0100235968 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B3D753C2A4D5F0100235968 /* Assets.xcassets */; };
 		1B3D75402A4D5F0100235968 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1B3D753E2A4D5F0100235968 /* LaunchScreen.storyboard */; };
+		1B3D754C2A4D60E500235968 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1B3D754B2A4D60E500235968 /* SnapKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B3D754C2A4D60E500235968 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,16 +60,40 @@
 		1B3D752F2A4D5F0000235968 /* NewsApp */ = {
 			isa = PBXGroup;
 			children = (
+				1B3D75472A4D601400235968 /* Flow */,
+				1B3D75492A4D604900235968 /* Assets */,
+				1B3D75482A4D601B00235968 /* System files */,
+			);
+			path = NewsApp;
+			sourceTree = "<group>";
+		};
+		1B3D75472A4D601400235968 /* Flow */ = {
+			isa = PBXGroup;
+			children = (
+				1B3D75342A4D5F0000235968 /* ViewController.swift */,
+			);
+			path = Flow;
+			sourceTree = "<group>";
+		};
+		1B3D75482A4D601B00235968 /* System files */ = {
+			isa = PBXGroup;
+			children = (
 				1B3D75302A4D5F0000235968 /* AppDelegate.swift */,
 				1B3D75322A4D5F0000235968 /* SceneDelegate.swift */,
-				1B3D75342A4D5F0000235968 /* ViewController.swift */,
 				1B3D75362A4D5F0000235968 /* Main.storyboard */,
-				1B3D753C2A4D5F0100235968 /* Assets.xcassets */,
 				1B3D753E2A4D5F0100235968 /* LaunchScreen.storyboard */,
 				1B3D75412A4D5F0100235968 /* Info.plist */,
 				1B3D75392A4D5F0000235968 /* NewsApp.xcdatamodeld */,
 			);
-			path = NewsApp;
+			path = "System files";
+			sourceTree = "<group>";
+		};
+		1B3D75492A4D604900235968 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				1B3D753C2A4D5F0100235968 /* Assets.xcassets */,
+			);
+			path = Assets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -86,6 +112,9 @@
 			dependencies = (
 			);
 			name = NewsApp;
+			packageProductDependencies = (
+				1B3D754B2A4D60E500235968 /* SnapKit */,
+			);
 			productName = NewsApp;
 			productReference = 1B3D752D2A4D5F0000235968 /* NewsApp.app */;
 			productType = "com.apple.product-type.application";
@@ -114,6 +143,9 @@
 				Base,
 			);
 			mainGroup = 1B3D75242A4D5F0000235968;
+			packageReferences = (
+				1B3D754A2A4D60E500235968 /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = 1B3D752E2A4D5F0000235968 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -298,10 +330,9 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8M5L73RX22;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = NewsApp/Info.plist;
+				INFOPLIST_FILE = "/Users/dkus/Desktop/NewsApp/NewsApp/System files/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -326,10 +357,9 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8M5L73RX22;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = NewsApp/Info.plist;
+				INFOPLIST_FILE = "/Users/dkus/Desktop/NewsApp/NewsApp/System files/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -367,6 +397,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		1B3D754A2A4D60E500235968 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.6.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1B3D754B2A4D60E500235968 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1B3D754A2A4D60E500235968 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		1B3D75392A4D5F0000235968 /* NewsApp.xcdatamodeld */ = {
