@@ -15,7 +15,7 @@ protocol HomeViewModelProtocol {
     var sections: [String] { get }
     
     func fetchStoriesSections()
-    func fetcStories(for section: String)
+    func fetchStories(for section: String)
     func fetchMostViewedStories()
 }
 
@@ -59,7 +59,7 @@ class HomeViewModel: HomeViewModelProtocol, ObservableObject {
         }
     }
     
-    func fetcStories(for section: String) {
+    func fetchStories(for section: String) {
         do {
             try networkService.fetchStories(for: section)
                 .receive(on: DispatchQueue.main)

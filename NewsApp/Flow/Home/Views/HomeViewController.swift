@@ -62,7 +62,7 @@ class HomeViewController: UIViewController {
                         image: UIImage(systemName: Constants.HomeViewController.Sections.sectionListIcons[sectionName] ?? "")
                     ) { [weak self] _ in
                         self?.sectionNavButton.setTitle(sectionName, for: .normal)
-                        self?.viewModel.fetcStories(for: sectionName.withLowercasedFirstLetter)
+                        self?.viewModel.fetchStories(for: sectionName.withLowercasedFirstLetter)
                     }
                 }
             }()
