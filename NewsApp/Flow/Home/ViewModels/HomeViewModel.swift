@@ -11,9 +11,11 @@ import Observation
 
 protocol HomeViewModelProtocol {
     var networkService: StoriesNetworkServiceProtocol { get }
+    var sectionArticlesViewModel: SectionModel? { get }
     var sections: [String] { get }
     
     func fetchStoriesSections()
+    func fetchArticles(for section: String)
 }
 
 @Observable
@@ -23,9 +25,10 @@ class HomeViewModel: HomeViewModelProtocol, ObservableObject {
     private var cancellableSet: Set<AnyCancellable> = []
     
     @ObservationIgnored var networkService: StoriesNetworkServiceProtocol
-    var sectionsViewModel: SectionListModel? = nil
+    var sectionListViewModel: SectionListModel? = nil
+    var sectionArticlesViewModel: SectionModel? = nil
     var sections: [String] {
-        sectionsViewModel?.results
+        sectionListViewModel?.results
             .filter { Constants.HomeViewController.Sections.sectionsList.contains($0.displayName) }
             .map(\.displayName) ?? []
     }
@@ -47,10 +50,28 @@ class HomeViewModel: HomeViewModelProtocol, ObservableObject {
                         print(error)
                     }
                 } receiveValue: { [weak self] value in
-                    self?.sectionsViewModel = value
+                    self?.sectionListViewModel = value
                 }
                 .store(in: &cancellableSet)
         } catch {
+            print(error)
+        }
+    }
+    
+    func fetchArticles(for section: String) {
+        do {
+            try networkService.fetchArticles(for: section)
+                .receive(on: DispatchQueue.main)
+                .sink { error in
+                    if case .failure = error {
+                        print(error)
+                    }
+                } receiveValue: { [weak self] value in
+                    self?.sectionArticlesViewModel = value
+                    print(self?.sectionArticlesViewModel)
+                }
+                .store(in: &cancellableSet)
+        } catch  {
             print(error)
         }
     }
