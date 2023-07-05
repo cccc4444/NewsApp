@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import OrderedCollections
 
 struct Constants {
     struct Secret {
@@ -16,5 +17,11 @@ struct Constants {
         static let navBarButtonDefaultName = "Default button"
         static let navBarTitlePadding: CGFloat = 5
         static let navBarImagePadding: CGFloat = 5
+        
+        struct Sections {
+            static let sectionsList = ["Arts", "Automobiles", "Books", "Business", "Education", "Fashion", "Food", "Health", "Movies", "Science", "Sports", "Travel", "World"]
+            static let sectionsIcons: [String] = SystemAssets.allCases.map { $0.assetName }
+            static let sectionListIcons = Dictionary(uniqueKeysWithValues: zip(sectionsList, sectionsIcons))
+        }
     }
 }

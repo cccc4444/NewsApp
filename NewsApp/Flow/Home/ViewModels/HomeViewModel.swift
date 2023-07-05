@@ -25,7 +25,9 @@ class HomeViewModel: HomeViewModelProtocol, ObservableObject {
     @ObservationIgnored var networkService: StoriesNetworkServiceProtocol
     var sectionsViewModel: SectionListModel? = nil
     var sections: [String] {
-        sectionsViewModel?.results.compactMap { $0.section } ?? .init()
+        sectionsViewModel?.results
+            .filter { Constants.HomeViewController.Sections.sectionsList.contains($0.displayName) }
+            .map(\.displayName) ?? []
     }
     
     // MARK: - Initializers

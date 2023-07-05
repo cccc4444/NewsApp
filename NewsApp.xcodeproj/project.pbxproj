@@ -34,6 +34,7 @@
 		1B3D757C2A4D809F00235968 /* Int+isInBetween.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3D757B2A4D809F00235968 /* Int+isInBetween.swift */; };
 		1B3D75812A4D819700235968 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3D75802A4D819700235968 /* HomeViewModel.swift */; };
 		1BAE18482A547EA200466360 /* ImageAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BAE18472A547EA200466360 /* ImageAssets.swift */; };
+		1BAE184B2A558B1300466360 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 1BAE184A2A558B1300466360 /* OrderedCollections */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +73,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1BAE184B2A558B1300466360 /* OrderedCollections in Frameworks */,
 				1B3D754C2A4D60E500235968 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -291,6 +293,7 @@
 			name = NewsApp;
 			packageProductDependencies = (
 				1B3D754B2A4D60E500235968 /* SnapKit */,
+				1BAE184A2A558B1300466360 /* OrderedCollections */,
 			);
 			productName = NewsApp;
 			productReference = 1B3D752D2A4D5F0000235968 /* NewsApp.app */;
@@ -322,6 +325,7 @@
 			mainGroup = 1B3D75242A4D5F0000235968;
 			packageReferences = (
 				1B3D754A2A4D60E500235968 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				1BAE18492A558B1300466360 /* XCRemoteSwiftPackageReference "swift-collections" */,
 			);
 			productRefGroup = 1B3D752E2A4D5F0000235968 /* Products */;
 			projectDirPath = "";
@@ -603,6 +607,14 @@
 				minimumVersion = 5.6.0;
 			};
 		};
+		1BAE18492A558B1300466360 /* XCRemoteSwiftPackageReference "swift-collections" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-collections.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.4;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -610,6 +622,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1B3D754A2A4D60E500235968 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		1BAE184A2A558B1300466360 /* OrderedCollections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1BAE18492A558B1300466360 /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = OrderedCollections;
 		};
 /* End XCSwiftPackageProductDependency section */
 
