@@ -37,6 +37,7 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         track()
+        viewModel.fetchMostViewedStories()
         viewModel.fetchStoriesSections()
     }
     
@@ -61,7 +62,7 @@ class HomeViewController: UIViewController {
                         image: UIImage(systemName: Constants.HomeViewController.Sections.sectionListIcons[sectionName] ?? "")
                     ) { [weak self] _ in
                         self?.sectionNavButton.setTitle(sectionName, for: .normal)
-                        self?.viewModel.fetchArticles(for: sectionName.withLowercasedFirstLetter)
+                        self?.viewModel.fetcStories(for: sectionName.withLowercasedFirstLetter)
                     }
                 }
             }()
