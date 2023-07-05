@@ -19,7 +19,7 @@ struct Constants {
         static let navBarImagePadding: CGFloat = 5
         
         struct Sections {
-            static let sectionsList = ["Arts", "Books", "Business", "Education", "Fashion", "Food", "Health", "Movies", "Science", "Sports", "Travel", "World"]
+            static let sectionsList = ["Arts", "Automobiles", "Books", "Business", "Education", "Fashion", "Food", "Health", "Movies", "Science", "Sports", "Travel", "World"]
             static let sectionsIcons: [String] = SystemAssets.allCases.map { $0.assetName }
             static let sectionListIcons = Dictionary(uniqueKeysWithValues: zip(sectionsList, sectionsIcons))
         }
