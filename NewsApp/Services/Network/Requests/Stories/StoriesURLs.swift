@@ -9,17 +9,20 @@ import Foundation
 
 enum StoriesURLs: URLBuilderProtocol {
     case sectionList
+    case contentInSection(section: String)
     
     var path: String {
         switch self {
         case .sectionList:
             "/svc/news/v3/content/section-list.json"
+        case .contentInSection(let section):
+            "/svc/news/v3/content/all/\(section).json"
         }
     }
     
     var queries: Encodable? {
         switch self {
-        case .sectionList:
+        case .sectionList, .contentInSection:
             ApiKeyQuery(apikey: Constants.Secret.apiKey)
         }
     }

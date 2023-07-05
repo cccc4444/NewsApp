@@ -55,12 +55,13 @@ class HomeViewController: UIViewController {
         sectionNavButton.menu = UIMenu(
             children: { viewModel
                 .sections
-                .map {
+                .map { sectionName in
                     UIAction(
-                        title: "\($0)",
-                        image: UIImage(systemName: Constants.HomeViewController.Sections.sectionListIcons[$0] ?? "")
-                    ) { _ in
-                        
+                        title: "\(sectionName)",
+                        image: UIImage(systemName: Constants.HomeViewController.Sections.sectionListIcons[sectionName] ?? "")
+                    ) { [weak self] _ in
+                        self?.sectionNavButton.setTitle(sectionName, for: .normal)
+                        self?.viewModel.fetchArticles(for: sectionName.withLowercasedFirstLetter)
                     }
                 }
             }()
