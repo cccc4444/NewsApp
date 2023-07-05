@@ -10,18 +10,23 @@ import Combine
 
 protocol HomeViewModelProtocol {
     var networkService: StoriesNetworkServiceProtocol { get }
-    var sectionListViewModel: Observable<SectionListModel?> { get }
+    var sectionListViewModelPublisher: Published<SectionListModel?>.Publisher { get }
+    var sections: [String] { get }
     
     func fetchStoriesSections()
 }
 
-class HomeViewModel: HomeViewModelProtocol {
-    
+class HomeViewModel: HomeViewModelProtocol, ObservableObject {
     // MARK: - Properies
     
+    @Published var sectionsViewModel: SectionListModel?
+    var sectionListViewModelPublisher: Published<SectionListModel?>.Publisher { $sectionsViewModel }
     var networkService: StoriesNetworkServiceProtocol
-    var sectionListViewModel: Observable<SectionListModel?> = Observable(nil)
     private var cancellableSet: Set<AnyCancellable> = []
+    
+    var sections: [String] {
+        sectionsViewModel?.results.compactMap { $0.section } ?? .init()
+    }
     
     // MARK: - Initializers
     
@@ -40,7 +45,7 @@ class HomeViewModel: HomeViewModelProtocol {
                         print(error)
                     }
                 } receiveValue: { [weak self] value in
-                    self?.sectionListViewModel = Observable(value)
+                    self?.sectionsViewModel = value
                 }
                 .store(in: &cancellableSet)
         } catch {

@@ -9,6 +9,12 @@ import Foundation
 
 struct Constants {
     struct Secret {
-        static var apiKey = "OUyhf3E7V9z5MMeDbrPht55FtNxBAsHU"
+        static let apiKey = "OUyhf3E7V9z5MMeDbrPht55FtNxBAsHU"
+    }
+    
+    struct HomeViewController {
+        static let navBarButtonDefaultName = "Default button"
+        static let navBarTitlePadding: CGFloat = 5
+        static let navBarImagePadding: CGFloat = 5
     }
 }
