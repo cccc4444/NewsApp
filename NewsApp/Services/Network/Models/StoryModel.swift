@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SectionModel: Codable {
+struct StoryModel: Codable {
     let status: String
     let copyright: String
     let section: String

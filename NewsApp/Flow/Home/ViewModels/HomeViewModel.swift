@@ -11,11 +11,12 @@ import Observation
 
 protocol HomeViewModelProtocol {
     var networkService: StoriesNetworkServiceProtocol { get }
-    var sectionArticlesViewModel: SectionModel? { get }
+    var sectionArticlesViewModel: StoryModel? { get }
     var sections: [String] { get }
     
     func fetchStoriesSections()
-    func fetchArticles(for section: String)
+    func fetcStories(for section: String)
+    func fetchMostViewedStories()
 }
 
 @Observable
@@ -26,7 +27,7 @@ class HomeViewModel: HomeViewModelProtocol, ObservableObject {
     
     @ObservationIgnored var networkService: StoriesNetworkServiceProtocol
     var sectionListViewModel: SectionListModel? = nil
-    var sectionArticlesViewModel: SectionModel? = nil
+    var sectionArticlesViewModel: StoryModel? = nil
     var sections: [String] {
         sectionListViewModel?.results
             .filter { Constants.HomeViewController.Sections.sectionsList.contains($0.displayName) }
@@ -58,9 +59,9 @@ class HomeViewModel: HomeViewModelProtocol, ObservableObject {
         }
     }
     
-    func fetchArticles(for section: String) {
+    func fetcStories(for section: String) {
         do {
-            try networkService.fetchArticles(for: section)
+            try networkService.fetchStories(for: section)
                 .receive(on: DispatchQueue.main)
                 .sink { error in
                     if case .failure = error {
@@ -73,6 +74,23 @@ class HomeViewModel: HomeViewModelProtocol, ObservableObject {
                 .store(in: &cancellableSet)
         } catch  {
             print(error)
+        }
+    }
+    
+    func fetchMostViewedStories() {
+        do {
+            try networkService.fetchMostViewedStories(days: 1)
+                .receive(on: DispatchQueue.main)
+                .sink { error in
+                    if case .failure = error {
+                        print(error)
+                    }
+                } receiveValue: { [weak self] value in
+                    print(value)
+                }
+                .store(in: &cancellableSet)
+        } catch {
+            
         }
     }
 }
