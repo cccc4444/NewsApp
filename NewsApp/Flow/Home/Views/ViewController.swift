@@ -13,7 +13,7 @@ class HomeViewController: UIViewController {
     
     // MARK: - UI Elements
     
-    private lazy var centerNavigationButton: UIButton = {
+    private lazy var sectionNavButton: UIButton = {
         var configuration = UIButton.Configuration.borderless()
         configuration.title = Constants.HomeViewController.navBarButtonDefaultName
         configuration.baseForegroundColor = .black
@@ -46,24 +46,29 @@ class HomeViewController: UIViewController {
         } onChange: {
             Task {
                 @MainActor [weak self] in
-                self?.setupNavBarButton()
+                self?.setupSectionButton()
             }
         }
     }
     
-    private func setupNavBarButton() {
-        centerNavigationButton.menu = UIMenu(title: "", children: { viewModel
-            .sections
-            .map {
-                UIAction(
-                    title: "\($0)",
-                    image: UIImage(systemName: "heart.fill")) { _ in
+    private func setupSectionButton() {
+        sectionNavButton.menu = UIMenu(
+            children: { viewModel
+                .sections
+                .map {
+                    UIAction(
+                        title: "\($0)",
+                        image: UIImage(systemName: Constants.HomeViewController.Sections.sectionListIcons[$0] ?? "")
+                    ) { _ in
+                        
                     }
-            }}())
+                }
+            }()
+        )
     }
     
     private func setupUI() {
         view.backgroundColor = .white
-        navigationItem.titleView = centerNavigationButton
+        navigationItem.titleView = sectionNavButton
     }
 }
