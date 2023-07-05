@@ -16,7 +16,7 @@ enum StoriesURLs: URLBuilderProtocol {
         case .sectionList:
             "/svc/news/v3/content/section-list.json"
         case .contentInSection(let section):
-            "/svc/news/v3/content/all/\(section).json"
+            "/svc/topstories/v2/\(section).json"
         }
     }
     
