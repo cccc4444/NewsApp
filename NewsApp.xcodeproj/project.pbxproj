@@ -33,7 +33,6 @@
 		1B3D75782A4D803A00235968 /* URLResponse+checks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3D75772A4D803A00235968 /* URLResponse+checks.swift */; };
 		1B3D757C2A4D809F00235968 /* Int+isInBetween.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3D757B2A4D809F00235968 /* Int+isInBetween.swift */; };
 		1B3D75812A4D819700235968 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3D75802A4D819700235968 /* HomeViewModel.swift */; };
-		1B3D75842A4D860E00235968 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3D75832A4D860E00235968 /* Observable.swift */; };
 		1BAE18482A547EA200466360 /* ImageAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BAE18472A547EA200466360 /* ImageAssets.swift */; };
 /* End PBXBuildFile section */
 
@@ -65,7 +64,6 @@
 		1B3D75772A4D803A00235968 /* URLResponse+checks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLResponse+checks.swift"; sourceTree = "<group>"; };
 		1B3D757B2A4D809F00235968 /* Int+isInBetween.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+isInBetween.swift"; sourceTree = "<group>"; };
 		1B3D75802A4D819700235968 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
-		1B3D75832A4D860E00235968 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		1BAE18472A547EA200466360 /* ImageAssets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageAssets.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -271,7 +269,6 @@
 		1B3D75822A4D85F800235968 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				1B3D75832A4D860E00235968 /* Observable.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -376,7 +373,6 @@
 				1B3D75622A4D77FC00235968 /* URLComponents+setQueryItems.swift in Sources */,
 				1B3D757C2A4D809F00235968 /* Int+isInBetween.swift in Sources */,
 				1B3D75562A4D678700235968 /* SectionListModel.swift in Sources */,
-				1B3D75842A4D860E00235968 /* Observable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,23 +7,23 @@
 
 import Foundation
 import Combine
+import Observation
 
 protocol HomeViewModelProtocol {
     var networkService: StoriesNetworkServiceProtocol { get }
-    var sectionListViewModelPublisher: Published<SectionListModel?>.Publisher { get }
     var sections: [String] { get }
     
     func fetchStoriesSections()
 }
 
+@Observable
 class HomeViewModel: HomeViewModelProtocol, ObservableObject {
     // MARK: - Properies
     
-    @Published var sectionsViewModel: SectionListModel?
-    var sectionListViewModelPublisher: Published<SectionListModel?>.Publisher { $sectionsViewModel }
-    var networkService: StoriesNetworkServiceProtocol
     private var cancellableSet: Set<AnyCancellable> = []
     
+    @ObservationIgnored var networkService: StoriesNetworkServiceProtocol
+    var sectionsViewModel: SectionListModel? = nil
     var sections: [String] {
         sectionsViewModel?.results.compactMap { $0.section } ?? .init()
     }

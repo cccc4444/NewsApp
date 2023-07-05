@@ -6,8 +6,8 @@
 //
 
 import UIKit
-import Combine
 import SnapKit
+import Observation
 
 class HomeViewController: UIViewController {
     
@@ -29,24 +29,26 @@ class HomeViewController: UIViewController {
     
     // MARK: - Properties
     
-    private var cancellables: Set<AnyCancellable> = []
-    private var viewModel = HomeViewModel()
-    
+    private var viewModel: HomeViewModelProtocol = HomeViewModel()
+
     // MARK: - Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        track()
         viewModel.fetchStoriesSections()
-        bindSectionsViewModel()
     }
     
-    private func bindSectionsViewModel() {
-        viewModel.sectionListViewModelPublisher
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] sections in
+    private func track() {
+        withObservationTracking {
+            let _ = self.viewModel.sections
+        } onChange: {
+            Task {
+                @MainActor [weak self] in
                 self?.setupNavBarButton()
-            }.store(in: &cancellables)
+            }
+        }
     }
     
     private func setupNavBarButton() {
