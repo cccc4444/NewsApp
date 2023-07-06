@@ -7,9 +7,13 @@
 
 import UIKit
 import SnapKit
-import Observation
+import Combine
 
-class HomeViewController: UIViewController {
+protocol HomeViewContollerProtocol: AnyObject {
+    func reloadTableData()
+}
+
+class HomeViewController: UIViewController, HomeViewContollerProtocol {
     
     // MARK: - UI Elements
     
@@ -27,29 +31,49 @@ class HomeViewController: UIViewController {
         return button
     }()
     
+    private lazy var storiesTableView: UITableView = {
+        let tableView = UITableView()
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.separatorStyle = .none
+        tableView.showsVerticalScrollIndicator = false
+        return tableView
+    }()
+    
     // MARK: - Properties
     
     private var viewModel: HomeViewModelProtocol = HomeViewModel()
+    private var cancellables: Set<AnyCancellable> = []
 
     // MARK: - Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        track()
+        
+        trackSections()
+        trackMostViewedStories()
+        
         viewModel.fetchMostViewedStories()
         viewModel.fetchStoriesSections()
     }
     
-    private func track() {
-        withObservationTracking {
-            let _ = self.viewModel.sections
-        } onChange: {
-            Task {
-                @MainActor [weak self] in
+    private func trackSections() {
+        viewModel.sectionsPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
                 self?.setupSectionButton()
             }
-        }
+            .store(in: &cancellables)
+    }
+    
+    private func trackMostViewedStories() {
+        viewModel.mostViewedStoriesPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.storiesTableView.reloadData()
+            }
+            .store(in: &cancellables)
     }
     
     private func setupSectionButton() {
@@ -69,8 +93,40 @@ class HomeViewController: UIViewController {
         )
     }
     
+    func reloadTableData() {
+        DispatchQueue.main.async {
+            self.storiesTableView.reloadData()
+        }
+    }
+    
+    // MARK: - Configurational methods
+    
     private func setupUI() {
         view.backgroundColor = .white
         navigationItem.titleView = sectionNavButton
+        setupVacationsTableView()
+    }
+    
+    private func setupVacationsTableView() {
+        view.addSubview(storiesTableView)
+        storiesTableView.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalToSuperview()
+        }
+    }
+}
+
+// MARK: - UITableView
+
+extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel.mostViewdStoriesCount
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell()
+        cell.backgroundColor = .black
+        return cell
     }
 }
