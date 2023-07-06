@@ -13,7 +13,7 @@ struct StoryModel: Codable {
     let section: String
     let lastUpdated: String
     let numResults: Int
-    let results: [Article]
+    let results: [ArticleModel]
     
     private enum CodingKeys: String, CodingKey {
         case status, copyright, section
@@ -23,7 +23,7 @@ struct StoryModel: Codable {
     }
 }
 
-struct Article: Codable {
+struct ArticleModel: Codable {
     let section: String
     let subsection: String
     let title: String

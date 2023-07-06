@@ -11,7 +11,7 @@ struct SectionListModel: Codable {
     let status: String
     let copyright: String
     let numResults: Int
-    let results: [Result]
+    let results: [SectionModel]
     
     enum CodingKeys: String, CodingKey {
         case status
@@ -21,7 +21,7 @@ struct SectionListModel: Codable {
     }
 }
 
-struct Result: Codable {
+struct SectionModel: Codable {
     let section: String
     let displayName: String
     

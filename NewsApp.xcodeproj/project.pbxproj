@@ -243,6 +243,7 @@
 		1B3D757D2A4D815C00235968 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				1BAE18532A569ACB00466360 /* Models */,
 				1B3D757F2A4D817E00235968 /* ViewModels */,
 				1B3D757E2A4D817700235968 /* Views */,
 			);
@@ -269,6 +270,13 @@
 			isa = PBXGroup;
 			children = (
 				1B3D75752A4D7F3200235968 /* HTTPResponse.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		1BAE18532A569ACB00466360 /* Models */ = {
+			isa = PBXGroup;
+			children = (
 				1B3D75552A4D678700235968 /* SectionListModel.swift */,
 				1BAE184C2A559E9100466360 /* StoryModel.swift */,
 				1BAE18502A560FB100466360 /* MostViewedStoryModel.swift */,

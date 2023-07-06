@@ -8,31 +8,46 @@
 import Foundation
 import Combine
 import Observation
+import SwiftUI
 
 protocol HomeViewModelProtocol {
+    var controller: HomeViewContollerProtocol? { get set }
     var networkService: StoriesNetworkServiceProtocol { get }
-    var sectionArticlesViewModel: StoryModel? { get }
+    
+    var sectionsPublisher: Published<[SectionModel]?>.Publisher { get }
+    var mostViewedStoriesPublisher: Published<[MostViewedArticleModel]?>.Publisher { get }
     var sections: [String] { get }
+    var mostViewdStoriesCount: Int { get }
     
     func fetchStoriesSections()
     func fetchStories(for section: String)
     func fetchMostViewedStories()
 }
 
-@Observable
 class HomeViewModel: HomeViewModelProtocol, ObservableObject {
+    
     // MARK: - Properies
     
     private var cancellableSet: Set<AnyCancellable> = []
     
-    @ObservationIgnored var networkService: StoriesNetworkServiceProtocol
-    var sectionListViewModel: SectionListModel? = nil
-    var sectionArticlesViewModel: StoryModel? = nil
+    var networkService: StoriesNetworkServiceProtocol
+    weak var controller: HomeViewContollerProtocol?
+    
+    @Published var sectionViewModel: [SectionModel]?
+    var sectionsPublisher: Published<[SectionModel]?>.Publisher { $sectionViewModel }
     var sections: [String] {
-        sectionListViewModel?.results
+        sectionViewModel?
             .filter { Constants.HomeViewController.Sections.sectionsList.contains($0.displayName) }
             .map(\.displayName) ?? []
     }
+    
+    @Published var mostViewedStoriesViewModel: [MostViewedArticleModel]?
+    var mostViewedStoriesPublisher: Published<[MostViewedArticleModel]?>.Publisher { $mostViewedStoriesViewModel }
+    var mostViewdStoriesCount: Int {
+        mostViewedStoriesViewModel?.count ?? .zero
+    }
+    
+    var sectionStoriesViewModel: [ArticleModel]?
     
     // MARK: - Initializers
     
@@ -51,7 +66,7 @@ class HomeViewModel: HomeViewModelProtocol, ObservableObject {
                         print(error)
                     }
                 } receiveValue: { [weak self] value in
-                    self?.sectionListViewModel = value
+                    self?.sectionViewModel = value.results
                 }
                 .store(in: &cancellableSet)
         } catch {
@@ -68,8 +83,7 @@ class HomeViewModel: HomeViewModelProtocol, ObservableObject {
                         print(error)
                     }
                 } receiveValue: { [weak self] value in
-                    self?.sectionArticlesViewModel = value
-                    print(self?.sectionArticlesViewModel)
+                    self?.sectionStoriesViewModel = value.results
                 }
                 .store(in: &cancellableSet)
         } catch  {
@@ -86,7 +100,7 @@ class HomeViewModel: HomeViewModelProtocol, ObservableObject {
                         print(error)
                     }
                 } receiveValue: { [weak self] value in
-                    print(value)
+                    self?.mostViewedStoriesViewModel = value.results
                 }
                 .store(in: &cancellableSet)
         } catch {

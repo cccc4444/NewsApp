@@ -11,14 +11,14 @@ struct MostViewedStoryModel: Codable {
     let status: String
     let copyright: String
     let numResults: Int
-    let results: [MostViewedArticle]
+    let results: [MostViewedArticleModel]
     
     private enum CodingKeys: String, CodingKey {
         case status, copyright, numResults = "num_results", results
     }
 }
 
-struct MostViewedArticle: Codable {
+struct MostViewedArticleModel: Codable {
     let uri: String
     let url: String
     let id: Int
