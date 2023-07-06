@@ -45,6 +45,10 @@ struct MostViewedArticleModel: Codable {
     private enum CodingKeys: String, CodingKey {
         case uri, url, id, assetId = "asset_id", source, publishedDate = "published_date", updated, section, subsection, nytdsection, adxKeywords = "adx_keywords", column, byline, type, title, abstract, desFacet = "des_facet", orgFacet = "org_facet", perFacet = "per_facet", geoFacet = "geo_facet", media, etaId = "eta_id"
     }
+    
+    var mediaURL: String? {
+        media.first?.mediaMetadata[1].url
+    }
 }
 
 struct Media: Codable {
@@ -70,4 +74,9 @@ struct MediaMetadata: Codable {
     private enum CodingKeys: String, CodingKey {
         case url, format, height, width, itemType = "item_type"
     }
+}
+
+
+extension MostViewedArticleModel {
+    static let empty: Self = .init(uri: "", url: "", id: 1, assetId: 1, source: "", publishedDate: "", updated: "", section: "", subsection: "", nytdsection: "", adxKeywords: "", column: nil, byline: "", type: "", title: "", abstract: "", desFacet: [], orgFacet: [], perFacet: [], geoFacet: [], media: [], etaId: 0)
 }

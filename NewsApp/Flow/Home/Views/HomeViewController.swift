@@ -120,13 +120,15 @@ class HomeViewController: UIViewController, HomeViewContollerProtocol {
 // MARK: - UITableView
 
 extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.mostViewdStoriesCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        cell.backgroundColor = .black
+        let article = viewModel.getArticle(for: indexPath)
+        let cell: StoriesTableViewCell = tableView.dequeueCell()
+        cell.setup(model: article)
         return cell
     }
 }

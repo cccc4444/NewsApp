@@ -22,6 +22,7 @@ protocol HomeViewModelProtocol {
     func fetchStoriesSections()
     func fetchStories(for section: String)
     func fetchMostViewedStories()
+    func getArticle(for indexPath: IndexPath) -> MostViewedArticleModel
 }
 
 class HomeViewModel: HomeViewModelProtocol, ObservableObject {
@@ -56,6 +57,12 @@ class HomeViewModel: HomeViewModelProtocol, ObservableObject {
     }
     
     // MARK: - Methods
+    
+    func getArticle(for indexPath: IndexPath) -> MostViewedArticleModel {
+        mostViewedStoriesViewModel?[safe: indexPath.row] ?? .empty
+    }
+    
+    // MARK: - Networking Methods
     
     func fetchStoriesSections() {
         do {
