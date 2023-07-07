@@ -45,7 +45,6 @@ class HomeViewController: UIViewController, HomeViewContollerProtocol {
         tableView.dataSource = self
         tableView.separatorStyle = .none
         tableView.showsVerticalScrollIndicator = false
-        storiesTableView.addSubview(refreshControl)
         return tableView
     }()
     
@@ -127,6 +126,7 @@ class HomeViewController: UIViewController, HomeViewContollerProtocol {
     
     private func setupVacationsTableView() {
         view.addSubview(storiesTableView)
+        storiesTableView.addSubview(refreshControl)
         
         storiesTableView.snp.makeConstraints {
             $0.top.equalToSuperview()

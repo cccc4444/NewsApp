@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 
 enum SystemAssets: CaseIterable {
+    case top
     case art
     case automobiles
     case books
@@ -29,6 +30,8 @@ enum SystemAssets: CaseIterable {
     
     var assetName: String {
         switch self {
+        case .top:
+            "popcorn.fill"
         case .art:
             "photo.artframe"
         case .automobiles:
