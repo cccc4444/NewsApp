@@ -18,14 +18,22 @@ protocol HomeViewModelProtocol {
     var mostViewedStoriesPublisher: Published<[MostViewedArticleModel]?>.Publisher { get }
     var sections: [String] { get }
     var mostViewdStoriesCount: Int { get }
-    
+}
+
+protocol HomeViewModelNetworkingProtocol {
     func fetchStoriesSections()
     func fetchStories(for section: String)
-    func fetchMostViewedStories()
+    func fetchMostViewedStories(isRefresh: Bool)
     func getArticle(for indexPath: IndexPath) -> MostViewedArticleModel
 }
 
-class HomeViewModel: HomeViewModelProtocol, ObservableObject {
+extension HomeViewModelNetworkingProtocol {
+    func fetchMostViewedStories(isRefresh: Bool = false) {
+        fetchMostViewedStories(isRefresh: isRefresh)
+    }
+}
+
+class HomeViewModel: HomeViewModelProtocol, HomeViewModelNetworkingProtocol, ObservableObject {
     
     // MARK: - Properies
     
@@ -94,11 +102,10 @@ class HomeViewModel: HomeViewModelProtocol, ObservableObject {
                 }
                 .store(in: &cancellableSet)
         } catch  {
-            print(error)
         }
     }
     
-    func fetchMostViewedStories() {
+    func fetchMostViewedStories(isRefresh: Bool) {
         do {
             try networkService.fetchMostViewedStories(days: 1)
                 .receive(on: DispatchQueue.main)
@@ -108,10 +115,13 @@ class HomeViewModel: HomeViewModelProtocol, ObservableObject {
                     }
                 } receiveValue: { [weak self] value in
                     self?.mostViewedStoriesViewModel = value.results
+                    if isRefresh {
+                        self?.controller?.endRefreshing()
+                    }
                 }
                 .store(in: &cancellableSet)
         } catch {
-            
+            print(error)
         }
     }
 }
