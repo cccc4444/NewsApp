@@ -27,7 +27,7 @@ class HomeViewController: UIViewController, HomeViewContollerProtocol {
     
     private lazy var sectionNavButton: UIButton = {
         var configuration = UIButton.Configuration.borderless()
-        configuration.title = Constants.HomeViewController.navBarButtonDefaultName
+        configuration.title = Constants.HomeViewController.defaultSectionName
         configuration.baseForegroundColor = .black
         configuration.image = UIImage(named: .chevron)
         configuration.titlePadding = Constants.HomeViewController.navBarTitlePadding
@@ -75,7 +75,7 @@ class HomeViewController: UIViewController, HomeViewContollerProtocol {
         viewModel.sectionsPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
-                self?.setupSectionButton()
+                self?.setupSectionActions()
             }
             .store(in: &cancellables)
     }
@@ -89,21 +89,34 @@ class HomeViewController: UIViewController, HomeViewContollerProtocol {
             .store(in: &cancellables)
     }
     
-    private func setupSectionButton() {
+    private func setupSectionActions() {        
         sectionNavButton.menu = UIMenu(
-            children: { viewModel
-                .sections
-                .map { sectionName in
-                    UIAction(
-                        title: "\(sectionName)",
-                        image: UIImage(systemName: Constants.HomeViewController.Sections.sectionListIcons[sectionName] ?? "")
-                    ) { [weak self] _ in
-                        self?.sectionNavButton.setTitle(sectionName, for: .normal)
-                        self?.viewModel.fetchStories(for: sectionName.withLowercasedFirstLetter)
-                    }
-                }
-            }()
+            children: viewModel.sections
+                .flatMap { createActionForSection($0) }
         )
+    }
+    
+    private func createActionForSection(_ section: HomeViewModel.SectionType) -> [UIAction] {
+        switch section {
+        case let .top(name):
+            return [UIAction(
+                title: "\(name)",
+                image: UIImage(systemNamed: .top)
+            ) { [weak self] _ in
+                self?.sectionNavButton.setTitle(name, for: .normal)
+                self?.viewModel.fetchMostViewedStories()
+            }]
+        case let .general(sectionNames):
+            return sectionNames.map { name in
+                return UIAction(
+                    title: "\(name)",
+                    image: UIImage(systemName: Constants.HomeViewController.Sections.sectionListIcons[name] ?? "")
+                ) { [weak self] _ in
+                    self?.sectionNavButton.setTitle(name, for: .normal)
+                    self?.viewModel.fetchStories(for: name.withLowercasedFirstLetter)
+                }
+            }
+        }
     }
     
     func reloadTableData() {
@@ -127,6 +140,10 @@ class HomeViewController: UIViewController, HomeViewContollerProtocol {
     private func setupVacationsTableView() {
         view.addSubview(storiesTableView)
         storiesTableView.addSubview(refreshControl)
+        
+        sectionNavButton.snp.makeConstraints { make in
+            make.width.equalTo(30)
+        }
         
         storiesTableView.snp.makeConstraints {
             $0.top.equalToSuperview()

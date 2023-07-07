@@ -16,7 +16,7 @@ protocol HomeViewModelProtocol {
     
     var sectionsPublisher: Published<[SectionModel]?>.Publisher { get }
     var mostViewedStoriesPublisher: Published<[MostViewedArticleModel]?>.Publisher { get }
-    var sections: [String] { get }
+    var sections: [HomeViewModel.SectionType] { get }
     var mostViewdStoriesCount: Int { get }
 }
 
@@ -35,6 +35,12 @@ extension HomeViewModelNetworkingProtocol {
 
 class HomeViewModel: HomeViewModelProtocol, HomeViewModelNetworkingProtocol, ObservableObject {
     
+    enum SectionType {
+        case top(name: String = Constants.HomeViewController.defaultSectionName)
+        case general(sectionNames: [String])
+    }
+    
+    
     // MARK: - Properies
     
     private var cancellableSet: Set<AnyCancellable> = []
@@ -44,10 +50,12 @@ class HomeViewModel: HomeViewModelProtocol, HomeViewModelNetworkingProtocol, Obs
     
     @Published var sectionViewModel: [SectionModel]?
     var sectionsPublisher: Published<[SectionModel]?>.Publisher { $sectionViewModel }
-    var sections: [String] {
-        sectionViewModel?
+    var sections: [SectionType] {
+        let filteredSections = sectionViewModel?
             .filter { Constants.HomeViewController.Sections.sectionsList.contains($0.displayName) }
             .map(\.displayName) ?? []
+        
+        return [.top()] + [.general(sectionNames: filteredSections)]
     }
     
     @Published var mostViewedStoriesViewModel: [MostViewedArticleModel]?
