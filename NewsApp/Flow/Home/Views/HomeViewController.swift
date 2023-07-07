@@ -11,11 +11,19 @@ import Combine
 
 protocol HomeViewContollerProtocol: AnyObject {
     func reloadTableData()
+    func endRefreshing()
 }
 
 class HomeViewController: UIViewController, HomeViewContollerProtocol {
     
     // MARK: - UI Elements
+    
+    private lazy var refreshControl: UIRefreshControl = {
+        var control = UIRefreshControl()
+        control.layer.zPosition = -1
+        control.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        return control
+    }()
     
     private lazy var sectionNavButton: UIButton = {
         var configuration = UIButton.Configuration.borderless()
@@ -37,18 +45,20 @@ class HomeViewController: UIViewController, HomeViewContollerProtocol {
         tableView.dataSource = self
         tableView.separatorStyle = .none
         tableView.showsVerticalScrollIndicator = false
+        storiesTableView.addSubview(refreshControl)
         return tableView
     }()
     
     // MARK: - Properties
     
-    private var viewModel: HomeViewModelProtocol = HomeViewModel()
+    private var viewModel: (HomeViewModelProtocol & HomeViewModelNetworkingProtocol) = HomeViewModel()
     private var cancellables: Set<AnyCancellable> = []
 
     // MARK: - Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.controller = self
         setupUI()
         
         trackSections()
@@ -56,6 +66,10 @@ class HomeViewController: UIViewController, HomeViewContollerProtocol {
         
         viewModel.fetchMostViewedStories()
         viewModel.fetchStoriesSections()
+    }
+    
+    @objc func refresh() {
+        viewModel.fetchMostViewedStories(isRefresh: true)
     }
     
     private func trackSections() {
@@ -99,6 +113,10 @@ class HomeViewController: UIViewController, HomeViewContollerProtocol {
         }
     }
     
+    func endRefreshing() {
+        refreshControl.endRefreshing()
+    }
+    
     // MARK: - Configurational methods
     
     private func setupUI() {
@@ -109,6 +127,7 @@ class HomeViewController: UIViewController, HomeViewContollerProtocol {
     
     private func setupVacationsTableView() {
         view.addSubview(storiesTableView)
+        
         storiesTableView.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.leading.trailing.equalToSuperview()
