@@ -7,8 +7,6 @@
 
 import Foundation
 
-import Foundation
-
 extension URLComponents {
     mutating func setQueryItems(with parameters: [String: String]) {
         queryItems = parameters.asUrlQueryItemsFromDict
