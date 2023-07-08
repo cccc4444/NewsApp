@@ -45,10 +45,6 @@ struct MostViewedArticleModel: Codable {
     private enum CodingKeys: String, CodingKey {
         case uri, url, id, assetId = "asset_id", source, publishedDate = "published_date", updated, section, subsection, nytdsection, adxKeywords = "adx_keywords", column, byline, type, title, abstract, desFacet = "des_facet", orgFacet = "org_facet", perFacet = "per_facet", geoFacet = "geo_facet", media, etaId = "eta_id"
     }
-    
-    var mediaURL: String? {
-        media.first?.mediaMetadata[1].url
-    }
 }
 
 struct Media: Codable {

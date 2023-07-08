@@ -62,13 +62,10 @@ class HomeViewController: UIViewController, HomeViewContollerProtocol {
         
         trackSections()
         trackMostViewedStories()
+        trackGeneralStories() 
         
         viewModel.fetchMostViewedStories()
         viewModel.fetchStoriesSections()
-    }
-    
-    @objc func refresh() {
-        viewModel.fetchMostViewedStories(isRefresh: true)
     }
     
     private func trackSections() {
@@ -82,6 +79,15 @@ class HomeViewController: UIViewController, HomeViewContollerProtocol {
     
     private func trackMostViewedStories() {
         viewModel.mostViewedStoriesPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.storiesTableView.reloadData()
+            }
+            .store(in: &cancellables)
+    }
+    
+    private func trackGeneralStories() {
+        viewModel.sectionStoriesViewModelPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 self?.storiesTableView.reloadData()
@@ -104,7 +110,7 @@ class HomeViewController: UIViewController, HomeViewContollerProtocol {
                 image: UIImage(systemNamed: .top)
             ) { [weak self] _ in
                 self?.sectionNavButton.setTitle(name, for: .normal)
-                self?.viewModel.fetchMostViewedStories()
+                self?.viewModel.sectionChosen(sectionName: name, isGeneralSection: false)
             }]
         case let .general(sectionNames):
             return sectionNames.map { name in
@@ -113,7 +119,7 @@ class HomeViewController: UIViewController, HomeViewContollerProtocol {
                     image: UIImage(systemName: Constants.HomeViewController.Sections.sectionListIcons[name] ?? "")
                 ) { [weak self] _ in
                     self?.sectionNavButton.setTitle(name, for: .normal)
-                    self?.viewModel.fetchStories(for: name.withLowercasedFirstLetter)
+                    self?.viewModel.sectionChosen(sectionName: name, isGeneralSection: true)
                 }
             }
         }
@@ -127,6 +133,12 @@ class HomeViewController: UIViewController, HomeViewContollerProtocol {
     
     func endRefreshing() {
         refreshControl.endRefreshing()
+    }
+    
+    // MARK: - Actions
+    
+    @objc private func refresh() {
+        viewModel.refreshStories()
     }
     
     // MARK: - Configurational methods
@@ -158,7 +170,7 @@ class HomeViewController: UIViewController, HomeViewContollerProtocol {
 extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.mostViewdStoriesCount
+        return viewModel.storiesCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

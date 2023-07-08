@@ -60,7 +60,8 @@ class StoriesTableViewCell: UITableViewCell {
     
     // MARK: - Mehods
     
-    func setup(model: MostViewedArticleModel) {
+    func setup(model: DisplayableArticle?) {
+        guard let model else { return }
         title.text = model.title
         author.text = model.byline
         setupImage(url: model.mediaURL)
