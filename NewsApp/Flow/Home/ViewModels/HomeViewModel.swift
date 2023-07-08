@@ -143,7 +143,9 @@ class HomeViewModel: HomeViewModelProtocol, HomeViewModelNetworkingProtocol, Obs
                         self?.controller?.endRefreshing()
                     }
                 } receiveValue: { [weak self] value in
-                    self?.sectionStoriesViewModel = value.results
+                    self?.sectionStoriesViewModel = value.results.filter {
+                        $0.title.isNotEmpty
+                    }
                     if isRefresh {
                         self?.controller?.endRefreshing()
                     }
@@ -164,7 +166,9 @@ class HomeViewModel: HomeViewModelProtocol, HomeViewModelNetworkingProtocol, Obs
                         self?.controller?.endRefreshing()
                     }
                 } receiveValue: { [weak self] value in
-                    self?.mostViewedStoriesViewModel = value.results
+                    self?.mostViewedStoriesViewModel = value.results.filter {
+                        $0.title.isNotEmpty
+                    }
                     if isRefresh {
                         self?.controller?.endRefreshing()
                     }

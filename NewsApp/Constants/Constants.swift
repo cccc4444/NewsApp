@@ -26,3 +26,4 @@ struct Constants {
         }
     }
 }
+// swiftlint:enable nesting
