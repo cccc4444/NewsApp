@@ -18,7 +18,7 @@ class StoriesTableViewCell: UITableViewCell {
     private lazy var coverImage: CustomImageView = {
         let view = CustomImageView()
         view.cornerRadius = 5
-        view.image = .checkmark
+        view.image = UIImage(systemName: "photo.fill")
         view.contentMode = .scaleAspectFill
         view.clipsToBounds = true
         return view
@@ -26,7 +26,6 @@ class StoriesTableViewCell: UITableViewCell {
     
     private lazy var title: UILabel = {
         let label = UILabel()
-        label.text = "My fridge started melting on 2020 before oaks started blooming"
         label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
         label.textColor = .black
         label.lineBreakMode = .byTruncatingTail
@@ -37,7 +36,6 @@ class StoriesTableViewCell: UITableViewCell {
     
     private lazy var author: UILabel = {
         let label = UILabel()
-        label.text = "by Danylo Kush and Co"
         label.font = UIFont.systemFont(ofSize: 12, weight: .regular)
         label.textColor = .secondaryLabel
         label.adjustsFontSizeToFitWidth = false
@@ -61,7 +59,7 @@ class StoriesTableViewCell: UITableViewCell {
     // MARK: - Mehods
     
     func setup(model: DisplayableArticle?) {
-        guard let model, model.title.isNotEmpty else { return }
+        guard let model else { return }
         title.text = model.title
         author.text = model.byline
         setupImage(url: model.mediaURL)
