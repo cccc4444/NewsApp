@@ -11,7 +11,7 @@ import Observation
 import SwiftUI
 
 protocol HomeViewModelProtocol {
-    var controller: HomeViewContollerProtocol? { get set }
+    var controller: (AlertProtocol & HomeViewContollerProtocol)? { get set }
     var networkService: StoriesNetworkServiceProtocol { get }
     
     var sectionsPublisher: Published<[SectionModel]?>.Publisher { get }
@@ -52,7 +52,7 @@ class HomeViewModel: HomeViewModelProtocol, HomeViewModelNetworkingProtocol, Obs
     private var cancellableSet: Set<AnyCancellable> = []
     
     var networkService: StoriesNetworkServiceProtocol
-    weak var controller: HomeViewContollerProtocol?
+    weak var controller: (AlertProtocol & HomeViewContollerProtocol)?
     
     private var isGeneralSectionType: Bool?
     private var selectedSection: String
@@ -120,16 +120,16 @@ class HomeViewModel: HomeViewModelProtocol, HomeViewModelNetworkingProtocol, Obs
         do {
             try networkService.fetchSectionList()
                 .receive(on: DispatchQueue.main)
-                .sink { error in
-                    if case .failure = error {
-                        print(error)
+                .sink { [weak self] error in
+                    if case let .failure(error as HTTPErrorResponse) = error {
+                        self?.controller?.present(alert: .rateLimit(message: error.fault.faultString))
                     }
                 } receiveValue: { [weak self] value in
                     self?.sectionViewModel = value.results
                 }
                 .store(in: &cancellableSet)
         } catch {
-            print(error)
+            controller?.present(alert: .badServerResponse)
         }
     }
     
@@ -137,9 +137,10 @@ class HomeViewModel: HomeViewModelProtocol, HomeViewModelNetworkingProtocol, Obs
         do {
             try networkService.fetchStories(for: section)
                 .receive(on: DispatchQueue.main)
-                .sink { error in
-                    if case .failure = error {
-                        print(error)
+                .sink { [weak self] error in
+                    if case let .failure(error as HTTPErrorResponse) = error {
+                        self?.controller?.present(alert: .rateLimit(message: error.fault.faultString))
+                        self?.controller?.endRefreshing()
                     }
                 } receiveValue: { [weak self] value in
                     self?.sectionStoriesViewModel = value.results
@@ -149,7 +150,7 @@ class HomeViewModel: HomeViewModelProtocol, HomeViewModelNetworkingProtocol, Obs
                 }
                 .store(in: &cancellableSet)
         } catch  {
-            print(error)
+            controller?.present(alert: .badServerResponse)
         }
     }
     
@@ -157,9 +158,10 @@ class HomeViewModel: HomeViewModelProtocol, HomeViewModelNetworkingProtocol, Obs
         do {
             try networkService.fetchMostViewedStories(days: 1)
                 .receive(on: DispatchQueue.main)
-                .sink { error in
-                    if case .failure = error {
-                        print(error)
+                .sink { [weak self] error in
+                    if case let .failure(error as HTTPErrorResponse) = error {
+                        self?.controller?.present(alert: .rateLimit(message: error.fault.faultString))
+                        self?.controller?.endRefreshing()
                     }
                 } receiveValue: { [weak self] value in
                     self?.mostViewedStoriesViewModel = value.results
@@ -169,7 +171,7 @@ class HomeViewModel: HomeViewModelProtocol, HomeViewModelNetworkingProtocol, Obs
                 }
                 .store(in: &cancellableSet)
         } catch {
-            print(error)
+            controller?.present(alert: .badServerResponse)
         }
     }
 }

@@ -61,7 +61,7 @@ class StoriesTableViewCell: UITableViewCell {
     // MARK: - Mehods
     
     func setup(model: DisplayableArticle?) {
-        guard let model else { return }
+        guard let model, model.title.isNotEmpty else { return }
         title.text = model.title
         author.text = model.byline
         setupImage(url: model.mediaURL)
