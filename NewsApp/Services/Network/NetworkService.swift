@@ -30,7 +30,6 @@ extension NetworkServiceProtocol {
                 guard result.response.isSuccess else {
                     throw try decoder.decode(HTTPErrorResponse.self, from: result.data)
                 }
-                
                 let data = try decoder.decode(T.self, from: result.data)
                 return HTTPResponse(value: data, response: result.response)
             }

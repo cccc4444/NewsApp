@@ -41,7 +41,7 @@ struct ArticleModel: Codable {
     let orgFacet: [String]
     let perFacet: [String]
     let geoFacet: [String]
-    let multimedia: [Multimedia]
+    let multimedia: [Multimedia]?
     let shortUrl: String
     
     private enum CodingKeys: String, CodingKey {

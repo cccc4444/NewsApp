@@ -20,18 +20,18 @@ protocol DisplayableArticle {
     var orgFacet: [String] { get }
     var perFacet: [String] { get }
     var geoFacet: [String] { get }
-    var multimedia: [Multimedia] { get }
+    var multimedia: [Multimedia]? { get }
 }
 
 extension DisplayableArticle {
     var mediaURL: String? {
-        return multimedia[safe: 1]?.url
+        return multimedia?[safe: 1]?.url
     }
 }
 
 extension ArticleModel: DisplayableArticle {}
 extension MostViewedArticleModel: DisplayableArticle {
-    var multimedia: [Multimedia] {
+    var multimedia: [Multimedia]? {
         media.flatMap { media in
             media.mediaMetadata.map {
                 .init(url: $0.url,
