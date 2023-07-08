@@ -22,4 +22,3 @@ class RequestCreator: RequestBuilderProtocol {
         self.header = header
     }
 }
-

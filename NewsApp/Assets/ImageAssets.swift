@@ -65,7 +65,6 @@ enum SystemAssets: CaseIterable {
 enum ImagesAssets {
     case chevron
     
-    
     var image: UIImage? {
         return UIImage(named: assetName)
     }

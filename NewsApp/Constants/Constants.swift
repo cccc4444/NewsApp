@@ -7,6 +7,7 @@
 
 import Foundation
 import OrderedCollections
+// swiftlint:disable nesting
 
 struct Constants {
     struct Secret {

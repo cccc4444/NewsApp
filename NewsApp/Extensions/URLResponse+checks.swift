@@ -16,4 +16,3 @@ extension URLResponse {
         return self as? HTTPURLResponse ?? HTTPURLResponse()
     }
 }
-

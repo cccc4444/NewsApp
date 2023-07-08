@@ -137,7 +137,8 @@ class HomeViewController: UIViewController, HomeViewContollerProtocol {
     
     // MARK: - Actions
     
-    @objc private func refresh() {
+    @objc
+    private func refresh() {
         viewModel.refreshStories()
     }
     

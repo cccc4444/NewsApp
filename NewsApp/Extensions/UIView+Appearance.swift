@@ -34,4 +34,3 @@ extension UIView {
         animator.startAnimation(afterDelay: delay)
     }
 }
-

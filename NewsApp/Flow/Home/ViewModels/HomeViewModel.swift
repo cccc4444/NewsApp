@@ -149,7 +149,7 @@ class HomeViewModel: HomeViewModelProtocol, HomeViewModelNetworkingProtocol, Obs
                     }
                 }
                 .store(in: &cancellableSet)
-        } catch  {
+        } catch {
             controller?.present(alert: .badServerResponse)
         }
     }

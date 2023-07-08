@@ -36,6 +36,7 @@
 		1BA046982A58762400E63F46 /* DisplayableArticle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA046972A58762400E63F46 /* DisplayableArticle.swift */; };
 		1BA0469A2A5952DC00E63F46 /* String+isNotEmpty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA046992A5952DC00E63F46 /* String+isNotEmpty.swift */; };
 		1BA0469D2A59574C00E63F46 /* AlertProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA0469C2A59574C00E63F46 /* AlertProtocol.swift */; };
+		1BA046A62A59699A00E63F46 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 1BA046A52A59699A00E63F46 /* .swiftlint.yml */; };
 		1BAE18482A547EA200466360 /* ImageAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BAE18472A547EA200466360 /* ImageAssets.swift */; };
 		1BAE184B2A558B1300466360 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 1BAE184A2A558B1300466360 /* OrderedCollections */; };
 		1BAE184D2A559E9100466360 /* StoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BAE184C2A559E9100466360 /* StoryModel.swift */; };
@@ -81,6 +82,7 @@
 		1BA046972A58762400E63F46 /* DisplayableArticle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayableArticle.swift; sourceTree = "<group>"; };
 		1BA046992A5952DC00E63F46 /* String+isNotEmpty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+isNotEmpty.swift"; sourceTree = "<group>"; };
 		1BA0469C2A59574C00E63F46 /* AlertProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertProtocol.swift; sourceTree = "<group>"; };
+		1BA046A52A59699A00E63F46 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		1BAE18472A547EA200466360 /* ImageAssets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageAssets.swift; sourceTree = "<group>"; };
 		1BAE184C2A559E9100466360 /* StoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryModel.swift; sourceTree = "<group>"; };
 		1BAE184E2A55A08000466360 /* String+lowercased.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+lowercased.swift"; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				1B3D752F2A4D5F0000235968 /* NewsApp */,
+				1BA046A52A59699A00E63F46 /* .swiftlint.yml */,
 				1B3D752E2A4D5F0000235968 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -352,6 +355,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				1BA046A42A59688100E63F46 /* PBXTargetDependency */,
 			);
 			name = NewsApp;
 			packageProductDependencies = (
@@ -389,6 +393,7 @@
 			packageReferences = (
 				1B3D754A2A4D60E500235968 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				1BAE18492A558B1300466360 /* XCRemoteSwiftPackageReference "swift-collections" */,
+				1BA046A22A59684100E63F46 /* XCRemoteSwiftPackageReference "SwiftLint" */,
 			);
 			productRefGroup = 1B3D752E2A4D5F0000235968 /* Products */;
 			projectDirPath = "";
@@ -404,6 +409,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1BA046A62A59699A00E63F46 /* .swiftlint.yml in Resources */,
 				1B3D75402A4D5F0100235968 /* LaunchScreen.storyboard in Resources */,
 				1B3D753D2A4D5F0100235968 /* Assets.xcassets in Resources */,
 				1B3D75382A4D5F0000235968 /* Main.storyboard in Resources */,
@@ -457,6 +463,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		1BA046A42A59688100E63F46 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 1BA046A32A59688100E63F46 /* SwiftLintPlugin */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		1B3D75362A4D5F0000235968 /* Main.storyboard */ = {
@@ -683,6 +696,14 @@
 				minimumVersion = 5.6.0;
 			};
 		};
+		1BA046A22A59684100E63F46 /* XCRemoteSwiftPackageReference "SwiftLint" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/SwiftLint.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.52.4;
+			};
+		};
 		1BAE18492A558B1300466360 /* XCRemoteSwiftPackageReference "swift-collections" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apple/swift-collections.git";
@@ -698,6 +719,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1B3D754A2A4D60E500235968 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		1BA046A32A59688100E63F46 /* SwiftLintPlugin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1BA046A22A59684100E63F46 /* XCRemoteSwiftPackageReference "SwiftLint" */;
+			productName = "plugin:SwiftLintPlugin";
 		};
 		1BAE184A2A558B1300466360 /* OrderedCollections */ = {
 			isa = XCSwiftPackageProductDependency;

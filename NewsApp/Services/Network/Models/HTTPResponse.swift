@@ -33,4 +33,3 @@ struct Detail: Decodable {
         case errorCode = "errorcode"
     }
 }
-

@@ -51,4 +51,3 @@ extension UIViewController: AlertProtocol {
         present(alert, animated: true, completion: nil)
     }
 }
-
