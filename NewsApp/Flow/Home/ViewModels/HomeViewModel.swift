@@ -7,8 +7,6 @@
 
 import Foundation
 import Combine
-import Observation
-import SwiftUI
 
 protocol HomeViewModelProtocol: AnyObject {
     var controller: (AlertProtocol & HomeViewContollerProtocol)? { get set }
@@ -20,12 +18,13 @@ protocol HomeViewModelProtocol: AnyObject {
     var sectionStoriesViewModel: [ArticleModel]? { get }
     var sectionStoriesViewModelPublisher: Published<[ArticleModel]?>.Publisher { get }
     
+    var selectedSectionType: HomeViewModel.SectionType { get set }
     var sections: [HomeViewModel.SectionType] { get }
     var storiesCount: Int { get }
-    var selectedSectionType: HomeViewModel.SectionType { get }
     
     func refreshStories()
-    func sectionChosen(sectionName: String, isGeneralSection: Bool)
+    func setSectionAction()
+    func setSelectedSectionName(_ name: String)
 }
 
 protocol HomeViewModelNetworkingProtocol: AnyObject {
@@ -57,11 +56,8 @@ class HomeViewModel: HomeViewModelProtocol, HomeViewModelNetworkingProtocol, Obs
     var networkService: StoriesNetworkServiceProtocol
     weak var controller: (AlertProtocol & HomeViewContollerProtocol)?
     
-    private var isGeneralSectionType: Bool?
-    private var selectedSection: String
-    private var shouldRefreshGeneralStories: Bool {
-        return isGeneralSectionType ?? false
-    }
+    var selectedSectionType: HomeViewModel.SectionType = HomeViewModel.SectionType.defaultValue
+    private var selectedSectionName: String
     
     @Published var sectionViewModel: [SectionModel]?
     var sectionsPublisher: Published<[SectionModel]?>.Publisher { $sectionViewModel }
@@ -77,51 +73,43 @@ class HomeViewModel: HomeViewModelProtocol, HomeViewModelNetworkingProtocol, Obs
         return [.top()] + [.general(sectionNames: filteredSections)]
     }
     var storiesCount: Int {
-        guard let isGeneralType = isGeneralSectionType, isGeneralType else {
-            return mostViewedStoriesViewModel?.count ?? .zero
+        if case .general = selectedSectionType {
+            return sectionStoriesViewModel?.count ?? .zero
         }
-        return sectionStoriesViewModel?.count ?? .zero
-    }
-    
-    var selectedSectionType: HomeViewModel.SectionType {
-        guard let isGeneralType = isGeneralSectionType, isGeneralType else {
-            return .emptyGeneral
-        }
-        return .emptyTop
+        return mostViewedStoriesViewModel?.count ?? .zero
     }
     
     // MARK: - Initializers
     
     init(networkService: StoriesNetworkService = StoriesNetworkService()) {
         self.networkService = networkService
-        self.selectedSection = Constants.HomeViewController.defaultSectionName
+        self.selectedSectionName = Constants.HomeViewController.defaultSectionName
     }
     
     // MARK: - Methods
     
-    func sectionChosen(sectionName: String, isGeneralSection: Bool) {
-        selectedSection = sectionName
-        isGeneralSectionType = isGeneralSection
-        guard isGeneralSection else {
-            fetchMostViewedStories()
+    func getArticle(for indexPath: IndexPath) -> DisplayableArticle? {
+        if case .general = selectedSectionType {
+            return sectionStoriesViewModel?[safe: indexPath.row]
+        }
+        return mostViewedStoriesViewModel?[safe: indexPath.row]
+    }
+    
+    func setSectionAction() {
+        if case .general = selectedSectionType {
+            fetchStories(for: selectedSectionName.withLowercasedFirstLetter)
             return
         }
-        fetchStories(for: sectionName.withLowercasedFirstLetter)
+        fetchMostViewedStories()
+    }
+    
+    func setSelectedSectionName(_ name: String) {
+        selectedSectionName = name
     }
     
     func refreshStories() {
-        guard shouldRefreshGeneralStories else {
-            fetchMostViewedStories(isRefresh: true)
-            return
-        }
-        fetchStories(for: selectedSection, isRefresh: true)
-    }
-    
-    func getArticle(for indexPath: IndexPath) -> DisplayableArticle? {
-        guard let isGeneralType = isGeneralSectionType, isGeneralType else {
-            return mostViewedStoriesViewModel?[safe: indexPath.row]
-        }
-        return sectionStoriesViewModel?[safe: indexPath.row]
+        fetchMostViewedStories(isRefresh: true)
+        fetchStories(for: selectedSectionName, isRefresh: true)
     }
     
     // MARK: - Networking Methods
@@ -191,11 +179,7 @@ class HomeViewModel: HomeViewModelProtocol, HomeViewModelNetworkingProtocol, Obs
 }
 
 fileprivate extension HomeViewModel.SectionType {
-
-    static var emptyTop: Self {
+    static var defaultValue: Self {
         return .top(name: "")
-    }
-    static var emptyGeneral: Self {
-        return .general(sectionNames: [])
     }
 }

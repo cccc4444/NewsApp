@@ -10,9 +10,9 @@ import UIKit
 
 protocol DetailViewModelProtocol {
     var article: DisplayableArticle { get }
-    var selectedSectionType: HomeViewModel.SectionType? { get }
     var numberOfSections: Int { get }
     var numberOfItemsInSections: Int { get }
+    var selectedSectionType: HomeViewModel.SectionType? { get }
 }
 
 class DetailViewModel: DetailViewModelProtocol {
@@ -21,7 +21,6 @@ class DetailViewModel: DetailViewModelProtocol {
     var article: DisplayableArticle
     var numberOfSections: Int = 2
     var numberOfItemsInSections: Int = 1
-    
     var selectedSectionType: HomeViewModel.SectionType? {
         homeViewModel?.selectedSectionType
     }

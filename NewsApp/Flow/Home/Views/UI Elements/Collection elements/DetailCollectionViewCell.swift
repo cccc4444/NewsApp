@@ -53,9 +53,9 @@ class DetailCollectionViewCell: UICollectionViewCell {
     private func setupImage(data: DisplayableArticle, articleType: HomeViewModel.SectionType?) {
         switch articleType {
         case .top:
-            image.asyncLoadImage(urlSting: data.mediaURL)
-        case .general:
             image.asyncLoadImage(urlSting: data.largeMediaURL)
+        case .general:
+            image.asyncLoadImage(urlSting: data.mediaURL)
         case nil:
             return
         }

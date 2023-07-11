@@ -109,8 +109,8 @@ class HomeViewController: UIViewController, HomeViewContollerProtocol {
                 title: "\(name)",
                 image: UIImage(systemNamed: .top)
             ) { [weak self] _ in
-                self?.sectionNavButton.setTitle(name, for: .normal)
-                self?.viewModel.sectionChosen(sectionName: name, isGeneralSection: false)
+                self?.setNavButton(name: name)
+                self?.setViewModel(section, sectionName: name)
             }]
         case let .general(sectionNames):
             return sectionNames.map { name in
@@ -118,11 +118,21 @@ class HomeViewController: UIViewController, HomeViewContollerProtocol {
                     title: "\(name)",
                     image: UIImage(systemName: Constants.HomeViewController.Sections.sectionListIcons[name] ?? "")
                 ) { [weak self] _ in
-                    self?.sectionNavButton.setTitle(name, for: .normal)
-                    self?.viewModel.sectionChosen(sectionName: name, isGeneralSection: true)
+                    self?.setNavButton(name: name)
+                    self?.setViewModel(section, sectionName: name)
                 }
             }
         }
+    }
+    
+    private func setNavButton(name: String) {
+        sectionNavButton.setTitle(name, for: .normal)
+    }
+    
+    private func setViewModel(_ section: HomeViewModel.SectionType, sectionName: String) {
+        viewModel.selectedSectionType = section
+        viewModel.setSelectedSectionName(sectionName)
+        viewModel.setSectionAction()
     }
     
     func reloadTableData() {
