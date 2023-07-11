@@ -18,7 +18,7 @@ class StoriesTableViewCell: UITableViewCell {
     private lazy var coverImage: CustomImageView = {
         let view = CustomImageView()
         view.cornerRadius = 5
-        view.image = UIImage(systemName: "photo.fill")
+        view.image = UIImage(named: .noImage)
         view.contentMode = .scaleAspectFill
         view.clipsToBounds = true
         return view
@@ -47,7 +47,7 @@ class StoriesTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        isUserInteractionEnabled = false
+        isUserInteractionEnabled = true
         selectionStyle = .none
         setupViews()
     }

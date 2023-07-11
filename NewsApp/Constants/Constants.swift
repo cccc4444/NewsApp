@@ -25,5 +25,10 @@ struct Constants {
             static let sectionListIcons = Dictionary(uniqueKeysWithValues: zip(sectionsList, sectionsIcons))
         }
     }
+    
+    struct DetailViewController {
+        static let articleInfoReuseIdentifier = "NewsApp.InfoCollectionViewCell"
+        static let articleDetailsReuseIdentifier = "NewsApp.DetailCollectionViewCell"
+    }
 }
 // swiftlint:enable nesting

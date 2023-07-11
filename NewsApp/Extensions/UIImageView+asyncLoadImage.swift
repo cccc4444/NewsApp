@@ -38,8 +38,11 @@ final class Networking {
 }
 
 extension UIImageView {
-    func asyncLoadImage(urlSting: String, completion: @escaping (() -> Void) = {}) {
-        guard let url = URL(string: urlSting) else { return }
+    func asyncLoadImage(urlSting: String?, completion: @escaping (() -> Void) = {}) {
+        guard let urlSting,
+              let url = URL(string: urlSting) else {
+            return
+        }
         image = nil
 
         if let imageFromCache = imageCache.object(forKey: urlSting as AnyObject) {

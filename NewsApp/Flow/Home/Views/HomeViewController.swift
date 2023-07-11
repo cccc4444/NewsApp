@@ -158,10 +158,10 @@ class HomeViewController: UIViewController, HomeViewContollerProtocol {
             make.width.equalTo(30)
         }
         
-        storiesTableView.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalToSuperview()
+        storiesTableView.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalToSuperview()
         }
     }
 }
@@ -179,5 +179,12 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
         let cell: StoriesTableViewCell = tableView.dequeueCell()
         cell.setup(model: article)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let article = viewModel.getArticle(for: indexPath) else { return }
+        let viewModel = DetailViewModel(homeViewModel: viewModel, article: article)
+        let detailVC = DetailViewController(viewModel: viewModel)
+        super.navigationController?.pushViewController(detailVC, animated: true)
     }
 }

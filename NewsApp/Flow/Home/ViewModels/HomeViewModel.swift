@@ -10,22 +10,25 @@ import Combine
 import Observation
 import SwiftUI
 
-protocol HomeViewModelProtocol {
+protocol HomeViewModelProtocol: AnyObject {
     var controller: (AlertProtocol & HomeViewContollerProtocol)? { get set }
     var networkService: StoriesNetworkServiceProtocol { get }
     
     var sectionsPublisher: Published<[SectionModel]?>.Publisher { get }
+    var mostViewedStoriesViewModel: [MostViewedArticleModel]? { get }
     var mostViewedStoriesPublisher: Published<[MostViewedArticleModel]?>.Publisher { get }
+    var sectionStoriesViewModel: [ArticleModel]? { get }
     var sectionStoriesViewModelPublisher: Published<[ArticleModel]?>.Publisher { get }
     
     var sections: [HomeViewModel.SectionType] { get }
     var storiesCount: Int { get }
+    var selectedSectionType: HomeViewModel.SectionType { get }
     
     func refreshStories()
     func sectionChosen(sectionName: String, isGeneralSection: Bool)
 }
 
-protocol HomeViewModelNetworkingProtocol {
+protocol HomeViewModelNetworkingProtocol: AnyObject {
     func fetchStoriesSections()
     func fetchStories(for section: String, isRefresh: Bool)
     func fetchMostViewedStories(isRefresh: Bool)
@@ -78,6 +81,13 @@ class HomeViewModel: HomeViewModelProtocol, HomeViewModelNetworkingProtocol, Obs
             return mostViewedStoriesViewModel?.count ?? .zero
         }
         return sectionStoriesViewModel?.count ?? .zero
+    }
+    
+    var selectedSectionType: HomeViewModel.SectionType {
+        guard let isGeneralType = isGeneralSectionType, isGeneralType else {
+            return .emptyGeneral
+        }
+        return .emptyTop
     }
     
     // MARK: - Initializers
@@ -177,5 +187,15 @@ class HomeViewModel: HomeViewModelProtocol, HomeViewModelNetworkingProtocol, Obs
         } catch {
             controller?.present(alert: .badServerResponse)
         }
+    }
+}
+
+fileprivate extension HomeViewModel.SectionType {
+
+    static var emptyTop: Self {
+        return .top(name: "")
+    }
+    static var emptyGeneral: Self {
+        return .general(sectionNames: [])
     }
 }
