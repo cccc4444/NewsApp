@@ -109,8 +109,8 @@ class HomeViewController: UIViewController, HomeViewContollerProtocol {
                 title: "\(name)",
                 image: UIImage(systemNamed: .top)
             ) { [weak self] _ in
-                self?.sectionNavButton.setTitle(name, for: .normal)
-                self?.viewModel.sectionChosen(sectionName: name, isGeneralSection: false)
+                self?.setNavButton(name: name)
+                self?.setViewModel(section, sectionName: name)
             }]
         case let .general(sectionNames):
             return sectionNames.map { name in
@@ -118,11 +118,21 @@ class HomeViewController: UIViewController, HomeViewContollerProtocol {
                     title: "\(name)",
                     image: UIImage(systemName: Constants.HomeViewController.Sections.sectionListIcons[name] ?? "")
                 ) { [weak self] _ in
-                    self?.sectionNavButton.setTitle(name, for: .normal)
-                    self?.viewModel.sectionChosen(sectionName: name, isGeneralSection: true)
+                    self?.setNavButton(name: name)
+                    self?.setViewModel(section, sectionName: name)
                 }
             }
         }
+    }
+    
+    private func setNavButton(name: String) {
+        sectionNavButton.setTitle(name, for: .normal)
+    }
+    
+    private func setViewModel(_ section: HomeViewModel.SectionType, sectionName: String) {
+        viewModel.selectedSectionType = section
+        viewModel.setSelectedSectionName(sectionName)
+        viewModel.setSectionAction()
     }
     
     func reloadTableData() {
@@ -158,10 +168,10 @@ class HomeViewController: UIViewController, HomeViewContollerProtocol {
             make.width.equalTo(30)
         }
         
-        storiesTableView.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalToSuperview()
+        storiesTableView.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalToSuperview()
         }
     }
 }
@@ -179,5 +189,12 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
         let cell: StoriesTableViewCell = tableView.dequeueCell()
         cell.setup(model: article)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let article = viewModel.getArticle(for: indexPath) else { return }
+        let viewModel = DetailViewModel(homeViewModel: viewModel, article: article)
+        let detailVC = DetailViewController(viewModel: viewModel)
+        super.navigationController?.pushViewController(detailVC, animated: true)
     }
 }

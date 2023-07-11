@@ -27,6 +27,10 @@ extension DisplayableArticle {
     var mediaURL: String? {
         return multimedia?[safe: 1]?.url
     }
+    
+    var largeMediaURL: String? {
+        return multimedia?[safe: 2]?.url
+    }
 }
 
 extension ArticleModel: DisplayableArticle {}
