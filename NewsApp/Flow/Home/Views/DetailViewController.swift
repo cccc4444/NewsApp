@@ -43,11 +43,18 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
+        setupNavigationBarAppearance()
         setupArticleCollectionView()
     }
     
     // MARK: - Configurational Methods
     
+    private func setupNavigationBarAppearance() {
+        let appearance = UINavigationBarAppearance()
+        let navBar = self.navigationController?.navigationBar
+        navBar?.tintColor = .black
+    }
+
     private func setupArticleCollectionView() {
         view.addSubview(articleCollectionView)
         
