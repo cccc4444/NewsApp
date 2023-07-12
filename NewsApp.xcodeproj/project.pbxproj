@@ -33,6 +33,8 @@
 		1B3D75782A4D803A00235968 /* URLResponse+checks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3D75772A4D803A00235968 /* URLResponse+checks.swift */; };
 		1B3D757C2A4D809F00235968 /* Int+isInBetween.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3D757B2A4D809F00235968 /* Int+isInBetween.swift */; };
 		1B3D75812A4D819700235968 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3D75802A4D819700235968 /* HomeViewModel.swift */; };
+		1B44BD142A5ECEBE00A0E3C8 /* ShimmerEffectProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B44BD132A5ECEBE00A0E3C8 /* ShimmerEffectProtocol.swift */; };
+		1B44BD162A5ECED000A0E3C8 /* ShimmerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B44BD152A5ECED000A0E3C8 /* ShimmerButton.swift */; };
 		1BA046982A58762400E63F46 /* DisplayableArticle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA046972A58762400E63F46 /* DisplayableArticle.swift */; };
 		1BA0469A2A5952DC00E63F46 /* String+isNotEmpty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA046992A5952DC00E63F46 /* String+isNotEmpty.swift */; };
 		1BA0469D2A59574C00E63F46 /* AlertProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA0469C2A59574C00E63F46 /* AlertProtocol.swift */; };
@@ -83,6 +85,8 @@
 		1B3D75772A4D803A00235968 /* URLResponse+checks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLResponse+checks.swift"; sourceTree = "<group>"; };
 		1B3D757B2A4D809F00235968 /* Int+isInBetween.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+isInBetween.swift"; sourceTree = "<group>"; };
 		1B3D75802A4D819700235968 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		1B44BD132A5ECEBE00A0E3C8 /* ShimmerEffectProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmerEffectProtocol.swift; sourceTree = "<group>"; };
+		1B44BD152A5ECED000A0E3C8 /* ShimmerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmerButton.swift; sourceTree = "<group>"; };
 		1BA046972A58762400E63F46 /* DisplayableArticle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayableArticle.swift; sourceTree = "<group>"; };
 		1BA046992A5952DC00E63F46 /* String+isNotEmpty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+isNotEmpty.swift"; sourceTree = "<group>"; };
 		1BA0469C2A59574C00E63F46 /* AlertProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertProtocol.swift; sourceTree = "<group>"; };
@@ -138,6 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				1B3D75472A4D601400235968 /* Flow */,
+				1B44BD112A5ECE8C00A0E3C8 /* Helpers */,
 				1B3D754D2A4D63E500235968 /* Services */,
 				1B3D75602A4D77D000235968 /* Extensions */,
 				1B3D756E2A4D7DAA00235968 /* Constants */,
@@ -307,6 +312,23 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
+		1B44BD112A5ECE8C00A0E3C8 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				1B44BD122A5ECE9D00A0E3C8 /* ShimmerButton */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		1B44BD122A5ECE9D00A0E3C8 /* ShimmerButton */ = {
+			isa = PBXGroup;
+			children = (
+				1B44BD132A5ECEBE00A0E3C8 /* ShimmerEffectProtocol.swift */,
+				1B44BD152A5ECED000A0E3C8 /* ShimmerButton.swift */,
+			);
+			path = ShimmerButton;
+			sourceTree = "<group>";
+		};
 		1BA0469B2A59573700E63F46 /* UI */ = {
 			isa = PBXGroup;
 			children = (
@@ -450,6 +472,7 @@
 				1BAE18482A547EA200466360 /* ImageAssets.swift in Sources */,
 				1B3D75702A4D7DBB00235968 /* Constants.swift in Sources */,
 				1B3D75352A4D5F0000235968 /* HomeViewController.swift in Sources */,
+				1B44BD162A5ECED000A0E3C8 /* ShimmerButton.swift in Sources */,
 				1BA046AA2A5C3E2700E63F46 /* DetailViewModel.swift in Sources */,
 				1BAE185F2A572D6B00466360 /* CustomImageView.swift in Sources */,
 				1BAE185A2A57289B00466360 /* Collection+Safe.swift in Sources */,
@@ -478,6 +501,7 @@
 				1BAE18562A56E85100466360 /* StoriesTableViewCell.swift in Sources */,
 				1BA046982A58762400E63F46 /* DisplayableArticle.swift in Sources */,
 				1B3D75502A4D642100235968 /* NetworkError.swift in Sources */,
+				1B44BD142A5ECEBE00A0E3C8 /* ShimmerEffectProtocol.swift in Sources */,
 				1BAE184F2A55A08000466360 /* String+lowercased.swift in Sources */,
 				1B3D75672A4D790A00235968 /* HTTPMethod.swift in Sources */,
 				1B3D75622A4D77FC00235968 /* URLComponents+setQueryItems.swift in Sources */,

@@ -28,6 +28,15 @@ class DetailViewController: UIViewController {
         return collectionView
     }()
     
+    private lazy var readMoreButton: UIButton = {
+        let shimmer = ShimmerButton()
+        shimmer.setTitle("Continue reading", for: .normal)
+        shimmer.gradientTint = .darkGray
+        shimmer.gradientHighlight = .lightGray
+        shimmer.sizeToFit()
+        return shimmer
+    }()
+    
     // MARK: - Initializers
     
     init(viewModel: DetailViewModelProtocol) {
@@ -38,13 +47,13 @@ class DetailViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     // MARK: - Metods
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
         setupNavigationBarAppearance()
-        setupArticleCollectionView()
+        setupUI()
     }
     
     // MARK: - Configurational Methods
@@ -54,12 +63,19 @@ class DetailViewController: UIViewController {
         let navBar = self.navigationController?.navigationBar
         navBar?.tintColor = .black
     }
-
-    private func setupArticleCollectionView() {
+    
+    private func  setupUI() {
         view.addSubview(articleCollectionView)
+        view.addSubview(readMoreButton)
         
         articleCollectionView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.top.leading.trailing.equalToSuperview()
+            make.bottom.equalTo(readMoreButton.snp.top)
+        }
+        readMoreButton.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.bottom.equalToSuperview().inset(30)
+            make.width.equalTo(200)
         }
     }
 }
