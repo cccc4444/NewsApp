@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class DetailViewController: UIViewController {
     // MARK: - Properies
@@ -34,6 +35,7 @@ class DetailViewController: UIViewController {
         shimmer.gradientTint = .darkGray
         shimmer.gradientHighlight = .lightGray
         shimmer.sizeToFit()
+        shimmer.addTarget(self, action: #selector(readMoreTapped), for: .touchUpInside)
         return shimmer
     }()
     
@@ -56,10 +58,16 @@ class DetailViewController: UIViewController {
         setupUI()
     }
     
+    // MARK: - Actions
+    @objc
+    private func readMoreTapped() {
+        guard let url = URL(string: viewModel.selectedArticleURL) else { return }
+        present(SFSafariViewController(url: url), animated: true)
+    }
+    
     // MARK: - Configurational Methods
     
     private func setupNavigationBarAppearance() {
-        let appearance = UINavigationBarAppearance()
         let navBar = self.navigationController?.navigationBar
         navBar?.tintColor = .black
     }

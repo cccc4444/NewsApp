@@ -13,6 +13,7 @@ protocol DetailViewModelProtocol {
     var numberOfSections: Int { get }
     var numberOfItemsInSections: Int { get }
     var selectedSectionType: HomeViewModel.SectionType? { get }
+    var selectedArticleURL: String { get }
 }
 
 class DetailViewModel: DetailViewModelProtocol {
@@ -23,6 +24,10 @@ class DetailViewModel: DetailViewModelProtocol {
     var numberOfItemsInSections: Int = 1
     var selectedSectionType: HomeViewModel.SectionType? {
         homeViewModel?.selectedSectionType
+    }
+    
+    var selectedArticleURL: String {
+        article.url
     }
     
     // MARK: - Initializers
