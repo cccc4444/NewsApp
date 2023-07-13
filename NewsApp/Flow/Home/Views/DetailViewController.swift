@@ -141,9 +141,24 @@ class DetailViewController: UIViewController {
         present(SFSafariViewController(url: url), animated: true)
     }
     
+    @objc
+    private func shareTapped() {
+        let items = [URL(string: viewModel.article.url)]
+        let activity = UIActivityViewController(activityItems: items as [Any], applicationActivities: nil)
+        present(activity, animated: true)
+    }
+    
+    @objc
+    private func likeTapped() {
+        
+    }
+    
     // MARK: - Configurational Methods
     private func setupNavigationBarAppearance() {
         let navBar = self.navigationController?.navigationBar
+        let share = UIBarButtonItem(image: UIImage(systemNamed: .share), style: .plain, target: self, action: #selector(shareTapped))
+        let like = UIBarButtonItem(image: UIImage(systemNamed: .like), style: .plain, target: self, action: #selector(likeTapped))
+        navigationItem.rightBarButtonItems = [like, share]
         navBar?.tintColor = .black
     }
     
