@@ -25,11 +25,11 @@ protocol DisplayableArticle {
 
 extension DisplayableArticle {
     var mediaURL: String? {
-        return multimedia?[safe: 1]?.url
+        multimedia?[safe: 1]?.url
     }
     
     var largeMediaURL: String? {
-        return multimedia?[safe: 2]?.url
+        multimedia?[safe: 2]?.url
     }
 }
 
