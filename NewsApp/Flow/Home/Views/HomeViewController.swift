@@ -152,12 +152,23 @@ class HomeViewController: UIViewController, HomeViewContollerProtocol {
         viewModel.refreshStories()
     }
     
+    @objc
+    private func displayLikedArticles() {
+        
+    }
+    
     // MARK: - Configurational methods
     
     private func setupUI() {
         view.backgroundColor = .white
-        navigationItem.titleView = sectionNavButton
+        setupNavigationController()
         setupVacationsTableView()
+    }
+    
+    private func setupNavigationController() {
+        self.navigationController?.navigationBar.tintColor = .black
+        navigationItem.titleView = sectionNavButton
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemNamed: .liked), style: .plain, target: self, action: #selector(displayLikedArticles))
     }
     
     private func setupVacationsTableView() {

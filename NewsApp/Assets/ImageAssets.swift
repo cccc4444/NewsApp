@@ -25,6 +25,7 @@ enum SystemAssets: CaseIterable {
     case world
     case share
     case like
+    case liked
     
     var image: UIImage? {
         return UIImage(systemName: assetName)
@@ -64,6 +65,8 @@ enum SystemAssets: CaseIterable {
             "square.and.arrow.up"
         case .like:
             "heart"
+        case .liked:
+            "heart.circle"
         }
     }
 }
