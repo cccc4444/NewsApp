@@ -110,15 +110,17 @@ class DetailViewController: UIViewController {
     // MARK: - Metods
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setupUIElements()
+        setupNavigationBarAppearance()
+        setupUI()
+    }
+
+    private func setupUIElements() {
         publishedDate.text = viewModel.article.publishedDate
         authors.text = viewModel.article.byline
         articleTitle.text = viewModel.article.title
         articleDescription.text = viewModel.article.abstract
         setupImage()
-        
-        setupNavigationBarAppearance()
-        setupUI()
     }
     
     private func setupImage() {
