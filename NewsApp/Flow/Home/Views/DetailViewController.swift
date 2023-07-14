@@ -9,6 +9,7 @@ import UIKit
 import SafariServices
 
 class DetailViewController: UIViewController {
+    
     // MARK: - Properies
     private var viewModel: DetailViewModelProtocol
     
@@ -110,6 +111,7 @@ class DetailViewController: UIViewController {
     // MARK: - Metods
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.controller = self
         setupUIElements()
         setupNavigationBarAppearance()
         setupUI()
@@ -134,6 +136,10 @@ class DetailViewController: UIViewController {
         }
     }
     
+    private func updateBarButtonImage() {
+        navigationItem.rightBarButtonItems?.first?.image = viewModel.articleLikedState.image
+    }
+    
     // MARK: - Actions
     @objc
     private func readMoreTapped() {
@@ -150,19 +156,21 @@ class DetailViewController: UIViewController {
     
     @objc
     private func likeTapped() {
-        LikedArtickePersistentService.shared.saveArticle(with: viewModel.article) { [weak self] result in
-            if case let .failure(error) = result {
-                self?.present(alert: .coreDataSavingIssue(message: error.localizedDescription))
-            }
-        }
+        viewModel.perforActionForArticle()
+        updateBarButtonImage()
     }
     
     // MARK: - Configurational Methods
     private func setupNavigationBarAppearance() {
-        let navBar = self.navigationController?.navigationBar
+        let navBar = navigationController?.navigationBar
         let share = UIBarButtonItem(image: UIImage(systemNamed: .share), style: .plain, target: self, action: #selector(shareTapped))
-        let like = UIBarButtonItem(image: UIImage(systemNamed: .like), style: .plain, target: self, action: #selector(likeTapped))
+        let like = UIBarButtonItem(image: viewModel.articleLikedState.image,
+                                   style: .plain,
+                                   target: self,
+                                   action: #selector(likeTapped))
         navigationItem.rightBarButtonItems = [like, share]
+        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationItem.largeTitleDisplayMode = .never
         navBar?.tintColor = .black
     }
     

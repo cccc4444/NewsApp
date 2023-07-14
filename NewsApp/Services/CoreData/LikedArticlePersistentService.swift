@@ -9,10 +9,10 @@ import Foundation
 import CoreData
 import UIKit
 
-class LikedArtickePersistentService {
+class LikedArticlePersistentService {
     // MARK: - Properties
-    static var shared: LikedArtickePersistentService {
-        LikedArtickePersistentService()
+    static var shared: LikedArticlePersistentService {
+        LikedArticlePersistentService()
     }
     
     // MARK: - Methods
@@ -30,6 +30,7 @@ class LikedArtickePersistentService {
         article.setValue(likedArticle.title, forKey: .title)
         article.setValue(likedArticle.byline, forKey: .author)
         article.setValue(likedArticle.url, forKey: .url)
+        article.setValue(likedArticle.section, forKey: .section)
         do {
             try managedContext.save()
             completion(.success(true))
@@ -54,6 +55,53 @@ class LikedArtickePersistentService {
         }
     }
     
+    func isArticleSaved(with likedArticle: DisplayableArticle, completion: @escaping (Swift.Result<Bool, Error>) -> Void) {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            completion(.failure(CoreDataError.noAppDelegate))
+            return
+        }
+        
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: Constants.CoreData.entityName)
+        
+        let predicate = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(LikedArticle.url), likedArticle.url])
+        fetchRequest.predicate = predicate
+        
+        do {
+            let result = try managedContext.fetch(fetchRequest)
+            completion(.success(!result.isEmpty))
+        } catch {
+            completion(.failure(error))
+        }
+    }
+    
+    func deleteArticle(with likedArticle: DisplayableArticle, completion: @escaping (Swift.Result<Bool, Error>) -> Void) {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            completion(.failure(CoreDataError.noAppDelegate))
+            return
+        }
+        
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: Constants.CoreData.entityName)
+        
+        let predicate = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(LikedArticle.title), likedArticle.title])
+        fetchRequest.predicate = predicate
+        
+        do {
+            let result = try managedContext.fetch(fetchRequest)
+            guard let articleToDelete = result.first else {
+                completion(.success(false))
+                return
+            }
+            
+            managedContext.delete(articleToDelete)
+            try managedContext.save()
+            completion(.success(true))
+        } catch {
+            completion(.failure(error))
+        }
+    }
+
     func deleteAllArticles(completion: @escaping (Swift.Result<Bool, Error>) -> Void) {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             completion(.failure(CoreDataError.noAppDelegate))
