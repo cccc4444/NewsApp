@@ -14,6 +14,10 @@ struct Constants {
         static let apiKey = "OUyhf3E7V9z5MMeDbrPht55FtNxBAsHU"
     }
     
+    struct CoreData {
+        static let entityName = "LikedArticle"
+    }
+    
     struct HomeViewController {
         static let defaultSectionName = "Top"
         static let navBarTitlePadding: CGFloat = 5

@@ -150,7 +150,11 @@ class DetailViewController: UIViewController {
     
     @objc
     private func likeTapped() {
-        
+        LikedArtickePersistentService.shared.saveArticle(with: viewModel.article) { [weak self] result in
+            if case let .failure(error) = result {
+                self?.present(alert: .coreDataSavingIssue(message: error.localizedDescription))
+            }
+        }
     }
     
     // MARK: - Configurational Methods
