@@ -156,7 +156,7 @@ class HomeViewController: UIViewController, HomeViewContollerProtocol {
     private func displayLikedArticles() {
         let viewModel = LikedArticlesViewModel()
         let likedVC = LikedArticlesViewController(viewModel: viewModel)
-        present(likedVC, animated: true)
+        super.navigationController?.pushViewController(likedVC, animated: true)
     }
     
     // MARK: - Configurational methods
@@ -168,9 +168,11 @@ class HomeViewController: UIViewController, HomeViewContollerProtocol {
     }
     
     private func setupNavigationController() {
-        self.navigationController?.navigationBar.tintColor = .black
+        navigationController?.navigationBar.tintColor = .black
+        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationItem.largeTitleDisplayMode = .never
         navigationItem.titleView = sectionNavButton
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemNamed: .liked), style: .plain, target: self, action: #selector(displayLikedArticles))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemNamed: .like), style: .plain, target: self, action: #selector(displayLikedArticles))
     }
     
     private func setupVacationsTableView() {

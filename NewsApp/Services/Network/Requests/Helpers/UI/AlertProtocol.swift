@@ -18,6 +18,7 @@ enum AlertType {
     case coreDataSavingIssue(message: String)
     case coreDataFetchingIssue(message: String)
     case coreDataDeletionIssue(message: String)
+    case coreDataCheckingForPresenceIssue(message: String)
 }
 
 extension AlertType {
@@ -33,12 +34,14 @@ extension AlertType {
             "Could not fetch liked articles"
         case .coreDataDeletionIssue:
             "Could not delete liked article"
+        case .coreDataCheckingForPresenceIssue:
+            "Could not check article for presence"
         }
     }
     
     var message: String {
         switch self {
-        case .rateLimit(message: let message), .coreDataSavingIssue(let message), .coreDataFetchingIssue(let message), .coreDataDeletionIssue(let message):
+        case .rateLimit(message: let message), .coreDataSavingIssue(let message), .coreDataFetchingIssue(let message), .coreDataDeletionIssue(let message), .coreDataCheckingForPresenceIssue(let message):
             "\(message)"
         case .badServerResponse:
             "Please try again later"

@@ -7,38 +7,59 @@
 
 import Foundation
 import CoreData
+import OrderedCollections
 
 protocol LikedArticlesViewModelProtocol {
     var controller: AlertProtocol? { get set }
-    func getLikedArticles() -> [LikedArticleModel?]
+    var numberOfSections: Int { get }
+    
+    func numberOfArticles(in section: Int) -> Int
+    func fetchLikedArticles()
 }
 
 class LikedArticlesViewModel: LikedArticlesViewModelProtocol {
-    
     // MARK: - Properties
+    struct Section {
+        let name: String
+        let articles: [LikedArticleModel]
+    }
+    
     weak var controller: AlertProtocol?
     private var likedArticles: [NSManagedObject] = []
+    private var likedarticlesSections = [Section]()
     
-    // MARK: - Initializsers
-    init() {
-        fetchLikedArticles()
+    var numberOfSections: Int {
+        likedarticlesSections.count
     }
     
     // MARK: - Methods
-    func getLikedArticles() -> [LikedArticleModel?] {
-        return likedArticles.map {
-            .init(title: $0.value(forKey: .title),
-                  author: $0.value(forKey: .author),
-                  url: $0.value(forKey: .url))
+    func createLikedArticlesSections() {
+        likedarticlesSections = likedArticles.compactMap {
+            LikedArticleModel(title: $0.value(forKey: .title),
+                              author: $0.value(forKey: .author),
+                              url: $0.value(forKey: .url),
+                              section: $0.value(forKey: .section))
+        }
+        .orderedDictionary {
+            $0.section
+        }
+        .map { key, value in
+            Section(name: key, articles: value)
         }
     }
     
+    func numberOfArticles(in section: Int) -> Int {
+        likedarticlesSections[safe: section]?
+            .articles.count ?? .zero
+    }
+    
     // MARK: - Persistent Methods
-    private func fetchLikedArticles() {
-        LikedArtickePersistentService.shared.fetchArticles { [weak self] result in
+    func fetchLikedArticles() {
+        LikedArticlePersistentService.shared.fetchArticles { [weak self] result in
             switch result {
             case .success(let managedObjects):
                 self?.likedArticles = managedObjects
+                self?.createLikedArticlesSections()
             case .failure(let error):
                 self?.controller?.present(alert: .coreDataFetchingIssue(message: error.localizedDescription))
             }
@@ -46,10 +67,16 @@ class LikedArticlesViewModel: LikedArticlesViewModelProtocol {
     }
     
     private func deleteAllArticles() {
-        LikedArtickePersistentService.shared.deleteAllArticles { [weak self] result in
+        LikedArticlePersistentService.shared.deleteAllArticles { [weak self] result in
             if case let .failure(error) = result {
                 self?.controller?.present(alert: .coreDataDeletionIssue(message: error.localizedDescription))
             }
         }
+    }
+}
+
+fileprivate extension Array where Element == LikedArticleModel {
+    func orderedDictionary(grouping keyPath: (Element) -> String) -> OrderedDictionary<String, [Element]> {
+        return OrderedDictionary(grouping: self, by: keyPath)
     }
 }

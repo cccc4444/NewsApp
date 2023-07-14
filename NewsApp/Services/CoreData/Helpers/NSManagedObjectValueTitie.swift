@@ -11,12 +11,14 @@ enum ManagedValueType {
     case title
     case author
     case url
+    case section
     
     var value: String {
         switch self {
         case .title: "title"
         case .author: "author"
         case .url: "url"
+        case .section: "section"
         }
     }
 }
