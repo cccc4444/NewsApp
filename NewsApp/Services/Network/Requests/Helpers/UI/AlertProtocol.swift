@@ -15,6 +15,9 @@ protocol AlertProtocol: AnyObject {
 enum AlertType {
     case badServerResponse
     case rateLimit(message: String)
+    case coreDataSavingIssue(message: String)
+    case coreDataFetchingIssue(message: String)
+    case coreDataDeletionIssue(message: String)
 }
 
 extension AlertType {
@@ -24,12 +27,18 @@ extension AlertType {
             "Could not fetch news"
         case .badServerResponse:
             "Something went wrong"
+        case .coreDataSavingIssue:
+            "Could not add to liked articles"
+        case .coreDataFetchingIssue:
+            "Could not fetch liked articles"
+        case .coreDataDeletionIssue:
+            "Could not delete liked article"
         }
     }
     
     var message: String {
         switch self {
-        case .rateLimit(message: let message):
+        case .rateLimit(message: let message), .coreDataSavingIssue(let message), .coreDataFetchingIssue(let message), .coreDataDeletionIssue(let message):
             "\(message)"
         case .badServerResponse:
             "Please try again later"

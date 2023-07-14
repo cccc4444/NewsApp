@@ -27,7 +27,7 @@ class HomeViewController: UIViewController, HomeViewContollerProtocol {
     
     private lazy var sectionNavButton: UIButton = {
         var configuration = UIButton.Configuration.borderless()
-        configuration.title = Constants.HomeViewController.defaultSectionName
+//        configuration.title = Constants.HomeViewController.navBarButtonDefaultName
         configuration.baseForegroundColor = .black
         configuration.image = UIImage(named: .chevron)
         configuration.titlePadding = Constants.HomeViewController.navBarTitlePadding
@@ -36,6 +36,7 @@ class HomeViewController: UIViewController, HomeViewContollerProtocol {
         let button = UIButton(configuration: configuration)
         button.showsMenuAsPrimaryAction = true
         button.semanticContentAttribute = .forceRightToLeft
+        button.titleLabel?.numberOfLines = .zero
         return button
     }()
     
@@ -62,17 +63,20 @@ class HomeViewController: UIViewController, HomeViewContollerProtocol {
         
         trackSections()
         trackMostViewedStories()
-        trackGeneralStories() 
         
         viewModel.fetchMostViewedStories()
         viewModel.fetchStoriesSections()
+    }
+    
+    @objc func refresh() {
+        viewModel.fetchMostViewedStories(isRefresh: true)
     }
     
     private func trackSections() {
         viewModel.sectionsPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
-                self?.setupSectionActions()
+                self?.setupSectionButton()
             }
             .store(in: &cancellables)
     }
@@ -86,53 +90,37 @@ class HomeViewController: UIViewController, HomeViewContollerProtocol {
             .store(in: &cancellables)
     }
     
-    private func trackGeneralStories() {
-        viewModel.sectionStoriesViewModelPublisher
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] _ in
-                self?.storiesTableView.reloadData()
-            }
-            .store(in: &cancellables)
-    }
-    
-    private func setupSectionActions() {        
+    private func setupSectionButton() {
+        sectionNavButton.setTitle(viewModel.sections.first, for: .normal)
         sectionNavButton.menu = UIMenu(
-            children: viewModel.sections
-                .flatMap { createActionForSection($0) }
+            children: { viewModel
+                .sections
+                .map { sectionName in
+                    actionFor(sectionName: sectionName, action: <#T##HomeViewModel.SectionType#>)
+                }
+            }()
         )
     }
     
-    private func createActionForSection(_ section: HomeViewModel.SectionType) -> [UIAction] {
-        switch section {
-        case let .top(name):
-            return [UIAction(
-                title: "\(name)",
+    private func actionFor(sectionName: String, action: HomeViewModel.SectionType) -> UIAction {
+        switch action {
+        case .top:
+            return UIAction(
+                title: "Top",
                 image: UIImage(systemNamed: .top)
             ) { [weak self] _ in
-                self?.setNavButton(name: name)
-                self?.setViewModel(section, sectionName: name)
-            }]
-        case let .general(sectionNames):
-            return sectionNames.map { name in
-                return UIAction(
-                    title: "\(name)",
-                    image: UIImage(systemName: Constants.HomeViewController.Sections.sectionListIcons[name] ?? "")
-                ) { [weak self] _ in
-                    self?.setNavButton(name: name)
-                    self?.setViewModel(section, sectionName: name)
-                }
+                self?.sectionNavButton.setTitle("Top", for: .normal)
+                self?.viewModel.fetchMostViewedStories()
+            }
+        case .general:
+            return UIAction(
+                title: "\(sectionName)",
+                image: UIImage(systemName: Constants.HomeViewController.Sections.sectionListIcons[sectionName] ?? "")
+            ) { [weak self] _ in
+                self?.sectionNavButton.setTitle(sectionName, for: .normal)
+                self?.viewModel.fetchStories(for: sectionName.withLowercasedFirstLetter)
             }
         }
-    }
-    
-    private func setNavButton(name: String) {
-        sectionNavButton.setTitle(name, for: .normal)
-    }
-    
-    private func setViewModel(_ section: HomeViewModel.SectionType, sectionName: String) {
-        viewModel.selectedSectionType = section
-        viewModel.setSelectedSectionName(sectionName)
-        viewModel.setSectionAction()
     }
     
     func reloadTableData() {
@@ -145,46 +133,22 @@ class HomeViewController: UIViewController, HomeViewContollerProtocol {
         refreshControl.endRefreshing()
     }
     
-    // MARK: - Actions
-    
-    @objc
-    private func refresh() {
-        viewModel.refreshStories()
-    }
-    
-    @objc
-    private func displayLikedArticles() {
-        let viewModel = LikedArticlesViewModel()
-        let likedVC = LikedArticlesViewController(viewModel: viewModel)
-        present(likedVC, animated: true)
-    }
-    
     // MARK: - Configurational methods
     
     private func setupUI() {
         view.backgroundColor = .white
-        setupNavigationController()
-        setupVacationsTableView()
-    }
-    
-    private func setupNavigationController() {
-        self.navigationController?.navigationBar.tintColor = .black
         navigationItem.titleView = sectionNavButton
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemNamed: .liked), style: .plain, target: self, action: #selector(displayLikedArticles))
+        setupVacationsTableView()
     }
     
     private func setupVacationsTableView() {
         view.addSubview(storiesTableView)
         storiesTableView.addSubview(refreshControl)
         
-        sectionNavButton.snp.makeConstraints { make in
-            make.width.equalTo(30)
-        }
-        
-        storiesTableView.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.leading.trailing.equalToSuperview()
-            make.bottom.equalToSuperview()
+        storiesTableView.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalToSuperview()
         }
     }
 }
@@ -194,7 +158,7 @@ class HomeViewController: UIViewController, HomeViewContollerProtocol {
 extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.storiesCount
+        return viewModel.mostViewdStoriesCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -202,12 +166,5 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
         let cell: StoriesTableViewCell = tableView.dequeueCell()
         cell.setup(model: article)
         return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let article = viewModel.getArticle(for: indexPath) else { return }
-        let viewModel = DetailViewModel(homeViewModel: viewModel, article: article)
-        let detailVC = DetailViewController(viewModel: viewModel)
-        super.navigationController?.pushViewController(detailVC, animated: true)
     }
 }
