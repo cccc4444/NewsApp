@@ -10,21 +10,28 @@ import CoreData
 import OrderedCollections
 
 protocol LikedArticlesViewModelProtocol {
-    var controller: AlertProtocol? { get set }
+    var controller: (AlertProtocol & LikedArticleProtocol)? { get set }
     var numberOfSections: Int { get }
     
+    func getLikedArticle(for indexPath: IndexPath) -> LikedArticleModel
+    func titleForHeader(in section: Int) -> String
     func numberOfArticles(in section: Int) -> Int
-    func fetchLikedArticles()
 }
 
-class LikedArticlesViewModel: LikedArticlesViewModelProtocol {
+protocol LikedArticlesPersistentProtocol {
+    func fetchLikedArticles()
+    func deleteArticle(for indexPath: IndexPath)
+    func deleteAllArticles()
+}
+
+class LikedArticlesViewModel: LikedArticlesViewModelProtocol, LikedArticlesPersistentProtocol {
     // MARK: - Properties
     struct Section {
         let name: String
         let articles: [LikedArticleModel]
     }
     
-    weak var controller: AlertProtocol?
+    weak var controller: (AlertProtocol & LikedArticleProtocol)?
     private var likedArticles: [NSManagedObject] = []
     private var likedarticlesSections = [Section]()
     
@@ -53,6 +60,15 @@ class LikedArticlesViewModel: LikedArticlesViewModelProtocol {
             .articles.count ?? .zero
     }
     
+    func titleForHeader(in section: Int) -> String {
+        likedarticlesSections[safe: section]?
+            .name ?? ""
+    }
+    
+    func getLikedArticle(for indexPath: IndexPath) -> LikedArticleModel {
+        likedarticlesSections[safe: indexPath.section]?.articles[safe: indexPath.row] ?? .empty
+    }
+    
     // MARK: - Persistent Methods
     func fetchLikedArticles() {
         LikedArticlePersistentService.shared.fetchArticles { [weak self] result in
@@ -66,11 +82,23 @@ class LikedArticlesViewModel: LikedArticlesViewModelProtocol {
         }
     }
     
-    private func deleteAllArticles() {
+    func deleteArticle(for indexPath: IndexPath) {
+        LikedArticlePersistentService.shared.deleteArticle(with: getLikedArticle(for: indexPath)) { [weak self] result in
+            if case let .failure(error) = result {
+                self?.controller?.present(alert: .coreDataDeletionIssue(message: error.localizedDescription))
+            }
+            self?.fetchLikedArticles()
+            self?.controller?.reloadTable()
+        }
+    }
+    
+    func deleteAllArticles() {
         LikedArticlePersistentService.shared.deleteAllArticles { [weak self] result in
             if case let .failure(error) = result {
                 self?.controller?.present(alert: .coreDataDeletionIssue(message: error.localizedDescription))
             }
+            self?.fetchLikedArticles()
+            self?.controller?.reloadTable()
         }
     }
 }

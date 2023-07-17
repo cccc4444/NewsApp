@@ -8,10 +8,12 @@
 import UIKit
 import SnapKit
 import Combine
+import NotificationBannerSwift
 
 protocol HomeViewContollerProtocol: AnyObject {
     func reloadTableData()
     func endRefreshing()
+    func showLikeWarning()
 }
 
 class HomeViewController: UIViewController, HomeViewContollerProtocol {
@@ -50,7 +52,7 @@ class HomeViewController: UIViewController, HomeViewContollerProtocol {
     
     // MARK: - Properties
     
-    private var viewModel: (HomeViewModelProtocol & HomeViewModelNetworkingProtocol) = HomeViewModel()
+    private var viewModel: (HomeViewModelProtocol & HomeViewModelNetworkingProtocol & HomeViewPersistentProtocol) = HomeViewModel()
     private var cancellables: Set<AnyCancellable> = []
 
     // MARK: - Methods
@@ -145,6 +147,11 @@ class HomeViewController: UIViewController, HomeViewContollerProtocol {
         refreshControl.endRefreshing()
     }
     
+    func showLikeWarning() {
+        let banner = NotificationBanner(title: "Hey", subtitle: "Reconsider your life choices!", style: .warning)
+        banner.show()
+    }
+    
     // MARK: - Actions
     
     @objc
@@ -211,5 +218,15 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
         let viewModel = DetailViewModel(homeViewModel: viewModel, article: article)
         let detailVC = DetailViewController(viewModel: viewModel)
         super.navigationController?.pushViewController(detailVC, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let archive = UIContextualAction(style: .normal,
+                                         title: "Archive") { [weak self] (_, _, completionHandler) in
+            self?.viewModel.likeArticle(at: indexPath)
+            completionHandler(true)
+        }
+        archive.backgroundColor = .systemGreen
+        return UISwipeActionsConfiguration(actions: [archive])
     }
 }

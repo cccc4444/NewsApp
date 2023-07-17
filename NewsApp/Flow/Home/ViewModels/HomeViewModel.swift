@@ -27,6 +27,10 @@ protocol HomeViewModelProtocol: AnyObject {
     func setSelectedSectionName(_ name: String)
 }
 
+protocol HomeViewPersistentProtocol: AnyObject {
+    func likeArticle(at indexPath: IndexPath)
+}
+
 protocol HomeViewModelNetworkingProtocol: AnyObject {
     func fetchStoriesSections()
     func fetchStories(for section: String, isRefresh: Bool)
@@ -43,7 +47,7 @@ extension HomeViewModelNetworkingProtocol {
     }
 }
 
-class HomeViewModel: HomeViewModelProtocol, HomeViewModelNetworkingProtocol, ObservableObject {
+class HomeViewModel: HomeViewModelProtocol, HomeViewModelNetworkingProtocol, HomeViewPersistentProtocol, ObservableObject {
     enum SectionType {
         case top(name: String = Constants.HomeViewController.defaultSectionName)
         case general(sectionNames: [String])
@@ -110,6 +114,31 @@ class HomeViewModel: HomeViewModelProtocol, HomeViewModelNetworkingProtocol, Obs
     func refreshStories() {
         fetchMostViewedStories(isRefresh: true)
         fetchStories(for: selectedSectionName, isRefresh: true)
+    }
+    
+    // MARK: - Persistent methods
+    func likeArticle(at indexPath: IndexPath) {
+        guard let article = getArticle(for: indexPath) else { return }
+        LikedArticlePersistentService.shared.isArticleSaved(with: article) { [weak self] result in
+            switch result {
+            case .success(let isSaved):
+                if isSaved {
+                    self?.controller?.showLikeWarning()
+                    return
+                }
+                self?.saveLikedArticle(article: article)
+            case .failure(let error):
+                self?.controller?.present(alert: .coreDataCheckingForPresenceIssue(message: error.localizedDescription))
+            }
+        }
+    }
+    
+    private func saveLikedArticle(article: DisplayableArticle) {
+        LikedArticlePersistentService.shared.saveArticle(with: article) { [weak self] result in
+            if case let .failure(error) = result {
+                self?.controller?.present(alert: .coreDataSavingIssue(message: error.localizedDescription))
+            }
+        }
     }
     
     // MARK: - Networking Methods

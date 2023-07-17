@@ -43,6 +43,10 @@
 		1B44BD232A60429000A0E3C8 /* NSManagedObject+value.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B44BD222A60429000A0E3C8 /* NSManagedObject+value.swift */; };
 		1B44BD262A6042EE00A0E3C8 /* NSManagedObjectValueTitie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B44BD252A6042EE00A0E3C8 /* NSManagedObjectValueTitie.swift */; };
 		1B44BD282A6044FA00A0E3C8 /* LikedArticleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B44BD272A6044FA00A0E3C8 /* LikedArticleModel.swift */; };
+		1B44BD2A2A65589C00A0E3C8 /* LikedArticleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B44BD292A65589C00A0E3C8 /* LikedArticleTableViewCell.swift */; };
+		1B44BD2D2A6576DA00A0E3C8 /* NotificationBannerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1B44BD2C2A6576DA00A0E3C8 /* NotificationBannerSwift */; };
+		1B44BD302A657C7B00A0E3C8 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 1B44BD2F2A657C7B00A0E3C8 /* Lottie */; };
+		1B44BD322A65ABDB00A0E3C8 /* UIView+ShowHIde.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B44BD312A65ABDB00A0E3C8 /* UIView+ShowHIde.swift */; };
 		1BA046982A58762400E63F46 /* DisplayableArticle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA046972A58762400E63F46 /* DisplayableArticle.swift */; };
 		1BA0469A2A5952DC00E63F46 /* String+isNotEmpty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA046992A5952DC00E63F46 /* String+isNotEmpty.swift */; };
 		1BA0469D2A59574C00E63F46 /* AlertProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA0469C2A59574C00E63F46 /* AlertProtocol.swift */; };
@@ -101,6 +105,8 @@
 		1B44BD222A60429000A0E3C8 /* NSManagedObject+value.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObject+value.swift"; sourceTree = "<group>"; };
 		1B44BD252A6042EE00A0E3C8 /* NSManagedObjectValueTitie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSManagedObjectValueTitie.swift; sourceTree = "<group>"; };
 		1B44BD272A6044FA00A0E3C8 /* LikedArticleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedArticleModel.swift; sourceTree = "<group>"; };
+		1B44BD292A65589C00A0E3C8 /* LikedArticleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedArticleTableViewCell.swift; sourceTree = "<group>"; };
+		1B44BD312A65ABDB00A0E3C8 /* UIView+ShowHIde.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+ShowHIde.swift"; sourceTree = "<group>"; };
 		1BA046972A58762400E63F46 /* DisplayableArticle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayableArticle.swift; sourceTree = "<group>"; };
 		1BA046992A5952DC00E63F46 /* String+isNotEmpty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+isNotEmpty.swift"; sourceTree = "<group>"; };
 		1BA0469C2A59574C00E63F46 /* AlertProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertProtocol.swift; sourceTree = "<group>"; };
@@ -126,7 +132,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				1BAE184B2A558B1300466360 /* OrderedCollections in Frameworks */,
+				1B44BD2D2A6576DA00A0E3C8 /* NotificationBannerSwift in Frameworks */,
 				1B3D754C2A4D60E500235968 /* SnapKit in Frameworks */,
+				1B44BD302A657C7B00A0E3C8 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,6 +267,7 @@
 				1BAE18622A573D9B00466360 /* UIView+Appearance.swift */,
 				1BA046992A5952DC00E63F46 /* String+isNotEmpty.swift */,
 				1B44BD222A60429000A0E3C8 /* NSManagedObject+value.swift */,
+				1B44BD312A65ABDB00A0E3C8 /* UIView+ShowHIde.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -405,6 +414,7 @@
 			isa = PBXGroup;
 			children = (
 				1BAE18552A56E85100466360 /* StoriesTableViewCell.swift */,
+				1B44BD292A65589C00A0E3C8 /* LikedArticleTableViewCell.swift */,
 			);
 			path = "Table elements";
 			sourceTree = "<group>";
@@ -429,6 +439,8 @@
 			packageProductDependencies = (
 				1B3D754B2A4D60E500235968 /* SnapKit */,
 				1BAE184A2A558B1300466360 /* OrderedCollections */,
+				1B44BD2C2A6576DA00A0E3C8 /* NotificationBannerSwift */,
+				1B44BD2F2A657C7B00A0E3C8 /* Lottie */,
 			);
 			productName = NewsApp;
 			productReference = 1B3D752D2A4D5F0000235968 /* NewsApp.app */;
@@ -462,6 +474,8 @@
 				1B3D754A2A4D60E500235968 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				1BAE18492A558B1300466360 /* XCRemoteSwiftPackageReference "swift-collections" */,
 				1BA046A22A59684100E63F46 /* XCRemoteSwiftPackageReference "SwiftLint" */,
+				1B44BD2B2A6576DA00A0E3C8 /* XCRemoteSwiftPackageReference "NotificationBanner" */,
+				1B44BD2E2A657C7B00A0E3C8 /* XCRemoteSwiftPackageReference "lottie-spm" */,
 			);
 			productRefGroup = 1B3D752E2A4D5F0000235968 /* Products */;
 			projectDirPath = "";
@@ -503,6 +517,7 @@
 				1BAE185F2A572D6B00466360 /* CustomImageView.swift in Sources */,
 				1BAE185A2A57289B00466360 /* Collection+Safe.swift in Sources */,
 				1B44BD262A6042EE00A0E3C8 /* NSManagedObjectValueTitie.swift in Sources */,
+				1B44BD2A2A65589C00A0E3C8 /* LikedArticleTableViewCell.swift in Sources */,
 				1B3D75312A4D5F0000235968 /* AppDelegate.swift in Sources */,
 				1B3D75742A4D7F1200235968 /* NetworkService.swift in Sources */,
 				1B3D755F2A4D712500235968 /* URLBuilderProtocol.swift in Sources */,
@@ -511,6 +526,7 @@
 				1B3D75642A4D783500235968 /* Encodable+Queries.swift in Sources */,
 				1BAE18612A573D5300466360 /* UIImageVIew+setImage.swift in Sources */,
 				1B3D756D2A4D7D2000235968 /* ApiKeyQuery.swift in Sources */,
+				1B44BD322A65ABDB00A0E3C8 /* UIView+ShowHIde.swift in Sources */,
 				1BAE18582A57232F00466360 /* UITableViewCell+dequeueCell.swift in Sources */,
 				1BAE184D2A559E9100466360 /* StoryModel.swift in Sources */,
 				1B44BD1F2A60225D00A0E3C8 /* LikedArticlesViewModel.swift in Sources */,
@@ -776,6 +792,22 @@
 				minimumVersion = 5.6.0;
 			};
 		};
+		1B44BD2B2A6576DA00A0E3C8 /* XCRemoteSwiftPackageReference "NotificationBanner" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Daltron/NotificationBanner";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.2.1;
+			};
+		};
+		1B44BD2E2A657C7B00A0E3C8 /* XCRemoteSwiftPackageReference "lottie-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-spm.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.2.0;
+			};
+		};
 		1BA046A22A59684100E63F46 /* XCRemoteSwiftPackageReference "SwiftLint" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/SwiftLint.git";
@@ -799,6 +831,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1B3D754A2A4D60E500235968 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		1B44BD2C2A6576DA00A0E3C8 /* NotificationBannerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1B44BD2B2A6576DA00A0E3C8 /* XCRemoteSwiftPackageReference "NotificationBanner" */;
+			productName = NotificationBannerSwift;
+		};
+		1B44BD2F2A657C7B00A0E3C8 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1B44BD2E2A657C7B00A0E3C8 /* XCRemoteSwiftPackageReference "lottie-spm" */;
+			productName = Lottie;
 		};
 		1BA046A32A59688100E63F46 /* SwiftLintPlugin */ = {
 			isa = XCSwiftPackageProductDependency;

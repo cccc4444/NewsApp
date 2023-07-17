@@ -23,3 +23,7 @@ struct LikedArticleModel {
         self.section = section
     }
 }
+
+extension LikedArticleModel {
+    static let empty: Self = .init(title: "", author: "", url: "", section: "")!
+}
