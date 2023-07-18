@@ -169,7 +169,19 @@ class HomeViewController: UIViewController, HomeViewContollerProtocol {
     
     @objc
     private func displaySettings() {
-        present(UIViewController(), animated: true)
+        let settingsViewController = ThemeViewController()
+        let nav = UINavigationController(rootViewController: settingsViewController)
+        nav.modalPresentationStyle = .pageSheet
+        
+        let multiplier = 0.2
+        let fraction = UISheetPresentationController.Detent.custom { context in
+            self.view.frame.height * multiplier
+        }
+        
+        if let sheet = nav.sheetPresentationController {
+            sheet.detents = [fraction]
+        }
+        present(nav, animated: true, completion: nil)
     }
     
     // MARK: - Configurational methods
@@ -186,9 +198,9 @@ class HomeViewController: UIViewController, HomeViewContollerProtocol {
         navigationItem.largeTitleDisplayMode = .never
         navigationItem.titleView = sectionNavButton
         let likedArticles = UIBarButtonItem(image: UIImage(systemNamed: .like), style: .plain, target: self, action: #selector(displayLikedArticles))
-        let settings = UIBarButtonItem(image: UIImage(systemNamed: .gear), style: .plain, target: self, action: #selector(displaySettings))
-        navigationItem.rightBarButtonItems = [settings, likedArticles
-        ]
+        let theme = UIBarButtonItem(image: UIImage(systemNamed: .theme), style: .plain, target: self, action: #selector(displaySettings))
+        navigationItem.rightBarButtonItem = likedArticles
+        navigationItem.leftBarButtonItem = theme
     }
     
     private func setupVacationsTableView() {

@@ -48,6 +48,9 @@
 		1B44BD302A657C7B00A0E3C8 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 1B44BD2F2A657C7B00A0E3C8 /* Lottie */; };
 		1B44BD322A65ABDB00A0E3C8 /* UIView+ShowHIde.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B44BD312A65ABDB00A0E3C8 /* UIView+ShowHIde.swift */; };
 		1B44BD342A66712400A0E3C8 /* ColorAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B44BD332A66712400A0E3C8 /* ColorAssets.swift */; };
+		1B44BD412A66C9ED00A0E3C8 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B44BD402A66C9ED00A0E3C8 /* Theme.swift */; };
+		1B44BD432A66CC5A00A0E3C8 /* ThemeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B44BD422A66CC5A00A0E3C8 /* ThemeViewController.swift */; };
+		1B44BD452A66CCAE00A0E3C8 /* UserDefaults+theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B44BD442A66CCAE00A0E3C8 /* UserDefaults+theme.swift */; };
 		1BA046982A58762400E63F46 /* DisplayableArticle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA046972A58762400E63F46 /* DisplayableArticle.swift */; };
 		1BA0469A2A5952DC00E63F46 /* String+isNotEmpty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA046992A5952DC00E63F46 /* String+isNotEmpty.swift */; };
 		1BA0469D2A59574C00E63F46 /* AlertProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA0469C2A59574C00E63F46 /* AlertProtocol.swift */; };
@@ -109,6 +112,9 @@
 		1B44BD292A65589C00A0E3C8 /* LikedArticleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedArticleTableViewCell.swift; sourceTree = "<group>"; };
 		1B44BD312A65ABDB00A0E3C8 /* UIView+ShowHIde.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+ShowHIde.swift"; sourceTree = "<group>"; };
 		1B44BD332A66712400A0E3C8 /* ColorAssets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorAssets.swift; sourceTree = "<group>"; };
+		1B44BD402A66C9ED00A0E3C8 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		1B44BD422A66CC5A00A0E3C8 /* ThemeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeViewController.swift; sourceTree = "<group>"; };
+		1B44BD442A66CCAE00A0E3C8 /* UserDefaults+theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+theme.swift"; sourceTree = "<group>"; };
 		1BA046972A58762400E63F46 /* DisplayableArticle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayableArticle.swift; sourceTree = "<group>"; };
 		1BA046992A5952DC00E63F46 /* String+isNotEmpty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+isNotEmpty.swift"; sourceTree = "<group>"; };
 		1BA0469C2A59574C00E63F46 /* AlertProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertProtocol.swift; sourceTree = "<group>"; };
@@ -271,6 +277,7 @@
 				1BA046992A5952DC00E63F46 /* String+isNotEmpty.swift */,
 				1B44BD222A60429000A0E3C8 /* NSManagedObject+value.swift */,
 				1B44BD312A65ABDB00A0E3C8 /* UIView+ShowHIde.swift */,
+				1B44BD442A66CCAE00A0E3C8 /* UserDefaults+theme.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -327,6 +334,7 @@
 				1B3D75342A4D5F0000235968 /* HomeViewController.swift */,
 				1BA046A72A5C360700E63F46 /* DetailViewController.swift */,
 				1B44BD1C2A60224600A0E3C8 /* LikedArticlesViewController.swift */,
+				1B44BD422A66CC5A00A0E3C8 /* ThemeViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -344,6 +352,7 @@
 		1B44BD112A5ECE8C00A0E3C8 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				1B44BD3F2A66C9D700A0E3C8 /* Themes */,
 				1B44BD122A5ECE9D00A0E3C8 /* ShimmerButton */,
 			);
 			path = Helpers;
@@ -374,6 +383,14 @@
 				1B44BD252A6042EE00A0E3C8 /* NSManagedObjectValueTitie.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		1B44BD3F2A66C9D700A0E3C8 /* Themes */ = {
+			isa = PBXGroup;
+			children = (
+				1B44BD402A66C9ED00A0E3C8 /* Theme.swift */,
+			);
+			path = Themes;
 			sourceTree = "<group>";
 		};
 		1BA0469B2A59573700E63F46 /* UI */ = {
@@ -525,6 +542,7 @@
 				1B3D75742A4D7F1200235968 /* NetworkService.swift in Sources */,
 				1B3D755F2A4D712500235968 /* URLBuilderProtocol.swift in Sources */,
 				1B44BD182A5EDAD300A0E3C8 /* SwipableNavigationController.swift in Sources */,
+				1B44BD412A66C9ED00A0E3C8 /* Theme.swift in Sources */,
 				1B44BD282A6044FA00A0E3C8 /* LikedArticleModel.swift in Sources */,
 				1B3D75642A4D783500235968 /* Encodable+Queries.swift in Sources */,
 				1BAE18612A573D5300466360 /* UIImageVIew+setImage.swift in Sources */,
@@ -535,6 +553,7 @@
 				1B44BD1F2A60225D00A0E3C8 /* LikedArticlesViewModel.swift in Sources */,
 				1B3D75532A4D668000235968 /* StoriesNetworkService.swift in Sources */,
 				1BA046A82A5C360700E63F46 /* DetailViewController.swift in Sources */,
+				1B44BD452A66CCAE00A0E3C8 /* UserDefaults+theme.swift in Sources */,
 				1B3D756B2A4D7AEB00235968 /* StoriesURLs.swift in Sources */,
 				1B3D75692A4D79F300235968 /* HeaderType.swift in Sources */,
 				1B3D753B2A4D5F0000235968 /* LikedArticle.xcdatamodeld in Sources */,
@@ -550,6 +569,7 @@
 				1BAE185C2A572B3E00466360 /* UIImageView+asyncLoadImage.swift in Sources */,
 				1BAE18562A56E85100466360 /* StoriesTableViewCell.swift in Sources */,
 				1BA046982A58762400E63F46 /* DisplayableArticle.swift in Sources */,
+				1B44BD432A66CC5A00A0E3C8 /* ThemeViewController.swift in Sources */,
 				1B3D75502A4D642100235968 /* NetworkError.swift in Sources */,
 				1B44BD142A5ECEBE00A0E3C8 /* ShimmerEffectProtocol.swift in Sources */,
 				1BAE184F2A55A08000466360 /* String+lowercased.swift in Sources */,
