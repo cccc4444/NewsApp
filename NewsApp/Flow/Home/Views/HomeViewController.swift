@@ -30,8 +30,8 @@ class HomeViewController: UIViewController, HomeViewContollerProtocol {
     private lazy var sectionNavButton: UIButton = {
         var configuration = UIButton.Configuration.borderless()
         configuration.title = Constants.HomeViewController.defaultSectionName
-        configuration.baseForegroundColor = .black
-        configuration.image = UIImage(named: .chevron)
+        configuration.baseForegroundColor = .blackWhite
+        configuration.image = UIImage(named: .chevron)?.withTintColor(.blackWhite)
         configuration.titlePadding = Constants.HomeViewController.navBarTitlePadding
         configuration.imagePadding = Constants.HomeViewController.navBarImagePadding
         
@@ -43,6 +43,7 @@ class HomeViewController: UIViewController, HomeViewContollerProtocol {
     
     private lazy var storiesTableView: UITableView = {
         let tableView = UITableView()
+        tableView.backgroundColor = .systemGray6
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
@@ -166,20 +167,28 @@ class HomeViewController: UIViewController, HomeViewContollerProtocol {
         super.navigationController?.pushViewController(likedVC, animated: true)
     }
     
+    @objc
+    private func displaySettings() {
+        present(UIViewController(), animated: true)
+    }
+    
     // MARK: - Configurational methods
     
     private func setupUI() {
-        view.backgroundColor = .white
+        view.backgroundColor = .systemGray6
         setupNavigationController()
         setupVacationsTableView()
     }
     
     private func setupNavigationController() {
-        navigationController?.navigationBar.tintColor = .black
+        navigationController?.navigationBar.tintColor = .blackWhite
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.largeTitleDisplayMode = .never
         navigationItem.titleView = sectionNavButton
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemNamed: .like), style: .plain, target: self, action: #selector(displayLikedArticles))
+        let likedArticles = UIBarButtonItem(image: UIImage(systemNamed: .like), style: .plain, target: self, action: #selector(displayLikedArticles))
+        let settings = UIBarButtonItem(image: UIImage(systemNamed: .gear), style: .plain, target: self, action: #selector(displaySettings))
+        navigationItem.rightBarButtonItems = [settings, likedArticles
+        ]
     }
     
     private func setupVacationsTableView() {

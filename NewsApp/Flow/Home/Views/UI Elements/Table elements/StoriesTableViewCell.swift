@@ -12,7 +12,9 @@ class StoriesTableViewCell: UITableViewCell {
     // MARK: - UI Components
     
     private lazy var containerView: UIView = {
-        return UIView()
+        let view = UIView()
+        view.backgroundColor = .systemGray6
+        return view
     }()
     
     private lazy var coverImage: CustomImageView = {
@@ -27,7 +29,7 @@ class StoriesTableViewCell: UITableViewCell {
     private lazy var title: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
-        label.textColor = .black
+        label.textColor = .blackWhite
         label.lineBreakMode = .byTruncatingTail
         label.numberOfLines = 3
         label.adjustsFontSizeToFitWidth = false
@@ -39,7 +41,8 @@ class StoriesTableViewCell: UITableViewCell {
         label.font = UIFont.systemFont(ofSize: 12, weight: .regular)
         label.textColor = .secondaryLabel
         label.adjustsFontSizeToFitWidth = false
-        label.numberOfLines = .zero
+        label.lineBreakMode = .byTruncatingTail
+        label.numberOfLines = 3
         return label
     }()
     
@@ -71,6 +74,7 @@ class StoriesTableViewCell: UITableViewCell {
     }
     
     private func setupViews() {
+        contentView.backgroundColor = .systemGray6
         contentView.addSubview(containerView)
         containerView.addSubview(coverImage)
         containerView.addSubview(title)

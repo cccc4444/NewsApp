@@ -17,13 +17,13 @@ class DetailViewController: UIViewController {
     
     private lazy var scrollView: UIScrollView = {
         var scrollView = UIScrollView()
-        scrollView.backgroundColor = .white
+        scrollView.backgroundColor = .systemGray6
         return scrollView
     }()
     
     private lazy var contentView: UIView = {
         let contentView = UIView()
-        contentView.backgroundColor = .white
+        contentView.backgroundColor = .systemGray6
         return contentView
     }()
     
@@ -31,7 +31,7 @@ class DetailViewController: UIViewController {
         let label = UILabel()
         label.textAlignment = .left
         label.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
-        label.textColor = .black
+        label.textColor = .blackWhite
         label.numberOfLines = .zero
         label.lineBreakMode = .byTruncatingTail
         return label
@@ -50,7 +50,7 @@ class DetailViewController: UIViewController {
     private lazy var articleTitle: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
-        label.textColor = .black
+        label.textColor = .blackWhite
         label.numberOfLines = .zero
         return label
     }()
@@ -65,14 +65,14 @@ class DetailViewController: UIViewController {
     private lazy var articleDescription: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        label.textColor = .black
+        label.textColor = .blackWhite
         label.numberOfLines = .zero
         return label
     }()
     
     private lazy var readMoreButtonView: UIView = {
         let view = UIView()
-        view.backgroundColor = .white
+        view.backgroundColor = .systemGray6
         return view
     }()
     
@@ -171,7 +171,7 @@ class DetailViewController: UIViewController {
         navigationItem.rightBarButtonItems = [like, share]
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.largeTitleDisplayMode = .never
-        navBar?.tintColor = .black
+        navBar?.tintColor = .blackWhite
     }
     
     private func  setupUI() {
@@ -192,6 +192,10 @@ class DetailViewController: UIViewController {
         stackView.snp.makeConstraints { make in
             make.top.leading.trailing.equalTo(contentView)
             make.bottom.equalTo(readMoreButtonView.snp.top).offset(-10)
+        }
+        
+        articleTitle.snp.makeConstraints { make in
+            make.trailing.equalToSuperview().inset(10)
         }
         
         readMoreButtonView.snp.makeConstraints { make in
