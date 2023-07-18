@@ -17,7 +17,7 @@ class LikedArticleTableViewCell: UITableViewCell {
     private lazy var title: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
-        label.textColor = .black
+        label.textColor = .blackWhite
         label.lineBreakMode = .byTruncatingTail
         label.numberOfLines = 3
         label.adjustsFontSizeToFitWidth = false
@@ -54,6 +54,7 @@ class LikedArticleTableViewCell: UITableViewCell {
     }
     
     private func setupViews() {
+        contentView.backgroundColor = .systemGray5
         contentView.addSubview(containerView)
         containerView.addSubview(title)
         containerView.addSubview(author)

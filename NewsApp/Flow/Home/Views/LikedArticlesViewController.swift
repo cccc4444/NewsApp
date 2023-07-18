@@ -24,6 +24,7 @@ class LikedArticlesViewController: UIViewController, LikedArticleProtocol {
         tableView.dataSource = self
         tableView.separatorStyle = .none
         tableView.estimatedRowHeight = 50
+        tableView.backgroundColor = .systemGray6
         return tableView
     }()
 
@@ -91,6 +92,7 @@ class LikedArticlesViewController: UIViewController, LikedArticleProtocol {
     
     // MARK: - Configurational Methods
     private func setupUI() {
+        view.backgroundColor = .systemGray
         setupNavigationController()
         setupTableView()
         setupEmptyStateAnimationView()
@@ -105,6 +107,7 @@ class LikedArticlesViewController: UIViewController, LikedArticleProtocol {
     
     private func setupNavigationController() {
         navigationItem.title = "Favourites"
+        navigationItem.titleView?.tintColor = .blackWhite
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.largeTitleDisplayMode = .always
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Remove all", image: nil, target: self, action: #selector(removeAllArticles))
