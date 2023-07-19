@@ -51,6 +51,7 @@
 		1B44BD412A66C9ED00A0E3C8 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B44BD402A66C9ED00A0E3C8 /* Theme.swift */; };
 		1B44BD432A66CC5A00A0E3C8 /* ThemeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B44BD422A66CC5A00A0E3C8 /* ThemeViewController.swift */; };
 		1B44BD452A66CCAE00A0E3C8 /* UserDefaults+theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B44BD442A66CCAE00A0E3C8 /* UserDefaults+theme.swift */; };
+		1B44BD482A6802E100A0E3C8 /* LocalNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B44BD472A6802E100A0E3C8 /* LocalNotification.swift */; };
 		1BA046982A58762400E63F46 /* DisplayableArticle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA046972A58762400E63F46 /* DisplayableArticle.swift */; };
 		1BA0469A2A5952DC00E63F46 /* String+isNotEmpty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA046992A5952DC00E63F46 /* String+isNotEmpty.swift */; };
 		1BA0469D2A59574C00E63F46 /* AlertProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA0469C2A59574C00E63F46 /* AlertProtocol.swift */; };
@@ -115,6 +116,7 @@
 		1B44BD402A66C9ED00A0E3C8 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		1B44BD422A66CC5A00A0E3C8 /* ThemeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeViewController.swift; sourceTree = "<group>"; };
 		1B44BD442A66CCAE00A0E3C8 /* UserDefaults+theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+theme.swift"; sourceTree = "<group>"; };
+		1B44BD472A6802E100A0E3C8 /* LocalNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotification.swift; sourceTree = "<group>"; };
 		1BA046972A58762400E63F46 /* DisplayableArticle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayableArticle.swift; sourceTree = "<group>"; };
 		1BA046992A5952DC00E63F46 /* String+isNotEmpty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+isNotEmpty.swift"; sourceTree = "<group>"; };
 		1BA0469C2A59574C00E63F46 /* AlertProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertProtocol.swift; sourceTree = "<group>"; };
@@ -352,6 +354,7 @@
 		1B44BD112A5ECE8C00A0E3C8 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				1B44BD462A6802C200A0E3C8 /* LocalNofitications */,
 				1B44BD3F2A66C9D700A0E3C8 /* Themes */,
 				1B44BD122A5ECE9D00A0E3C8 /* ShimmerButton */,
 			);
@@ -391,6 +394,14 @@
 				1B44BD402A66C9ED00A0E3C8 /* Theme.swift */,
 			);
 			path = Themes;
+			sourceTree = "<group>";
+		};
+		1B44BD462A6802C200A0E3C8 /* LocalNofitications */ = {
+			isa = PBXGroup;
+			children = (
+				1B44BD472A6802E100A0E3C8 /* LocalNotification.swift */,
+			);
+			path = LocalNofitications;
 			sourceTree = "<group>";
 		};
 		1BA0469B2A59573700E63F46 /* UI */ = {
@@ -578,6 +589,7 @@
 				1B3D75622A4D77FC00235968 /* URLComponents+setQueryItems.swift in Sources */,
 				1B44BD342A66712400A0E3C8 /* ColorAssets.swift in Sources */,
 				1B3D757C2A4D809F00235968 /* Int+isInBetween.swift in Sources */,
+				1B44BD482A6802E100A0E3C8 /* LocalNotification.swift in Sources */,
 				1B3D75562A4D678700235968 /* SectionListModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
