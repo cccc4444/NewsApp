@@ -171,16 +171,11 @@ class HomeViewController: UIViewController, HomeViewContollerProtocol {
     private func displaySettings() {
         let settingsViewController = ThemeViewController()
         let nav = UINavigationController(rootViewController: settingsViewController)
-        nav.modalPresentationStyle = .pageSheet
-        
-        let multiplier = 0.2
-        let fraction = UISheetPresentationController.Detent.custom { context in
-            self.view.frame.height * multiplier
-        }
-        
+        let fraction = UISheetPresentationController.Detent.custom(resolver: { _ in 100 })
         if let sheet = nav.sheetPresentationController {
             sheet.detents = [fraction]
         }
+        nav.modalPresentationStyle = .pageSheet
         present(nav, animated: true, completion: nil)
     }
     

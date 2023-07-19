@@ -10,10 +10,16 @@ import CoreData
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    let notificationCenter = UNUserNotificationCenter.current()
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        let options: UNAuthorizationOptions = [.alert, .sound, .badge]
+        notificationCenter.delegate = self
+        notificationCenter.requestAuthorization(options: options) { _ ,_ in }
+        scheduleNotification()
         return true
     }
-
+    
     // MARK: UISceneSession Lifecycle
 
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
