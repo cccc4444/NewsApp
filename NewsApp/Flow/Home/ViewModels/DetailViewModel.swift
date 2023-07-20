@@ -9,8 +9,15 @@ import Foundation
 import UIKit
 import CoreData
 
+protocol DetailNavigationProtocol: AnyObject {
+    func presentShareScreen(with url: String)
+    func presentArticle(at url: String)
+}
+
 protocol DetailViewModelProtocol {
     var controller: AlertProtocol? { get set }
+    var delegate: DetailNavigationProtocol? { get set }
+    
     var article: DisplayableArticle { get }
     var numberOfSections: Int { get }
     var numberOfItemsInSections: Int { get }
@@ -37,6 +44,7 @@ class DetailViewModel: DetailViewModelProtocol {
     
     weak var controller: AlertProtocol?
     weak var homeViewModel: (HomeViewModelProtocol & HomeViewModelNetworkingProtocol)?
+    weak var delegate: DetailNavigationProtocol?
     
     var article: DisplayableArticle
     var numberOfSections: Int = 2

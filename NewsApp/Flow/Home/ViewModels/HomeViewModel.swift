@@ -8,8 +8,16 @@
 import Foundation
 import Combine
 
+protocol HomeNavigationDelegate: AnyObject {
+    func presentLikedArticles()
+    func presentThemes()
+    func presentArticleDetails(for article: DisplayableArticle,
+                               with homeViewModel: HomeViewModelProtocolAlias)
+}
+
 protocol HomeViewModelProtocol: AnyObject {
     var controller: (AlertProtocol & HomeViewContollerProtocol)? { get set }
+    var delegate: HomeNavigationDelegate? { get set }
     var networkService: StoriesNetworkServiceProtocol { get }
     
     var sectionsPublisher: Published<[SectionModel]?>.Publisher { get }
@@ -59,6 +67,7 @@ class HomeViewModel: HomeViewModelProtocol, HomeViewModelNetworkingProtocol, Hom
     
     var networkService: StoriesNetworkServiceProtocol
     weak var controller: (AlertProtocol & HomeViewContollerProtocol)?
+    weak var delegate: HomeNavigationDelegate?
     
     var selectedSectionType: HomeViewModel.SectionType = HomeViewModel.SectionType.defaultValue
     private var selectedSectionName: String

@@ -9,10 +9,15 @@ import Foundation
 import CoreData
 import OrderedCollections
 
+protocol LikedArticlesNavigationProtocol: AnyObject {
+    func presentArticle(at url: String)
+}
+
 protocol LikedArticlesViewModelProtocol {
     var controller: (AlertProtocol & LikedArticleProtocol)? { get set }
-    var numberOfSections: Int { get }
+    var delegate: LikedArticlesNavigationProtocol? { get set }
     
+    var numberOfSections: Int { get }
     func getLikedArticle(for indexPath: IndexPath) -> LikedArticleModel
     func titleForHeader(in section: Int) -> String
     func numberOfArticles(in section: Int) -> Int
@@ -32,6 +37,8 @@ class LikedArticlesViewModel: LikedArticlesViewModelProtocol, LikedArticlesPersi
     }
     
     weak var controller: (AlertProtocol & LikedArticleProtocol)?
+    weak var delegate: LikedArticlesNavigationProtocol?
+    
     private var likedArticles: [NSManagedObject] = []
     private var likedarticlesSections = [Section]()
     

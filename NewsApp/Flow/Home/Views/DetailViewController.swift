@@ -143,15 +143,12 @@ class DetailViewController: UIViewController {
     // MARK: - Actions
     @objc
     private func readMoreTapped() {
-        guard let url = URL(string: viewModel.selectedArticleURL) else { return }
-        present(SFSafariViewController(url: url), animated: true)
+        viewModel.delegate?.presentArticle(at: viewModel.selectedArticleURL)
     }
     
     @objc
     private func shareTapped() {
-        let items = [URL(string: viewModel.article.url)]
-        let activity = UIActivityViewController(activityItems: items as [Any], applicationActivities: nil)
-        present(activity, animated: true)
+        viewModel.delegate?.presentShareScreen(with: viewModel.article.url)
     }
     
     @objc

@@ -10,17 +10,22 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    var homeCoordinator: HomeCoordinator?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
-        let rootViewController = HomeViewController()
-        let homeNavigationController = UINavigationController(rootViewController: rootViewController)
         window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = homeNavigationController
-        window?.makeKeyAndVisible()
+        window?.rootViewController = UINavigationController()
+        homeCoordinator = HomeCoordinator(
+            navigationController: (
+                window?.rootViewController as? UINavigationController ?? .init(nibName: nil, bundle: nil)
+            )
+        )
+        homeCoordinator?.start()
         
         let defaults = UserDefaults.standard
         window?.overrideUserInterfaceStyle = defaults.theme.userInterfaceStyle
+        window?.makeKeyAndVisible()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

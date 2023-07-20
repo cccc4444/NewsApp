@@ -80,8 +80,7 @@ class LikedArticlesViewController: UIViewController, LikedArticleProtocol {
     }
     
     func articleTapped(article: LikedArticleModel) {
-        guard let url = URL(string: article.url) else { return }
-        present(SFSafariViewController(url: url), animated: true)
+        viewModel.delegate?.presentArticle(at: article.url)
     }
     
     // MARK: - Actions
