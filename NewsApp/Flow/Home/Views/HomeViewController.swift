@@ -10,6 +10,8 @@ import SnapKit
 import Combine
 import NotificationBannerSwift
 
+typealias HomeViewModelProtocolAlias = (HomeViewModelNetworkingProtocol & HomeViewModelProtocol & HomeViewPersistentProtocol)
+
 protocol HomeViewContollerProtocol: AnyObject {
     func reloadTableData()
     func endRefreshing()
@@ -19,7 +21,6 @@ protocol HomeViewContollerProtocol: AnyObject {
 class HomeViewController: UIViewController, HomeViewContollerProtocol {
     
     // MARK: - UI Elements
-    
     private lazy var refreshControl: UIRefreshControl = {
         var control = UIRefreshControl()
         control.layer.zPosition = -1
@@ -52,12 +53,20 @@ class HomeViewController: UIViewController, HomeViewContollerProtocol {
     }()
     
     // MARK: - Properties
-    
-    private var viewModel: (HomeViewModelProtocol & HomeViewModelNetworkingProtocol & HomeViewPersistentProtocol) = HomeViewModel()
+    private var viewModel: HomeViewModelProtocolAlias
     private var cancellables: Set<AnyCancellable> = []
-
-    // MARK: - Methods
     
+    // MARK: - Initializers
+    init(viewModel: HomeViewModelProtocol & HomeViewModelNetworkingProtocol & HomeViewPersistentProtocol) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.controller = self
@@ -162,21 +171,12 @@ class HomeViewController: UIViewController, HomeViewContollerProtocol {
     
     @objc
     private func displayLikedArticles() {
-        let viewModel = LikedArticlesViewModel()
-        let likedVC = LikedArticlesViewController(viewModel: viewModel)
-        super.navigationController?.pushViewController(likedVC, animated: true)
+        viewModel.delegate?.presentLikedArticles()
     }
     
     @objc
-    private func displaySettings() {
-        let settingsViewController = ThemeViewController()
-        let nav = UINavigationController(rootViewController: settingsViewController)
-        let fraction = UISheetPresentationController.Detent.custom(resolver: { _ in 100 })
-        if let sheet = nav.sheetPresentationController {
-            sheet.detents = [fraction]
-        }
-        nav.modalPresentationStyle = .pageSheet
-        present(nav, animated: true, completion: nil)
+    private func displayThemesScreen() {
+        viewModel.delegate?.presentThemes()
     }
     
     // MARK: - Configurational methods
@@ -193,7 +193,7 @@ class HomeViewController: UIViewController, HomeViewContollerProtocol {
         navigationItem.largeTitleDisplayMode = .never
         navigationItem.titleView = sectionNavButton
         let likedArticles = UIBarButtonItem(image: UIImage(systemNamed: .like), style: .plain, target: self, action: #selector(displayLikedArticles))
-        let theme = UIBarButtonItem(image: UIImage(systemNamed: .theme), style: .plain, target: self, action: #selector(displaySettings))
+        let theme = UIBarButtonItem(image: UIImage(systemNamed: .theme), style: .plain, target: self, action: #selector(displayThemesScreen))
         navigationItem.rightBarButtonItem = likedArticles
         navigationItem.leftBarButtonItem = theme
     }
@@ -231,9 +231,7 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let article = viewModel.getArticle(for: indexPath) else { return }
-        let viewModel = DetailViewModel(homeViewModel: viewModel, article: article)
-        let detailVC = DetailViewController(viewModel: viewModel)
-        super.navigationController?.pushViewController(detailVC, animated: true)
+        viewModel.delegate?.presentArticleDetails(for: article, with: viewModel)
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
