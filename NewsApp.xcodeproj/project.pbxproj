@@ -227,6 +227,8 @@
 		1B3D754D2A4D63E500235968 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				1B44BD462A6802C200A0E3C8 /* LocalNofitications */,
+				1B44BD3F2A66C9D700A0E3C8 /* UserDefaultsThemes */,
 				1B44BD192A5FFE3000A0E3C8 /* CoreData */,
 				1B3D754E2A4D640600235968 /* Network */,
 			);
@@ -290,7 +292,6 @@
 				1BA046992A5952DC00E63F46 /* String+isNotEmpty.swift */,
 				1B44BD222A60429000A0E3C8 /* NSManagedObject+value.swift */,
 				1B44BD312A65ABDB00A0E3C8 /* UIView+ShowHIde.swift */,
-				1B44BD442A66CCAE00A0E3C8 /* UserDefaults+theme.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -365,9 +366,7 @@
 		1B44BD112A5ECE8C00A0E3C8 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				1B44BD462A6802C200A0E3C8 /* LocalNofitications */,
-				1B44BD3F2A66C9D700A0E3C8 /* Themes */,
-				1B44BD122A5ECE9D00A0E3C8 /* ShimmerButton */,
+				1B44BD802A6A83AF00A0E3C8 /* UI */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -399,12 +398,14 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
-		1B44BD3F2A66C9D700A0E3C8 /* Themes */ = {
+		1B44BD3F2A66C9D700A0E3C8 /* UserDefaultsThemes */ = {
 			isa = PBXGroup;
 			children = (
+				1B44BD442A66CCAE00A0E3C8 /* UserDefaults+theme.swift */,
 				1B44BD402A66C9ED00A0E3C8 /* Theme.swift */,
 			);
-			path = Themes;
+			name = UserDefaultsThemes;
+			path = ../Helpers/UserDefaultsThemes;
 			sourceTree = "<group>";
 		};
 		1B44BD462A6802C200A0E3C8 /* LocalNofitications */ = {
@@ -412,7 +413,8 @@
 			children = (
 				1B44BD472A6802E100A0E3C8 /* LocalNotification.swift */,
 			);
-			path = LocalNofitications;
+			name = LocalNofitications;
+			path = ../Helpers/LocalNofitications;
 			sourceTree = "<group>";
 		};
 		1B44BD602A695F3200A0E3C8 /* Coordinators */ = {
@@ -425,6 +427,14 @@
 				1B44BD672A6975FD00A0E3C8 /* ArticleDetailsCoordinator.swift */,
 			);
 			path = Coordinators;
+			sourceTree = "<group>";
+		};
+		1B44BD802A6A83AF00A0E3C8 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				1B44BD122A5ECE9D00A0E3C8 /* ShimmerButton */,
+			);
+			path = UI;
 			sourceTree = "<group>";
 		};
 		1BA0469B2A59573700E63F46 /* UI */ = {
