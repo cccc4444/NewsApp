@@ -57,6 +57,19 @@
 		1B44BD642A69619200A0E3C8 /* ThemesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B44BD632A69619200A0E3C8 /* ThemesCoordinator.swift */; };
 		1B44BD662A696C7500A0E3C8 /* LikedArticlesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B44BD652A696C7500A0E3C8 /* LikedArticlesCoordinator.swift */; };
 		1B44BD682A6975FD00A0E3C8 /* ArticleDetailsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B44BD672A6975FD00A0E3C8 /* ArticleDetailsCoordinator.swift */; };
+		1B44BD882A6A84E600A0E3C8 /* PasscodeKitCreate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B44BD822A6A84E600A0E3C8 /* PasscodeKitCreate.swift */; };
+		1B44BD892A6A84E600A0E3C8 /* PasscodeKitRemove.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B44BD832A6A84E600A0E3C8 /* PasscodeKitRemove.swift */; };
+		1B44BD8A2A6A84E600A0E3C8 /* PasscodeKitVerify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B44BD842A6A84E600A0E3C8 /* PasscodeKitVerify.swift */; };
+		1B44BD8B2A6A84E600A0E3C8 /* PasscodeKitText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B44BD852A6A84E600A0E3C8 /* PasscodeKitText.swift */; };
+		1B44BD8C2A6A84E600A0E3C8 /* PasscodeKitChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B44BD862A6A84E600A0E3C8 /* PasscodeKitChange.swift */; };
+		1B44BD8D2A6A84E600A0E3C8 /* PasscodeKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B44BD872A6A84E600A0E3C8 /* PasscodeKit.swift */; };
+		1B44BD932A6A84FB00A0E3C8 /* PasscodeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B44BD8F2A6A84FB00A0E3C8 /* PasscodeView.xib */; };
+		1B44BD942A6A84FB00A0E3C8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B44BD902A6A84FB00A0E3C8 /* ViewController.swift */; };
+		1B44BD952A6A84FB00A0E3C8 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B44BD912A6A84FB00A0E3C8 /* ViewController.xib */; };
+		1B44BD962A6A84FB00A0E3C8 /* PasscodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B44BD922A6A84FB00A0E3C8 /* PasscodeView.swift */; };
+		1B44BD992A6A95EE00A0E3C8 /* SimpleKeychain in Frameworks */ = {isa = PBXBuildFile; productRef = 1B44BD982A6A95EE00A0E3C8 /* SimpleKeychain */; };
+		1B44BD9C2A6A960D00A0E3C8 /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B44BD9B2A6A960D00A0E3C8 /* KeychainService.swift */; };
+		1B44BD9E2A6ACC4E00A0E3C8 /* SecretArticle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B44BD9D2A6ACC4E00A0E3C8 /* SecretArticle.swift */; };
 		1BA046982A58762400E63F46 /* DisplayableArticle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA046972A58762400E63F46 /* DisplayableArticle.swift */; };
 		1BA0469A2A5952DC00E63F46 /* String+isNotEmpty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA046992A5952DC00E63F46 /* String+isNotEmpty.swift */; };
 		1BA0469D2A59574C00E63F46 /* AlertProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA0469C2A59574C00E63F46 /* AlertProtocol.swift */; };
@@ -127,6 +140,18 @@
 		1B44BD632A69619200A0E3C8 /* ThemesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesCoordinator.swift; sourceTree = "<group>"; };
 		1B44BD652A696C7500A0E3C8 /* LikedArticlesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedArticlesCoordinator.swift; sourceTree = "<group>"; };
 		1B44BD672A6975FD00A0E3C8 /* ArticleDetailsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDetailsCoordinator.swift; sourceTree = "<group>"; };
+		1B44BD822A6A84E600A0E3C8 /* PasscodeKitCreate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasscodeKitCreate.swift; sourceTree = "<group>"; };
+		1B44BD832A6A84E600A0E3C8 /* PasscodeKitRemove.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasscodeKitRemove.swift; sourceTree = "<group>"; };
+		1B44BD842A6A84E600A0E3C8 /* PasscodeKitVerify.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasscodeKitVerify.swift; sourceTree = "<group>"; };
+		1B44BD852A6A84E600A0E3C8 /* PasscodeKitText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasscodeKitText.swift; sourceTree = "<group>"; };
+		1B44BD862A6A84E600A0E3C8 /* PasscodeKitChange.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasscodeKitChange.swift; sourceTree = "<group>"; };
+		1B44BD872A6A84E600A0E3C8 /* PasscodeKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasscodeKit.swift; sourceTree = "<group>"; };
+		1B44BD8F2A6A84FB00A0E3C8 /* PasscodeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PasscodeView.xib; sourceTree = "<group>"; };
+		1B44BD902A6A84FB00A0E3C8 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		1B44BD912A6A84FB00A0E3C8 /* ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController.xib; sourceTree = "<group>"; };
+		1B44BD922A6A84FB00A0E3C8 /* PasscodeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasscodeView.swift; sourceTree = "<group>"; };
+		1B44BD9B2A6A960D00A0E3C8 /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
+		1B44BD9D2A6ACC4E00A0E3C8 /* SecretArticle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretArticle.swift; sourceTree = "<group>"; };
 		1BA046972A58762400E63F46 /* DisplayableArticle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayableArticle.swift; sourceTree = "<group>"; };
 		1BA046992A5952DC00E63F46 /* String+isNotEmpty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+isNotEmpty.swift"; sourceTree = "<group>"; };
 		1BA0469C2A59574C00E63F46 /* AlertProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertProtocol.swift; sourceTree = "<group>"; };
@@ -155,6 +180,7 @@
 				1B44BD2D2A6576DA00A0E3C8 /* NotificationBannerSwift in Frameworks */,
 				1B3D754C2A4D60E500235968 /* SnapKit in Frameworks */,
 				1B44BD302A657C7B00A0E3C8 /* Lottie in Frameworks */,
+				1B44BD992A6A95EE00A0E3C8 /* SimpleKeychain in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -181,6 +207,7 @@
 		1B3D752F2A4D5F0000235968 /* NewsApp */ = {
 			isa = PBXGroup;
 			children = (
+				1B44BD812A6A84CF00A0E3C8 /* PasscodeKit */,
 				1B3D75472A4D601400235968 /* Flow */,
 				1B44BD112A5ECE8C00A0E3C8 /* Helpers */,
 				1B3D754D2A4D63E500235968 /* Services */,
@@ -227,6 +254,7 @@
 		1B3D754D2A4D63E500235968 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				1B44BD9A2A6A95F800A0E3C8 /* Keychain */,
 				1B44BD462A6802C200A0E3C8 /* LocalNofitications */,
 				1B44BD3F2A66C9D700A0E3C8 /* UserDefaultsThemes */,
 				1B44BD192A5FFE3000A0E3C8 /* CoreData */,
@@ -437,6 +465,39 @@
 			path = UI;
 			sourceTree = "<group>";
 		};
+		1B44BD812A6A84CF00A0E3C8 /* PasscodeKit */ = {
+			isa = PBXGroup;
+			children = (
+				1B44BD8E2A6A84F000A0E3C8 /* UI */,
+				1B44BD872A6A84E600A0E3C8 /* PasscodeKit.swift */,
+				1B44BD862A6A84E600A0E3C8 /* PasscodeKitChange.swift */,
+				1B44BD822A6A84E600A0E3C8 /* PasscodeKitCreate.swift */,
+				1B44BD832A6A84E600A0E3C8 /* PasscodeKitRemove.swift */,
+				1B44BD852A6A84E600A0E3C8 /* PasscodeKitText.swift */,
+				1B44BD842A6A84E600A0E3C8 /* PasscodeKitVerify.swift */,
+			);
+			path = PasscodeKit;
+			sourceTree = "<group>";
+		};
+		1B44BD8E2A6A84F000A0E3C8 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				1B44BD922A6A84FB00A0E3C8 /* PasscodeView.swift */,
+				1B44BD8F2A6A84FB00A0E3C8 /* PasscodeView.xib */,
+				1B44BD902A6A84FB00A0E3C8 /* ViewController.swift */,
+				1B44BD912A6A84FB00A0E3C8 /* ViewController.xib */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		1B44BD9A2A6A95F800A0E3C8 /* Keychain */ = {
+			isa = PBXGroup;
+			children = (
+				1B44BD9B2A6A960D00A0E3C8 /* KeychainService.swift */,
+			);
+			path = Keychain;
+			sourceTree = "<group>";
+		};
 		1BA0469B2A59573700E63F46 /* UI */ = {
 			isa = PBXGroup;
 			children = (
@@ -460,6 +521,7 @@
 				1BAE184C2A559E9100466360 /* StoryModel.swift */,
 				1BAE18502A560FB100466360 /* MostViewedStoryModel.swift */,
 				1BA046972A58762400E63F46 /* DisplayableArticle.swift */,
+				1B44BD9D2A6ACC4E00A0E3C8 /* SecretArticle.swift */,
 				1B44BD272A6044FA00A0E3C8 /* LikedArticleModel.swift */,
 			);
 			path = Models;
@@ -505,6 +567,7 @@
 				1BAE184A2A558B1300466360 /* OrderedCollections */,
 				1B44BD2C2A6576DA00A0E3C8 /* NotificationBannerSwift */,
 				1B44BD2F2A657C7B00A0E3C8 /* Lottie */,
+				1B44BD982A6A95EE00A0E3C8 /* SimpleKeychain */,
 			);
 			productName = NewsApp;
 			productReference = 1B3D752D2A4D5F0000235968 /* NewsApp.app */;
@@ -540,6 +603,7 @@
 				1BA046A22A59684100E63F46 /* XCRemoteSwiftPackageReference "SwiftLint" */,
 				1B44BD2B2A6576DA00A0E3C8 /* XCRemoteSwiftPackageReference "NotificationBanner" */,
 				1B44BD2E2A657C7B00A0E3C8 /* XCRemoteSwiftPackageReference "lottie-spm" */,
+				1B44BD972A6A95EE00A0E3C8 /* XCRemoteSwiftPackageReference "SimpleKeychain" */,
 			);
 			productRefGroup = 1B3D752E2A4D5F0000235968 /* Products */;
 			projectDirPath = "";
@@ -555,9 +619,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B44BD932A6A84FB00A0E3C8 /* PasscodeView.xib in Resources */,
 				1BA046A62A59699A00E63F46 /* .swiftlint.yml in Resources */,
 				1B3D75402A4D5F0100235968 /* LaunchScreen.storyboard in Resources */,
 				1B3D753D2A4D5F0100235968 /* Assets.xcassets in Resources */,
+				1B44BD952A6A84FB00A0E3C8 /* ViewController.xib in Resources */,
 				1B3D75382A4D5F0000235968 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -575,6 +641,7 @@
 				1B3D75812A4D819700235968 /* HomeViewModel.swift in Sources */,
 				1BA0469A2A5952DC00E63F46 /* String+isNotEmpty.swift in Sources */,
 				1BAE18482A547EA200466360 /* ImageAssets.swift in Sources */,
+				1B44BD942A6A84FB00A0E3C8 /* ViewController.swift in Sources */,
 				1B3D75702A4D7DBB00235968 /* Constants.swift in Sources */,
 				1B3D75352A4D5F0000235968 /* HomeViewController.swift in Sources */,
 				1B44BD162A5ECED000A0E3C8 /* ShimmerButton.swift in Sources */,
@@ -583,8 +650,10 @@
 				1BAE185A2A57289B00466360 /* Collection+Safe.swift in Sources */,
 				1B44BD262A6042EE00A0E3C8 /* NSManagedObjectValueTitie.swift in Sources */,
 				1B44BD2A2A65589C00A0E3C8 /* LikedArticleTableViewCell.swift in Sources */,
+				1B44BD8D2A6A84E600A0E3C8 /* PasscodeKit.swift in Sources */,
 				1B3D75312A4D5F0000235968 /* AppDelegate.swift in Sources */,
 				1B3D75742A4D7F1200235968 /* NetworkService.swift in Sources */,
+				1B44BD892A6A84E600A0E3C8 /* PasscodeKitRemove.swift in Sources */,
 				1B3D755F2A4D712500235968 /* URLBuilderProtocol.swift in Sources */,
 				1B44BD182A5EDAD300A0E3C8 /* SwipableNavigationController.swift in Sources */,
 				1B44BD412A66C9ED00A0E3C8 /* Theme.swift in Sources */,
@@ -592,6 +661,7 @@
 				1B3D75642A4D783500235968 /* Encodable+Queries.swift in Sources */,
 				1BAE18612A573D5300466360 /* UIImageVIew+setImage.swift in Sources */,
 				1B3D756D2A4D7D2000235968 /* ApiKeyQuery.swift in Sources */,
+				1B44BD962A6A84FB00A0E3C8 /* PasscodeView.swift in Sources */,
 				1B44BD322A65ABDB00A0E3C8 /* UIView+ShowHIde.swift in Sources */,
 				1BAE18582A57232F00466360 /* UITableViewCell+dequeueCell.swift in Sources */,
 				1BAE184D2A559E9100466360 /* StoryModel.swift in Sources */,
@@ -607,15 +677,21 @@
 				1B3D75782A4D803A00235968 /* URLResponse+checks.swift in Sources */,
 				1B44BD662A696C7500A0E3C8 /* LikedArticlesCoordinator.swift in Sources */,
 				1B44BD212A60236200A0E3C8 /* CoreDataError.swift in Sources */,
+				1B44BD882A6A84E600A0E3C8 /* PasscodeKitCreate.swift in Sources */,
 				1B44BD1B2A5FFE3E00A0E3C8 /* LikedArticlePersistentService.swift in Sources */,
 				1BA0469D2A59574C00E63F46 /* AlertProtocol.swift in Sources */,
+				1B44BD9C2A6A960D00A0E3C8 /* KeychainService.swift in Sources */,
 				1B3D755D2A4D70EA00235968 /* RequestBuilderProtocol.swift in Sources */,
 				1B3D75332A4D5F0000235968 /* SceneDelegate.swift in Sources */,
 				1B44BD1D2A60224600A0E3C8 /* LikedArticlesViewController.swift in Sources */,
+				1B44BD8C2A6A84E600A0E3C8 /* PasscodeKitChange.swift in Sources */,
 				1BAE185C2A572B3E00466360 /* UIImageView+asyncLoadImage.swift in Sources */,
 				1BAE18562A56E85100466360 /* StoriesTableViewCell.swift in Sources */,
+				1B44BD8B2A6A84E600A0E3C8 /* PasscodeKitText.swift in Sources */,
 				1B44BD5D2A69466000A0E3C8 /* Coordinator.swift in Sources */,
+				1B44BD9E2A6ACC4E00A0E3C8 /* SecretArticle.swift in Sources */,
 				1BA046982A58762400E63F46 /* DisplayableArticle.swift in Sources */,
+				1B44BD8A2A6A84E600A0E3C8 /* PasscodeKitVerify.swift in Sources */,
 				1B44BD432A66CC5A00A0E3C8 /* ThemeViewController.swift in Sources */,
 				1B3D75502A4D642100235968 /* NetworkError.swift in Sources */,
 				1B44BD142A5ECEBE00A0E3C8 /* ShimmerEffectProtocol.swift in Sources */,
@@ -882,6 +958,14 @@
 				minimumVersion = 4.2.0;
 			};
 		};
+		1B44BD972A6A95EE00A0E3C8 /* XCRemoteSwiftPackageReference "SimpleKeychain" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/auth0/SimpleKeychain";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.0;
+			};
+		};
 		1BA046A22A59684100E63F46 /* XCRemoteSwiftPackageReference "SwiftLint" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/SwiftLint.git";
@@ -915,6 +999,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1B44BD2E2A657C7B00A0E3C8 /* XCRemoteSwiftPackageReference "lottie-spm" */;
 			productName = Lottie;
+		};
+		1B44BD982A6A95EE00A0E3C8 /* SimpleKeychain */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1B44BD972A6A95EE00A0E3C8 /* XCRemoteSwiftPackageReference "SimpleKeychain" */;
+			productName = SimpleKeychain;
 		};
 		1BA046A32A59688100E63F46 /* SwiftLintPlugin */ = {
 			isa = XCSwiftPackageProductDependency;

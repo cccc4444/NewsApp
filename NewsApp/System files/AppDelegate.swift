@@ -17,6 +17,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         notificationCenter.delegate = self
         notificationCenter.requestAuthorization(options: options) { _ ,_ in }
         scheduleNotification()
+        
+        PasscodeKit.delegate = self
+        
         return true
     }
     
@@ -77,5 +80,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }
+    }
+}
+
+// MARK: - PasscodeKitDelegate
+//-----------------------------------------------------------------------------------------------------------------------------------------------
+extension AppDelegate: PasscodeKitDelegate {
+    
+    //-------------------------------------------------------------------------------------------------------------------------------------------
+    func passcodeCheckedButDisabled() {
+        
+        print(#function)
+    }
+    
+    //-------------------------------------------------------------------------------------------------------------------------------------------
+    func passcodeEnteredSuccessfully() {
+        
+        print(#function)
+    }
+    
+    //-------------------------------------------------------------------------------------------------------------------------------------------
+    func passcodeMaximumFailedAttempts() {
+        
+        print(#function)
     }
 }

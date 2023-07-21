@@ -179,6 +179,12 @@ class HomeViewController: UIViewController, HomeViewContollerProtocol {
         viewModel.delegate?.presentThemes()
     }
     
+    @objc
+    private func displayPassCodeSettings() {
+        let viewController = ViewController(nibName: "ViewController", bundle: nil)
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
     // MARK: - Configurational methods
     
     private func setupUI() {
@@ -194,8 +200,9 @@ class HomeViewController: UIViewController, HomeViewContollerProtocol {
         navigationItem.titleView = sectionNavButton
         let likedArticles = UIBarButtonItem(image: UIImage(systemNamed: .like), style: .plain, target: self, action: #selector(displayLikedArticles))
         let theme = UIBarButtonItem(image: UIImage(systemNamed: .theme), style: .plain, target: self, action: #selector(displayThemesScreen))
+        let passCodeSettings = UIBarButtonItem(image: UIImage(systemNamed: .gear), style: .plain, target: self, action: #selector(displayPassCodeSettings))
         navigationItem.rightBarButtonItem = likedArticles
-        navigationItem.leftBarButtonItem = theme
+        navigationItem.leftBarButtonItems = [passCodeSettings, theme]
     }
     
     private func setupVacationsTableView() {
@@ -240,7 +247,14 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
             self?.viewModel.likeArticle(at: indexPath)
             completionHandler(true)
         }
+        
+        let secret = UIContextualAction(style: .normal,
+                                         title: "Secret") { [weak self] (_, _, completionHandler) in
+            self?.viewModel.likeSecretArticle(at: indexPath)
+            completionHandler(true)
+        }
         archive.backgroundColor = .systemGreen
-        return UISwipeActionsConfiguration(actions: [archive])
+        secret.backgroundColor = .systemGray
+        return UISwipeActionsConfiguration(actions: [archive, secret])
     }
 }
