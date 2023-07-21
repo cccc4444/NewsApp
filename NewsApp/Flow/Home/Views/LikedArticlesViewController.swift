@@ -83,6 +83,11 @@ class LikedArticlesViewController: UIViewController, LikedArticleProtocol {
         viewModel.delegate?.presentArticle(at: article.url)
     }
     
+    @objc
+    private func lockTapped() {
+        PasscodeKit.start()
+    }
+    
     // MARK: - Actions
     @objc
     private func removeAllArticles() {
@@ -109,7 +114,9 @@ class LikedArticlesViewController: UIViewController, LikedArticleProtocol {
         navigationItem.titleView?.tintColor = .blackWhite
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.largeTitleDisplayMode = .always
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Remove all", image: nil, target: self, action: #selector(removeAllArticles))
+        let removeAll = UIBarButtonItem(title: "Remove all", image: nil, target: self, action: #selector(removeAllArticles))
+        let secretArticles = UIBarButtonItem(image: UIImage(systemNamed: .lock), style: .plain, target: self, action: #selector(lockTapped))
+        navigationItem.rightBarButtonItems = [removeAll, secretArticles]
     }
     
     private func setupTableView() {

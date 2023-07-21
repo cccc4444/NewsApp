@@ -29,6 +29,8 @@ enum SystemAssets: CaseIterable {
     case likePressed
     case gear
     case theme
+    case lock
+    case unlocked
     
     var image: UIImage? {
         return UIImage(systemName: assetName)
@@ -76,6 +78,10 @@ enum SystemAssets: CaseIterable {
             "gear"
         case .theme:
             "circle.lefthalf.filled"
+        case .lock:
+            "lock"
+        case .unlocked:
+            "lock.open"
         }
     }
 }

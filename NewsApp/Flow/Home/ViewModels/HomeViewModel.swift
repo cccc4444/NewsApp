@@ -37,6 +37,7 @@ protocol HomeViewModelProtocol: AnyObject {
 
 protocol HomeViewPersistentProtocol: AnyObject {
     func likeArticle(at indexPath: IndexPath)
+    func likeSecretArticle(at indexPath: IndexPath)
 }
 
 protocol HomeViewModelNetworkingProtocol: AnyObject {
@@ -108,6 +109,11 @@ class HomeViewModel: HomeViewModelProtocol, HomeViewModelNetworkingProtocol, Hom
         return mostViewedStoriesViewModel?[safe: indexPath.row]
     }
     
+    func getSecretArticle(for indexPath: IndexPath) -> SecretArticle? {
+        guard let article = getArticle(for: indexPath) else { return nil }
+        return SecretArticle(displayableArticle: article)
+    }
+    
     func setSectionAction() {
         if case .general = selectedSectionType {
             fetchStories(for: selectedSectionName.withLowercasedFirstLetter)
@@ -148,6 +154,11 @@ class HomeViewModel: HomeViewModelProtocol, HomeViewModelNetworkingProtocol, Hom
                 self?.controller?.present(alert: .coreDataSavingIssue(message: error.localizedDescription))
             }
         }
+    }
+    
+    func likeSecretArticle(at indexPath: IndexPath) {
+        guard let article = getSecretArticle(for: indexPath) else { return }
+        ArticleKeychainService.shared.store(article: article)
     }
     
     // MARK: - Networking Methods

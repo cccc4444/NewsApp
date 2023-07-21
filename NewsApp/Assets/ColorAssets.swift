@@ -10,7 +10,7 @@ import UIKit
 
 extension UIColor {
     enum ColorIdentifier: String {
-        case blackWhite = "blackWhite"
+        case blackWhite
     }
 
     convenience init!(_ colorIdentifier: ColorIdentifier) {
