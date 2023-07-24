@@ -11,7 +11,7 @@
 
 import UIKit
 import CryptoKit
-
+// swiftlint:disable all
 //-----------------------------------------------------------------------------------------------------------------------------------------------
 @objc public protocol PasscodeKitDelegate {
 
@@ -287,3 +287,4 @@ class PasscodeKitNavController: UINavigationController {
 		return false
 	}
 }
+// swiftlint:enable all

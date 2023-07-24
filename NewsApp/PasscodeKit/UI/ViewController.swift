@@ -10,7 +10,7 @@
 // THE SOFTWARE.
 
 import UIKit
-
+// swiftlint:disable all
 //-----------------------------------------------------------------------------------------------------------------------------------------------
 class ViewController: UITableViewController {
 
@@ -76,3 +76,4 @@ extension ViewController {
 		navigationController?.pushViewController(passcodeView, animated: true)
 	}
 }
+// swiftlint:enable all

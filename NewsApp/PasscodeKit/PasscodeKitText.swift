@@ -10,7 +10,7 @@
 // THE SOFTWARE.
 
 import UIKit
-
+// swiftlint:disable all
 //-----------------------------------------------------------------------------------------------------------------------------------------------
 class PasscodeKitText: UITextField {
 
@@ -82,3 +82,4 @@ class PasscodeKitText: UITextField {
 		}
 	}
 }
+// swiftlint:enable all

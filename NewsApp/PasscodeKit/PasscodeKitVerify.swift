@@ -11,7 +11,7 @@
 
 import UIKit
 import LocalAuthentication
-
+// swiftlint:disable all
 //-----------------------------------------------------------------------------------------------------------------------------------------------
 class PasscodeKitVerify: UIViewController {
 
@@ -181,3 +181,4 @@ extension PasscodeKitVerify {
 		}
 	}
 }
+// swiftlint:enable all

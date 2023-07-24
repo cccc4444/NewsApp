@@ -10,7 +10,7 @@
 // THE SOFTWARE.
 
 import UIKit
-
+// swiftlint:disable all
 //-----------------------------------------------------------------------------------------------------------------------------------------------
 class PasscodeKitCreate: UIViewController {
 
@@ -146,3 +146,4 @@ extension PasscodeKitCreate {
 		}
 	}
 }
+// swiftlint:enable all

@@ -10,7 +10,7 @@
 // THE SOFTWARE.
 
 import UIKit
-
+// swiftlint:disable all
 //-----------------------------------------------------------------------------------------------------------------------------------------------
 private enum PasscodeState {
 
@@ -225,3 +225,4 @@ extension PasscodeKitChange {
 		}
 	}
 }
+// swiftlint:enable all

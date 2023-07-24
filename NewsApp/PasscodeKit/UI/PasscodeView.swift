@@ -10,7 +10,7 @@
 // THE SOFTWARE.
 
 import UIKit
-
+// swiftlint:disable all
 //-----------------------------------------------------------------------------------------------------------------------------------------------
 class PasscodeView: UIViewController {
 
@@ -133,3 +133,4 @@ extension PasscodeView: UITableViewDelegate {
 		if (indexPath.section == 0) && (indexPath.row == 1) { actionChangePasscode()	}
 	}
 }
+// swiftlint:enable all

@@ -207,7 +207,6 @@
 		1B3D752F2A4D5F0000235968 /* NewsApp */ = {
 			isa = PBXGroup;
 			children = (
-				1B44BD812A6A84CF00A0E3C8 /* PasscodeKit */,
 				1B3D75472A4D601400235968 /* Flow */,
 				1B44BD112A5ECE8C00A0E3C8 /* Helpers */,
 				1B3D754D2A4D63E500235968 /* Services */,
@@ -254,6 +253,7 @@
 		1B3D754D2A4D63E500235968 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				1B44BD812A6A84CF00A0E3C8 /* PasscodeKit */,
 				1B44BD9A2A6A95F800A0E3C8 /* Keychain */,
 				1B44BD462A6802C200A0E3C8 /* LocalNofitications */,
 				1B44BD3F2A66C9D700A0E3C8 /* UserDefaultsThemes */,
@@ -476,7 +476,8 @@
 				1B44BD852A6A84E600A0E3C8 /* PasscodeKitText.swift */,
 				1B44BD842A6A84E600A0E3C8 /* PasscodeKitVerify.swift */,
 			);
-			path = PasscodeKit;
+			name = PasscodeKit;
+			path = ../PasscodeKit;
 			sourceTree = "<group>";
 		};
 		1B44BD8E2A6A84F000A0E3C8 /* UI */ = {
