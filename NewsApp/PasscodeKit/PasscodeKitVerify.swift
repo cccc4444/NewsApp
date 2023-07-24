@@ -30,7 +30,9 @@ class PasscodeKitVerify: UIViewController {
 		super.viewDidLoad()
 
 		title = PasscodeKit.titleEnterPasscode
-		view.backgroundColor = PasscodeKit.backgroundColor
+		view.backgroundColor = .systemGray6
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(actionCancel))
 	}
 
 	//-------------------------------------------------------------------------------------------------------------------------------------------
@@ -39,6 +41,11 @@ class PasscodeKitVerify: UIViewController {
 		super.viewWillAppear(animated)
 		authenticateBiometric()
 	}
+    
+    @objc private func actionCancel() {
+
+        dismiss(animated: true)
+    }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------
@@ -81,7 +88,7 @@ extension PasscodeKitVerify {
 	//-------------------------------------------------------------------------------------------------------------------------------------------
 	private func setupUI() {
 
-		view.backgroundColor = PasscodeKit.backgroundColor
+		view.backgroundColor = .systemGray6
 
 		viewPasscode.frame = CGRect(x: 0, y: 200, width: UIScreen.main.bounds.width, height: 120)
 		view.addSubview(viewPasscode)

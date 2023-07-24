@@ -14,9 +14,6 @@ protocol LikedArticleProtocol {
 }
 
 class LikedArticlesViewController: UIViewController, LikedArticleProtocol {
-    // MARK: - Properties
-    private var viewModel: (LikedArticlesViewModelProtocol & LikedArticlesPersistentProtocol)
-    
     // MARK: - UIElements
     private lazy var likedArticlesTableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .insetGrouped)
@@ -37,6 +34,35 @@ class LikedArticlesViewController: UIViewController, LikedArticleProtocol {
         return animationView
     }()
     
+    // MARK: - Properties
+    enum SecretStatus {
+        case locked
+        case unlocked
+        
+        var navIconImage: SystemAssets {
+            switch self {
+            case .locked:
+                return .lock
+            case .unlocked:
+                return .unlocked
+            }
+        }
+    }
+    
+    private var viewModel: (LikedArticlesViewModelProtocol & LikedArticlesPersistentProtocol)
+    
+    private var navigationItems: [UIBarButtonItem] {
+        let removeAll = UIBarButtonItem(title: "Remove all", image: nil, target: self, action: #selector(removeAllArticles))
+        let secretArticles = UIBarButtonItem(image: UIImage(systemNamed: secretStatus.navIconImage), style: .plain, target: self, action: #selector(lockTapped))
+        
+        if PasscodeKit.enabled() {
+            return [removeAll, secretArticles]
+        }
+        return [removeAll]
+    }
+    
+    private var secretStatus: SecretStatus = .locked
+    
     // MARK: - Initializers
     init(viewModel: (LikedArticlesViewModelProtocol & LikedArticlesPersistentProtocol)) {
         self.viewModel = viewModel
@@ -51,6 +77,7 @@ class LikedArticlesViewController: UIViewController, LikedArticleProtocol {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        setupNavigationController()
         viewModel.fetchLikedArticles()
         playLottieAnimation()
     }
@@ -58,6 +85,7 @@ class LikedArticlesViewController: UIViewController, LikedArticleProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.controller = self
+        PasscodeKit.delegate = self
         setupUI()
     }
     
@@ -85,7 +113,7 @@ class LikedArticlesViewController: UIViewController, LikedArticleProtocol {
     
     @objc
     private func lockTapped() {
-        PasscodeKit.start()
+        PasscodeKit.shared.verifyPasscode()
     }
     
     // MARK: - Actions
@@ -97,7 +125,6 @@ class LikedArticlesViewController: UIViewController, LikedArticleProtocol {
     // MARK: - Configurational Methods
     private func setupUI() {
         view.backgroundColor = .systemGray
-        setupNavigationController()
         setupTableView()
         setupEmptyStateAnimationView()
     }
@@ -114,9 +141,7 @@ class LikedArticlesViewController: UIViewController, LikedArticleProtocol {
         navigationItem.titleView?.tintColor = .blackWhite
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.largeTitleDisplayMode = .always
-        let removeAll = UIBarButtonItem(title: "Remove all", image: nil, target: self, action: #selector(removeAllArticles))
-        let secretArticles = UIBarButtonItem(image: UIImage(systemNamed: .lock), style: .plain, target: self, action: #selector(lockTapped))
-        navigationItem.rightBarButtonItems = [removeAll, secretArticles]
+        navigationItem.rightBarButtonItems = navigationItems
     }
     
     private func setupTableView() {
@@ -159,5 +184,20 @@ extension LikedArticlesViewController: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         articleTapped(article: viewModel.getLikedArticle(for: indexPath))
+    }
+}
+
+// MARK: - PasscodeKitDelegate
+extension LikedArticlesViewController: PasscodeKitDelegate {
+    func passcodeCheckedButDisabled() {
+        print(#function)
+    }
+    
+    func passcodeEnteredSuccessfully() {
+        secretStatus = .unlocked
+    }
+    
+    func passcodeMaximumFailedAttempts() {
+        print(#function)
     }
 }

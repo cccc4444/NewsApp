@@ -23,7 +23,7 @@ class PasscodeKitText: UITextField {
 		super.init(frame: frame)
 
 		tintColor = .clear
-		textColor = .clear
+		textColor = .blackWhite
 		borderStyle = .none
 		keyboardType = .numberPad
 		textContentType = .password
@@ -69,7 +69,7 @@ class PasscodeKitText: UITextField {
 
 		let circleCenter = CGPoint(x: radius, y: radius)
 		let circlePath = UIBezierPath(arcCenter: circleCenter, radius: radius, startAngle: 0, endAngle: 2 * .pi, clockwise: false)
-		let circleColor = PasscodeKit.textColor.cgColor
+        let circleColor = UIColor.systemGray2.cgColor
 
 		for i in 0..<passcodeLength {
 			let circle = CAShapeLayer()

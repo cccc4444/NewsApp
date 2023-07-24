@@ -57,7 +57,7 @@ extension PasscodeKitCreate {
 	//-------------------------------------------------------------------------------------------------------------------------------------------
 	private func setupUI() {
 
-		view.backgroundColor = PasscodeKit.backgroundColor
+		view.backgroundColor = .systemGray6
 
 		viewPasscode.frame = CGRect(x: 0, y: 200, width: UIScreen.main.bounds.width, height: 120)
 		view.addSubview(viewPasscode)
