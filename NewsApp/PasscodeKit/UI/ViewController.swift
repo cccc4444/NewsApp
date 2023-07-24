@@ -18,9 +18,10 @@ class ViewController: UITableViewController {
 	override func viewDidLoad() {
 
 		super.viewDidLoad()
-		title = "PasscodeKit"
+		title = "Passcode"
 
 		navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
+        view.backgroundColor = .systemGray6
 	}
 
 	//-------------------------------------------------------------------------------------------------------------------------------------------
@@ -52,7 +53,8 @@ extension ViewController {
 
 		var cell: UITableViewCell! = tableView.dequeueReusableCell(withIdentifier: "cell")
 		if (cell == nil) { cell = UITableViewCell(style: .value1, reuseIdentifier: "cell") }
-
+        
+        cell.backgroundColor = .systemGray5
 		cell.textLabel?.text = "Passcode Lock"
 		cell.detailTextLabel?.text = PasscodeKit.enabled() ? "On" : "Off"
 		cell.accessoryType = .disclosureIndicator

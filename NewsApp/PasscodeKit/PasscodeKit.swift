@@ -35,10 +35,10 @@ public class PasscodeKit: NSObject {
 	public static var passcodeLength			= 4
 	public static var allowedFailedAttempts		= 3
 
-	public static var textColor					= UIColor.darkText
-	public static var backgroundColor			= UIColor.lightGray
+    public static var textColor					= UIColor.blackWhite
+	public static var backgroundColor			= UIColor.blackWhite
 
-	public static var failedTextColor			= UIColor.white
+	public static var failedTextColor			= UIColor.blackWhite
 	public static var failedBackgroundColor		= UIColor.systemRed
 
 	public static var titleEnterPasscode		= "Enter Passcode"
@@ -105,8 +105,7 @@ extension PasscodeKit {
 	}
 
 	//-------------------------------------------------------------------------------------------------------------------------------------------
-	@objc private func verifyPasscode() {
-
+	@objc func verifyPasscode() {
 		if (PasscodeKit.enabled()) {
 			if let viewController = topViewController() {
 				if (noPasscodePresented(viewController)) {
@@ -264,12 +263,10 @@ class PasscodeKitNavController: UINavigationController {
 
 		super.viewDidLoad()
 
-		if #available(iOS 13.0, *) {
-			self.isModalInPresentation = true
-			self.modalPresentationStyle = .fullScreen
-		}
-
-		navigationBar.isTranslucent = false
+        if #available(iOS 13.0, *) {
+            self.isModalInPresentation = true
+            self.modalPresentationStyle = .fullScreen
+        }
 	}
 
 	//-------------------------------------------------------------------------------------------------------------------------------------------

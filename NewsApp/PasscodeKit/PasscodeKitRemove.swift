@@ -56,13 +56,13 @@ extension PasscodeKitRemove {
 	//-------------------------------------------------------------------------------------------------------------------------------------------
 	private func setupUI() {
 
-		view.backgroundColor = PasscodeKit.backgroundColor
+		view.backgroundColor = .systemGray6
 
 		viewPasscode.frame = CGRect(x: 0, y: 200, width: UIScreen.main.bounds.width, height: 120)
 		view.addSubview(viewPasscode)
 
 		labelInfo.textAlignment = .center
-		labelInfo.textColor = PasscodeKit.textColor
+        labelInfo.textColor = .blackWhite
 		labelInfo.font = UIFont.systemFont(ofSize: 17)
 		labelInfo.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 30)
 		viewPasscode.addSubview(labelInfo)
@@ -76,7 +76,7 @@ extension PasscodeKitRemove {
 		viewPasscode.addSubview(textPasscode)
 
 		labelFailedAttempts.textAlignment = .center
-		labelFailedAttempts.textColor = PasscodeKit.failedTextColor
+        labelFailedAttempts.textColor = .blackWhite
 		labelFailedAttempts.backgroundColor = PasscodeKit.failedBackgroundColor
 		labelFailedAttempts.font = UIFont.systemFont(ofSize: 15)
 		labelFailedAttempts.frame = CGRect(x: (UIScreen.main.bounds.width - 225) / 2, y: 90, width: 225, height: 30)

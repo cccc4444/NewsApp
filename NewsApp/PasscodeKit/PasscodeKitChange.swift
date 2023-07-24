@@ -72,13 +72,13 @@ extension PasscodeKitChange {
 
 		state = .change1
 
-		view.backgroundColor = PasscodeKit.backgroundColor
+        view.backgroundColor = .systemGray6
 
 		viewPasscode.frame = CGRect(x: 0, y: 200, width: UIScreen.main.bounds.width, height: 120)
 		view.addSubview(viewPasscode)
 
 		labelInfo.textAlignment = .center
-		labelInfo.textColor = PasscodeKit.textColor
+        labelInfo.textColor = .blackWhite
 		labelInfo.font = UIFont.systemFont(ofSize: 17)
 		labelInfo.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 30)
 		viewPasscode.addSubview(labelInfo)
