@@ -191,6 +191,134 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1B037F142A7036640017C798 /* Details */ = {
+			isa = PBXGroup;
+			children = (
+				1B037F1E2A7037AC0017C798 /* ViewModels */,
+				1B037F1D2A7037A70017C798 /* Views */,
+			);
+			path = Details;
+			sourceTree = "<group>";
+		};
+		1B037F152A70366D0017C798 /* LikedArticles */ = {
+			isa = PBXGroup;
+			children = (
+				1B037F1F2A7037D60017C798 /* Models */,
+				1B037F1B2A7037580017C798 /* ViewModels */,
+				1B037F1A2A7037500017C798 /* Views */,
+			);
+			path = LikedArticles;
+			sourceTree = "<group>";
+		};
+		1B037F162A70367F0017C798 /* Themes */ = {
+			isa = PBXGroup;
+			children = (
+				1B037F172A7036CF0017C798 /* Views */,
+			);
+			path = Themes;
+			sourceTree = "<group>";
+		};
+		1B037F172A7036CF0017C798 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1B44BD422A66CC5A00A0E3C8 /* ThemeViewController.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		1B037F1A2A7037500017C798 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1B037F212A70385C0017C798 /* Table Elements */,
+				1B44BD1C2A60224600A0E3C8 /* LikedArticlesViewController.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		1B037F1B2A7037580017C798 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				1B44BD1E2A60225D00A0E3C8 /* LikedArticlesViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		1B037F1D2A7037A70017C798 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1BA046A72A5C360700E63F46 /* DetailViewController.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		1B037F1E2A7037AC0017C798 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				1BA046A92A5C3E2700E63F46 /* DetailViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		1B037F1F2A7037D60017C798 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				1B44BD9D2A6ACC4E00A0E3C8 /* SecretArticle.swift */,
+				1B44BD272A6044FA00A0E3C8 /* LikedArticleModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		1B037F212A70385C0017C798 /* Table Elements */ = {
+			isa = PBXGroup;
+			children = (
+				1B44BD292A65589C00A0E3C8 /* LikedArticleTableViewCell.swift */,
+			);
+			path = "Table Elements";
+			sourceTree = "<group>";
+		};
+		1B037F222A7039270017C798 /* UIImageView */ = {
+			isa = PBXGroup;
+			children = (
+				1BAE185B2A572B3E00466360 /* UIImageView+asyncLoadImage.swift */,
+				1BAE18602A573D5300466360 /* UIImageVIew+setImage.swift */,
+			);
+			path = UIImageView;
+			sourceTree = "<group>";
+		};
+		1B037F232A7039350017C798 /* UIView */ = {
+			isa = PBXGroup;
+			children = (
+				1BAE18622A573D9B00466360 /* UIView+Appearance.swift */,
+				1B44BD312A65ABDB00A0E3C8 /* UIView+ShowHIde.swift */,
+			);
+			path = UIView;
+			sourceTree = "<group>";
+		};
+		1B037F242A7039450017C798 /* String */ = {
+			isa = PBXGroup;
+			children = (
+				1BAE184E2A55A08000466360 /* String+lowercased.swift */,
+				1BA046992A5952DC00E63F46 /* String+isNotEmpty.swift */,
+				1B44BDA32A70050C00A0E3C8 /* String+DateFormatter.swift */,
+			);
+			path = String;
+			sourceTree = "<group>";
+		};
+		1B037F252A703A000017C798 /* Misc */ = {
+			isa = PBXGroup;
+			children = (
+				1B44BD172A5EDAD300A0E3C8 /* SwipableNavigationController.swift */,
+				1B3D75612A4D77FC00235968 /* URLComponents+setQueryItems.swift */,
+				1B3D75632A4D783500235968 /* Encodable+Queries.swift */,
+				1B3D75772A4D803A00235968 /* URLResponse+checks.swift */,
+				1B3D757B2A4D809F00235968 /* Int+isInBetween.swift */,
+				1BAE18572A57232E00466360 /* UITableViewCell+dequeueCell.swift */,
+				1BAE18592A57289B00466360 /* Collection+Safe.swift */,
+				1B44BD222A60429000A0E3C8 /* NSManagedObject+value.swift */,
+			);
+			path = Misc;
+			sourceTree = "<group>";
+		};
 		1B3D75242A4D5F0000235968 = {
 			isa = PBXGroup;
 			children = (
@@ -211,6 +339,7 @@
 		1B3D752F2A4D5F0000235968 /* NewsApp */ = {
 			isa = PBXGroup;
 			children = (
+				1B44BD602A695F3200A0E3C8 /* Coordinators */,
 				1B3D75472A4D601400235968 /* Flow */,
 				1B3D754D2A4D63E500235968 /* Services */,
 				1B3D75602A4D77D000235968 /* Extensions */,
@@ -225,7 +354,9 @@
 		1B3D75472A4D601400235968 /* Flow */ = {
 			isa = PBXGroup;
 			children = (
-				1B44BD602A695F3200A0E3C8 /* Coordinators */,
+				1B037F162A70367F0017C798 /* Themes */,
+				1B037F152A70366D0017C798 /* LikedArticles */,
+				1B037F142A7036640017C798 /* Details */,
 				1B3D757D2A4D815C00235968 /* Home */,
 			);
 			path = Flow;
@@ -310,21 +441,10 @@
 		1B3D75602A4D77D000235968 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				1B44BD172A5EDAD300A0E3C8 /* SwipableNavigationController.swift */,
-				1B3D75612A4D77FC00235968 /* URLComponents+setQueryItems.swift */,
-				1B3D75632A4D783500235968 /* Encodable+Queries.swift */,
-				1B3D75772A4D803A00235968 /* URLResponse+checks.swift */,
-				1B3D757B2A4D809F00235968 /* Int+isInBetween.swift */,
-				1BAE184E2A55A08000466360 /* String+lowercased.swift */,
-				1BAE18572A57232E00466360 /* UITableViewCell+dequeueCell.swift */,
-				1BAE18592A57289B00466360 /* Collection+Safe.swift */,
-				1BAE185B2A572B3E00466360 /* UIImageView+asyncLoadImage.swift */,
-				1BAE18602A573D5300466360 /* UIImageVIew+setImage.swift */,
-				1BAE18622A573D9B00466360 /* UIView+Appearance.swift */,
-				1BA046992A5952DC00E63F46 /* String+isNotEmpty.swift */,
-				1B44BD222A60429000A0E3C8 /* NSManagedObject+value.swift */,
-				1B44BD312A65ABDB00A0E3C8 /* UIView+ShowHIde.swift */,
-				1B44BDA32A70050C00A0E3C8 /* String+DateFormatter.swift */,
+				1B037F242A7039450017C798 /* String */,
+				1B037F232A7039350017C798 /* UIView */,
+				1B037F222A7039270017C798 /* UIImageView */,
+				1B037F252A703A000017C798 /* Misc */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -377,11 +497,8 @@
 		1B3D757E2A4D817700235968 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				1BAE18542A56E80600466360 /* UI Elements */,
+				1BAE185D2A572D5600466360 /* Table elements */,
 				1B3D75342A4D5F0000235968 /* HomeViewController.swift */,
-				1BA046A72A5C360700E63F46 /* DetailViewController.swift */,
-				1B44BD1C2A60224600A0E3C8 /* LikedArticlesViewController.swift */,
-				1B44BD422A66CC5A00A0E3C8 /* ThemeViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -390,8 +507,6 @@
 			isa = PBXGroup;
 			children = (
 				1B3D75802A4D819700235968 /* HomeViewModel.swift */,
-				1BA046A92A5C3E2700E63F46 /* DetailViewModel.swift */,
-				1B44BD1E2A60225D00A0E3C8 /* LikedArticlesViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -460,13 +575,15 @@
 				1B44BD672A6975FD00A0E3C8 /* ArticleDetailsCoordinator.swift */,
 				1B44BDA12A6FE54700A0E3C8 /* PasscodeSettingsCoordinator.swift */,
 			);
-			path = Coordinators;
+			name = Coordinators;
+			path = Flow/Coordinators;
 			sourceTree = "<group>";
 		};
 		1B44BD802A6A83AF00A0E3C8 /* UI */ = {
 			isa = PBXGroup;
 			children = (
 				1B44BD122A5ECE9D00A0E3C8 /* ShimmerButton */,
+				1BAE185E2A572D6B00466360 /* CustomImageView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -528,26 +645,14 @@
 				1BAE184C2A559E9100466360 /* StoryModel.swift */,
 				1BAE18502A560FB100466360 /* MostViewedStoryModel.swift */,
 				1BA046972A58762400E63F46 /* DisplayableArticle.swift */,
-				1B44BD9D2A6ACC4E00A0E3C8 /* SecretArticle.swift */,
-				1B44BD272A6044FA00A0E3C8 /* LikedArticleModel.swift */,
 			);
 			path = Models;
-			sourceTree = "<group>";
-		};
-		1BAE18542A56E80600466360 /* UI Elements */ = {
-			isa = PBXGroup;
-			children = (
-				1BAE185D2A572D5600466360 /* Table elements */,
-				1BAE185E2A572D6B00466360 /* CustomImageView.swift */,
-			);
-			path = "UI Elements";
 			sourceTree = "<group>";
 		};
 		1BAE185D2A572D5600466360 /* Table elements */ = {
 			isa = PBXGroup;
 			children = (
 				1BAE18552A56E85100466360 /* StoriesTableViewCell.swift */,
-				1B44BD292A65589C00A0E3C8 /* LikedArticleTableViewCell.swift */,
 			);
 			path = "Table elements";
 			sourceTree = "<group>";
