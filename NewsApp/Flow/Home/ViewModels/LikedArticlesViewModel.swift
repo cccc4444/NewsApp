@@ -108,22 +108,22 @@ class LikedArticlesViewModel: LikedArticlesViewModelProtocol, LikedArticlesPersi
     
     func deleteArticle(for indexPath: IndexPath) {
         let article = getLikedArticle(for: indexPath)
-        guard article.section == "Secret 🔒" else {
-            LikedArticlePersistentService.shared.deleteArticle(with: getLikedArticle(for: indexPath)) { [weak self] result in
-                if case let .failure(error) = result {
-                    self?.controller?.present(alert: .coreDataDeletionIssue(message: error.localizedDescription))
-                }
-                self?.fetchLikedArticles()
-                self?.controller?.reloadTable()
-            }
+        guard article.section == Constants.LikedViewController.secretSectionName else {
+            deleteLikedArticle(at: indexPath)
             return
         }
-        
-        ArticleKeychainService.shared.removeAt(index: indexPath.row) { [weak self] result in
+        deleteSecretArticle(at: indexPath)
+    }
+    
+    private func deleteLikedArticle(at indexPath: IndexPath) {
+        LikedArticlePersistentService.shared.deleteArticle(with: getLikedArticle(for: indexPath)) { [weak self] result in
             if case let .failure(error) = result {
-                self?.controller?.present(alert: .kCDeletingIssue(message: error.localizedDescription))
+                self?.controller?.present(alert: .coreDataDeletionIssue(message: error.localizedDescription))
             }
-            self?.fetchSecretArticles()
+            self?.fetchLikedArticles()
+            if self?.secretStatus == .unlocked {
+                self?.fetchSecretArticles()
+            }
             self?.controller?.reloadTable()
         }
     }
@@ -139,15 +139,6 @@ class LikedArticlesViewModel: LikedArticlesViewModelProtocol, LikedArticlesPersi
         }
     }
     
-    func deleteAllSecretArticles() {
-        guard secretStatus == .unlocked else { return }
-        ArticleKeychainService.shared.removeAll { [weak self] result in
-            if case let .failure(error) = result {
-                self?.controller?.present(alert: .kCDeletingIssue(message: error.localizedDescription))
-            }
-        }
-    }
-    
     // MARK: - KeychainService methods
     func fetchSecretArticles() {
         ArticleKeychainService.shared.retrieveArticles { [weak self] result in
@@ -157,6 +148,26 @@ class LikedArticlesViewModel: LikedArticlesViewModelProtocol, LikedArticlesPersi
             case .failure(let error):
                 self?.controller?.present(alert: .kCFethingIssue(message: error.localizedDescription))
             }
+        }
+    }
+    
+    private func deleteAllSecretArticles() {
+        guard secretStatus == .unlocked else { return }
+        ArticleKeychainService.shared.removeAll { [weak self] result in
+            if case let .failure(error) = result {
+                self?.controller?.present(alert: .kCDeletingIssue(message: error.localizedDescription))
+            }
+        }
+    }
+    
+    func deleteSecretArticle(at indexPath: IndexPath) {
+        ArticleKeychainService.shared.removeAt(index: indexPath.row) { [weak self] result in
+            if case let .failure(error) = result {
+                self?.controller?.present(alert: .kCDeletingIssue(message: error.localizedDescription))
+            }
+            self?.fetchLikedArticles()
+            self?.fetchSecretArticles()
+            self?.controller?.reloadTable()
         }
     }
 }
@@ -191,7 +202,7 @@ fileprivate extension Array where Element == SecretArticle {
             LikedArticleModel(title: $0.title,
                               author: $0.byline,
                               url: $0.url,
-                              section: "Secret 🔒")
+                              section: Constants.LikedViewController.secretSectionName)
         }
         .orderedDictionary {
             $0.section

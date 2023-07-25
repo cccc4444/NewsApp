@@ -118,7 +118,7 @@ class DetailViewController: UIViewController {
     }
 
     private func setupUIElements() {
-        publishedDate.text = viewModel.article.publishedDate
+        publishedDate.text = viewModel.article.publishedDate.formatted
         authors.text = viewModel.article.byline
         articleTitle.text = viewModel.article.title
         articleDescription.text = viewModel.article.abstract

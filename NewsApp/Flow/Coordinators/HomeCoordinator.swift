@@ -47,6 +47,11 @@ extension HomeCoordinator: HomeNavigationDelegate {
         childCoordinators.append(articleDetailsCoordinator)
         articleDetailsCoordinator.start()
     }
+    
+    func presentPassCodeSettings() {
+        let passcodeSettingsCoordinator = PasscodeSettingsCoordinator(navigationController: navigationController)
+        passcodeSettingsCoordinator.start()
+    }
 }
 
 extension HomeCoordinator: BackToHomeViewControllerDelegate {

@@ -11,7 +11,7 @@ class ThemeViewController: UIViewController {
     
     // MARK: - UI Elements
     lazy var segmentedControl: UISegmentedControl = {
-        let segmentedControl = UISegmentedControl(items: ["System", "Light", "Dark"])
+        let segmentedControl = UISegmentedControl(items: Constants.ThemesViewController.themeItems)
         segmentedControl.selectedSegmentIndex = UserDefaults.standard.theme.rawValue
         segmentedControl.addTarget(self, action: #selector(segmentedControlValueChanged(_:)), for: .valueChanged)
         return segmentedControl

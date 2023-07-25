@@ -26,7 +26,7 @@ class LikedArticlesViewController: UIViewController, LikedArticleProtocol {
     }()
 
     private lazy var emptyStateAnimationView: LottieAnimationView = {
-        var animationView: LottieAnimationView = .init(name: "animationBlack.json")
+        var animationView: LottieAnimationView = .init(name: Constants.LikedViewController.Lottie.name)
         animationView.contentMode = .scaleAspectFit
         animationView.loopMode = .loop
         animationView.animationSpeed = 0.5
@@ -38,8 +38,18 @@ class LikedArticlesViewController: UIViewController, LikedArticleProtocol {
     private var viewModel: (LikedArticlesViewModelProtocol & LikedArticlesPersistentProtocol & LikedArticlesSecretProtocol)
     
     private var navigationItems: [UIBarButtonItem] {
-        let removeAll = UIBarButtonItem(title: "Remove all", image: nil, target: self, action: #selector(removeAllArticles))
-        let secretArticles = UIBarButtonItem(image: UIImage(systemNamed: viewModel.secretStatus.navIconImage), style: .plain, target: self, action: #selector(lockTapped))
+        let removeAll = UIBarButtonItem(
+            title: Constants.LikedViewController.removeAll,
+            image: nil,
+            target: self,
+            action: #selector(removeAllArticles)
+        )
+        let secretArticles = UIBarButtonItem(
+            image: UIImage(systemNamed: viewModel.secretStatus.navIconImage),
+            style: .plain,
+            target: self,
+            action: #selector(lockTapped)
+        )
         return viewModel.isLocked ? [removeAll, secretArticles] : [removeAll]
     }
     
@@ -54,7 +64,6 @@ class LikedArticlesViewController: UIViewController, LikedArticleProtocol {
     }
     
     // MARK: - Methods
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupNavigationController()
@@ -92,13 +101,24 @@ class LikedArticlesViewController: UIViewController, LikedArticleProtocol {
         viewModel.delegate?.presentArticle(at: article.url)
     }
     
+    private func setTableTrailingActions(at indexPath: IndexPath) -> UISwipeActionsConfiguration {
+        let trash = UIContextualAction(
+            style: .destructive,
+            title: Constants.LikedViewController.removeTitle) { [weak self] (_, _, completionHandler)  in
+                self?.viewModel.deleteArticle(for: indexPath)
+                completionHandler(true)
+        }
+        trash.backgroundColor = .systemRed
+        return UISwipeActionsConfiguration(actions: [trash])
+    }
+    
+    // MARK: - Actions
     @objc
     private func lockTapped() {
         PasscodeKit.shared.verifyPasscode()
         viewModel.fetchSecretArticles()
     }
     
-    // MARK: - Actions
     @objc
     private func removeAllArticles() {
         viewModel.deleteAllArticles()
@@ -119,7 +139,7 @@ class LikedArticlesViewController: UIViewController, LikedArticleProtocol {
     }
     
     private func setupNavigationController() {
-        navigationItem.title = "Favourites"
+        navigationItem.title = Constants.LikedViewController.favouritesTitle
         navigationItem.titleView?.tintColor = .blackWhite
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.largeTitleDisplayMode = .always
@@ -155,13 +175,7 @@ extension LikedArticlesViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let trash = UIContextualAction(style: .destructive,
-                                       title: "Remove") { [weak self] (_, _, completionHandler)  in
-            self?.viewModel.deleteArticle(for: indexPath)
-            completionHandler(true)
-        }
-        trash.backgroundColor = .systemRed
-        return UISwipeActionsConfiguration(actions: [trash])
+        setTableTrailingActions(at: indexPath)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

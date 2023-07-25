@@ -13,6 +13,7 @@ protocol HomeNavigationDelegate: AnyObject {
     func presentThemes()
     func presentArticleDetails(for article: DisplayableArticle,
                                with homeViewModel: HomeViewModelProtocolAlias)
+    func presentPassCodeSettings()
 }
 
 protocol HomeViewModelProtocol: AnyObject {
@@ -63,7 +64,6 @@ class HomeViewModel: HomeViewModelProtocol, HomeViewModelNetworkingProtocol, Hom
     }
     
     // MARK: - Properies
-    
     private var cancellableSet: Set<AnyCancellable> = []
     
     var networkService: StoriesNetworkServiceProtocol
@@ -94,14 +94,12 @@ class HomeViewModel: HomeViewModelProtocol, HomeViewModelNetworkingProtocol, Hom
     }
     
     // MARK: - Initializers
-    
     init(networkService: StoriesNetworkService = StoriesNetworkService()) {
         self.networkService = networkService
         self.selectedSectionName = Constants.HomeViewController.defaultSectionName
     }
     
     // MARK: - Methods
-    
     func getArticle(for indexPath: IndexPath) -> DisplayableArticle? {
         if case .general = selectedSectionType {
             return sectionStoriesViewModel?[safe: indexPath.row]
@@ -159,6 +157,21 @@ class HomeViewModel: HomeViewModelProtocol, HomeViewModelNetworkingProtocol, Hom
     // MARK: - Keychain methods
     func likeSecretArticle(at indexPath: IndexPath) {
         guard let article = getSecretArticle(for: indexPath) else { return }
+        ArticleKeychainService.shared.isSaved(article: article) { [weak self] result in
+            switch result {
+            case .success(let isSaved):
+                if isSaved {
+                    self?.controller?.showLikeWarning()
+                    return
+                }
+                self?.saveSecretArticle(article: article)
+            case .failure(let error):
+                self?.controller?.present(alert: .kCCheckingForPresenceIssue(message: error.localizedDescription))
+            }
+        }
+    }
+    
+    private func saveSecretArticle(article: SecretArticle) {
         ArticleKeychainService.shared.store(article: article) { [weak self] result in
             if case let .failure(error) = result {
                 self?.controller?.present(alert: .kCSavingIssue(message: error.localizedDescription))
@@ -167,7 +180,6 @@ class HomeViewModel: HomeViewModelProtocol, HomeViewModelNetworkingProtocol, Hom
     }
     
     // MARK: - Networking Methods
-    
     func fetchStoriesSections() {
         do {
             try networkService.fetchSectionList()

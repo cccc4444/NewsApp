@@ -22,6 +22,7 @@ enum AlertType {
     case kCFethingIssue(message: String)
     case kCSavingIssue(message: String)
     case kCDeletingIssue(message: String)
+    case kCCheckingForPresenceIssue(message: String)
 }
 
 extension AlertType {
@@ -45,6 +46,8 @@ extension AlertType {
             "Could not save secret article"
         case .kCDeletingIssue:
             "Could not delete a secret article"
+        case .kCCheckingForPresenceIssue:
+            "Could not check secret article for presence"
         }
     }
     
@@ -57,7 +60,8 @@ extension AlertType {
                 .coreDataCheckingForPresenceIssue(let message),
                 .kCFethingIssue(let message),
                 .kCSavingIssue(let message),
-                .kCDeletingIssue(let message):
+                .kCDeletingIssue(let message),
+                .kCCheckingForPresenceIssue(let message):
             "\(message)"
         case .badServerResponse:
             "Please try again later"

@@ -23,30 +23,29 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     
     func scheduleNotification() {
         let content = UNMutableNotificationContent()
-        let categoryIdentifier = "dailyNotification"
+        let categoryIdentifier = Constants.LocalNotifications.categoryIdentifier
         
-        content.title = "Hey"
-        content.body = "Check out the latest stories"
+        content.title = Constants.LocalNotifications.title
+        content.body = Constants.LocalNotifications.body
         content.sound = UNNotificationSound.default
-        content.badge = 1
+        content.badge = Constants.LocalNotifications.badge
         content.categoryIdentifier = categoryIdentifier
         
         var dateComponents = DateComponents()
-        dateComponents.hour = 11
-        dateComponents.minute = 0
+        dateComponents.hour = Constants.LocalNotifications.hour
+        dateComponents.minute = Constants.LocalNotifications.minute
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
         let request = UNNotificationRequest(identifier: categoryIdentifier, content: content, trigger: trigger)
 
         notificationCenter.add(request) { (error) in
             if let error {
-                print("Error \(error.localizedDescription)")
+                print(error.localizedDescription)
             }
         }
         
-        let snoozeAction = UNNotificationAction(identifier: "Snooze", title: "Snooze", options: [])
-        let deleteAction = UNNotificationAction(identifier: "DeleteAction", title: "Delete", options: [.destructive])
+        let deleteAction = UNNotificationAction(identifier: Constants.LocalNotifications.deleteAction, title: Constants.LocalNotifications.deleteActionTitle, options: [.destructive])
         let category = UNNotificationCategory(identifier: categoryIdentifier,
-                                              actions: [snoozeAction, deleteAction],
+                                              actions: [deleteAction],
                                               intentIdentifiers: [],
                                               options: [])
         notificationCenter.setNotificationCategories([category])
