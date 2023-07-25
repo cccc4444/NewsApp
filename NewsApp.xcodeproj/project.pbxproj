@@ -208,9 +208,9 @@
 			isa = PBXGroup;
 			children = (
 				1B3D75472A4D601400235968 /* Flow */,
-				1B44BD112A5ECE8C00A0E3C8 /* Helpers */,
 				1B3D754D2A4D63E500235968 /* Services */,
 				1B3D75602A4D77D000235968 /* Extensions */,
+				1B44BD112A5ECE8C00A0E3C8 /* Helpers */,
 				1B3D756E2A4D7DAA00235968 /* Constants */,
 				1B3D75492A4D604900235968 /* Assets */,
 				1B3D75482A4D601B00235968 /* System files */,

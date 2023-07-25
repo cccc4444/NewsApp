@@ -124,7 +124,7 @@ extension PasscodeKit {
 			let passcodeKitVerify = PasscodeKitVerify()
 			passcodeKitVerify.delegate = PasscodeKit.delegate
 			let navController = PasscodeKitNavController(rootViewController: passcodeKitVerify)
-			viewController.present(navController, animated: false)
+			viewController.present(navController, animated: true)
 		}
 	}
 

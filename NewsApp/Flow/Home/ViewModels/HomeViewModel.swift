@@ -156,9 +156,14 @@ class HomeViewModel: HomeViewModelProtocol, HomeViewModelNetworkingProtocol, Hom
         }
     }
     
+    // MARK: - Keychain methods
     func likeSecretArticle(at indexPath: IndexPath) {
         guard let article = getSecretArticle(for: indexPath) else { return }
-        ArticleKeychainService.shared.store(article: article)
+        ArticleKeychainService.shared.store(article: article) { [weak self] result in
+            if case let .failure(error) = result {
+                self?.controller?.present(alert: .kCSavingIssue(message: error.localizedDescription))
+            }
+        }
     }
     
     // MARK: - Networking Methods

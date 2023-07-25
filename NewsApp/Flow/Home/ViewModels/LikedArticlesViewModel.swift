@@ -17,7 +17,10 @@ protocol LikedArticlesViewModelProtocol {
     var controller: (AlertProtocol & LikedArticleProtocol)? { get set }
     var delegate: LikedArticlesNavigationProtocol? { get set }
     
+    var isLocked: Bool { get }
+    var secretStatus: LikedArticlesViewModel.SecretStatus { get set }
     var numberOfSections: Int { get }
+    
     func getLikedArticle(for indexPath: IndexPath) -> LikedArticleModel
     func titleForHeader(in section: Int) -> String
     func numberOfArticles(in section: Int) -> Int
@@ -29,8 +32,26 @@ protocol LikedArticlesPersistentProtocol {
     func deleteAllArticles()
 }
 
-class LikedArticlesViewModel: LikedArticlesViewModelProtocol, LikedArticlesPersistentProtocol {
+protocol LikedArticlesSecretProtocol {
+    func fetchSecretArticles() 
+}
+
+class LikedArticlesViewModel: LikedArticlesViewModelProtocol, LikedArticlesPersistentProtocol, LikedArticlesSecretProtocol {
     // MARK: - Properties
+    enum SecretStatus {
+        case locked
+        case unlocked
+        
+        var navIconImage: SystemAssets {
+            switch self {
+            case .locked:
+                return .lock
+            case .unlocked:
+                return .unlocked
+            }
+        }
+    }
+    
     struct Section {
         let name: String
         let articles: [LikedArticleModel]
@@ -41,35 +62,31 @@ class LikedArticlesViewModel: LikedArticlesViewModelProtocol, LikedArticlesPersi
     
     private var likedArticles: [NSManagedObject] = []
     private var likedarticlesSections = [Section]()
+    var secretStatus: SecretStatus = .locked
+    
+    var isLocked: Bool {
+        return PasscodeKit.enabled() && secretStatus == .locked
+    }
     
     var numberOfSections: Int {
         likedarticlesSections.count
     }
     
     // MARK: - Methods
-    func createLikedArticlesSections() {
-        likedarticlesSections = likedArticles.compactMap {
-            LikedArticleModel(title: $0.value(forKey: .title),
-                              author: $0.value(forKey: .author),
-                              url: $0.value(forKey: .url),
-                              section: $0.value(forKey: .section))
-        }
-        .orderedDictionary {
-            $0.section
-        }
-        .map { key, value in
-            Section(name: key, articles: value)
-        }
+    private func createLikedArticlesSections() {
+        likedarticlesSections = likedArticles.toSections()
+    }
+    
+    private func appendToSections(secretArticles: [SecretArticle]) {
+        likedarticlesSections += secretArticles.toSections()
     }
     
     func numberOfArticles(in section: Int) -> Int {
-        likedarticlesSections[safe: section]?
-            .articles.count ?? .zero
+        likedarticlesSections[safe: section]?.articles.count ?? .zero
     }
     
     func titleForHeader(in section: Int) -> String {
-        likedarticlesSections[safe: section]?
-            .name ?? ""
+        likedarticlesSections[safe: section]?.name ?? ""
     }
     
     func getLikedArticle(for indexPath: IndexPath) -> LikedArticleModel {
@@ -90,11 +107,23 @@ class LikedArticlesViewModel: LikedArticlesViewModelProtocol, LikedArticlesPersi
     }
     
     func deleteArticle(for indexPath: IndexPath) {
-        LikedArticlePersistentService.shared.deleteArticle(with: getLikedArticle(for: indexPath)) { [weak self] result in
-            if case let .failure(error) = result {
-                self?.controller?.present(alert: .coreDataDeletionIssue(message: error.localizedDescription))
+        let article = getLikedArticle(for: indexPath)
+        guard article.section == "Secret 🔒" else {
+            LikedArticlePersistentService.shared.deleteArticle(with: getLikedArticle(for: indexPath)) { [weak self] result in
+                if case let .failure(error) = result {
+                    self?.controller?.present(alert: .coreDataDeletionIssue(message: error.localizedDescription))
+                }
+                self?.fetchLikedArticles()
+                self?.controller?.reloadTable()
             }
-            self?.fetchLikedArticles()
+            return
+        }
+        
+        ArticleKeychainService.shared.removeAt(index: indexPath.row) { [weak self] result in
+            if case let .failure(error) = result {
+                self?.controller?.present(alert: .kCDeletingIssue(message: error.localizedDescription))
+            }
+            self?.fetchSecretArticles()
             self?.controller?.reloadTable()
         }
     }
@@ -104,14 +133,71 @@ class LikedArticlesViewModel: LikedArticlesViewModelProtocol, LikedArticlesPersi
             if case let .failure(error) = result {
                 self?.controller?.present(alert: .coreDataDeletionIssue(message: error.localizedDescription))
             }
+            self?.deleteAllSecretArticles()
             self?.fetchLikedArticles()
             self?.controller?.reloadTable()
         }
     }
+    
+    func deleteAllSecretArticles() {
+        guard secretStatus == .unlocked else { return }
+        ArticleKeychainService.shared.removeAll { [weak self] result in
+            if case let .failure(error) = result {
+                self?.controller?.present(alert: .kCDeletingIssue(message: error.localizedDescription))
+            }
+        }
+    }
+    
+    // MARK: - KeychainService methods
+    func fetchSecretArticles() {
+        ArticleKeychainService.shared.retrieveArticles { [weak self] result in
+            switch result {
+            case .success(let secretArticles):
+                self?.appendToSections(secretArticles: secretArticles)
+            case .failure(let error):
+                self?.controller?.present(alert: .kCFethingIssue(message: error.localizedDescription))
+            }
+        }
+    }
 }
 
+// MARK: - Extensions
 fileprivate extension Array where Element == LikedArticleModel {
     func orderedDictionary(grouping keyPath: (Element) -> String) -> OrderedDictionary<String, [Element]> {
         return OrderedDictionary(grouping: self, by: keyPath)
+    }
+}
+
+fileprivate extension Array where Element == NSManagedObject {
+    func toSections() -> [LikedArticlesViewModel.Section] {
+        self.compactMap {
+            LikedArticleModel(title: $0.value(forKey: .title),
+                              author: $0.value(forKey: .author),
+                              url: $0.value(forKey: .url),
+                              section: $0.value(forKey: .section))
+        }
+        .orderedDictionary {
+            $0.section
+        }
+        .map { key, value in
+            LikedArticlesViewModel.Section(name: key, articles: value)
+        }
+    }
+}
+
+fileprivate extension Array where Element == SecretArticle {
+    func toSections() -> [LikedArticlesViewModel.Section] {
+        self.compactMap {
+            LikedArticleModel(title: $0.title,
+                              author: $0.byline,
+                              url: $0.url,
+                              section: "Secret 🔒")
+        }
+        .orderedDictionary {
+            $0.section
+        }
+        .map { key, value in
+            LikedArticlesViewModel.Section(name: key, articles: value)
+        }
     }
 }
