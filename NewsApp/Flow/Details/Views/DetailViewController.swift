@@ -173,9 +173,9 @@ class DetailViewController: UIViewController {
     
     private func  setupUI() {
         view.addSubview(scrollView)
+        view.addSubview(readMoreButtonView)
         scrollView.addSubview(contentView)
         contentView.addSubview(stackView)
-        contentView.addSubview(readMoreButtonView)
         readMoreButtonView.addSubview(readMoreButton)
         
         scrollView.snp.makeConstraints { make in
@@ -188,7 +188,6 @@ class DetailViewController: UIViewController {
         
         stackView.snp.makeConstraints { make in
             make.top.leading.trailing.equalTo(contentView)
-            make.bottom.equalTo(readMoreButtonView.snp.top).offset(-10)
         }
         
         articleTitle.snp.makeConstraints { make in
@@ -196,7 +195,8 @@ class DetailViewController: UIViewController {
         }
         
         readMoreButtonView.snp.makeConstraints { make in
-            make.leading.trailing.bottom.equalTo(contentView)
+            make.centerX.equalToSuperview()
+            make.bottom.equalTo(view.snp.bottom).offset(-20)
             make.height.equalTo(50)
         }
         
