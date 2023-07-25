@@ -35,36 +35,16 @@ class LikedArticlesViewController: UIViewController, LikedArticleProtocol {
     }()
     
     // MARK: - Properties
-    enum SecretStatus {
-        case locked
-        case unlocked
-        
-        var navIconImage: SystemAssets {
-            switch self {
-            case .locked:
-                return .lock
-            case .unlocked:
-                return .unlocked
-            }
-        }
-    }
-    
-    private var viewModel: (LikedArticlesViewModelProtocol & LikedArticlesPersistentProtocol)
+    private var viewModel: (LikedArticlesViewModelProtocol & LikedArticlesPersistentProtocol & LikedArticlesSecretProtocol)
     
     private var navigationItems: [UIBarButtonItem] {
         let removeAll = UIBarButtonItem(title: "Remove all", image: nil, target: self, action: #selector(removeAllArticles))
-        let secretArticles = UIBarButtonItem(image: UIImage(systemNamed: secretStatus.navIconImage), style: .plain, target: self, action: #selector(lockTapped))
-        
-        if PasscodeKit.enabled() {
-            return [removeAll, secretArticles]
-        }
-        return [removeAll]
+        let secretArticles = UIBarButtonItem(image: UIImage(systemNamed: viewModel.secretStatus.navIconImage), style: .plain, target: self, action: #selector(lockTapped))
+        return viewModel.isLocked ? [removeAll, secretArticles] : [removeAll]
     }
     
-    private var secretStatus: SecretStatus = .locked
-    
     // MARK: - Initializers
-    init(viewModel: (LikedArticlesViewModelProtocol & LikedArticlesPersistentProtocol)) {
+    init(viewModel: (LikedArticlesViewModelProtocol & LikedArticlesPersistentProtocol & LikedArticlesSecretProtocol)) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -78,7 +58,6 @@ class LikedArticlesViewController: UIViewController, LikedArticleProtocol {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupNavigationController()
-        viewModel.fetchLikedArticles()
         playLottieAnimation()
     }
     
@@ -86,6 +65,8 @@ class LikedArticlesViewController: UIViewController, LikedArticleProtocol {
         super.viewDidLoad()
         viewModel.controller = self
         PasscodeKit.delegate = self
+        
+        viewModel.fetchLikedArticles()
         setupUI()
     }
     
@@ -114,6 +95,7 @@ class LikedArticlesViewController: UIViewController, LikedArticleProtocol {
     @objc
     private func lockTapped() {
         PasscodeKit.shared.verifyPasscode()
+        viewModel.fetchSecretArticles()
     }
     
     // MARK: - Actions
@@ -194,7 +176,8 @@ extension LikedArticlesViewController: PasscodeKitDelegate {
     }
     
     func passcodeEnteredSuccessfully() {
-        secretStatus = .unlocked
+        viewModel.secretStatus = .unlocked
+        likedArticlesTableView.reloadData()
     }
     
     func passcodeMaximumFailedAttempts() {

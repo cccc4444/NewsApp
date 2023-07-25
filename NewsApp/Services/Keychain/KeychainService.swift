@@ -1,5 +1,5 @@
 //
-//  KeycChainService.swift
+//  KeyChainService.swift
 //  NewsApp
 //
 //  Created by Danylo Kushlianskyi on 21.07.2023.
@@ -10,50 +10,86 @@ import Security
 import SimpleKeychain
 
 protocol KeychainServiceInterface {
-    func store(article: SecretArticle) throws
-    func retrieveArticles() -> [SecretArticle]
-    func remove() throws
+    func store(article: SecretArticle, completion: @escaping (Swift.Result<Bool, Error>) -> Void)
+    func retrieveArticles(completion: @escaping (Swift.Result<[SecretArticle], Error>) -> Void)
+    func removeAt(index: Int, completion: @escaping (Swift.Result<Bool, Error>) -> Void)
+    func removeAll(completion: @escaping (Swift.Result<Bool, Error>) -> Void)
 }
 
 class ArticleKeychainService: KeychainServiceInterface {
     
     static let shared = ArticleKeychainService()
     
-    func store(article: SecretArticle) {
+    func store(article: SecretArticle, completion: @escaping (Swift.Result<Bool, Error>) -> Void) {
         do {
-            var existingArticles = retrieveArticles()
+            var existingArticles = [SecretArticle]()
+            retrieveArticles { result in
+                if case let .success(data) = result {
+                    existingArticles = data
+                }
+            }
             existingArticles.append(article)
             let data = try JSONEncoder().encode(existingArticles)
             let keychain = SimpleKeychain(service: "serviceIdentifier")
             try keychain.set(data, forKey: "articles")
         } catch {
-            print("Error storing article in keychain: \(error.localizedDescription)")
+            completion(.failure(error))
         }
+        completion(.success(true))
     }
     
-    func retrieveArticles() -> [SecretArticle] {
+    func retrieveArticles(completion: @escaping (Swift.Result<[SecretArticle], Error>) -> Void) {
         do {
             let keychain = SimpleKeychain(service: "serviceIdentifier")
-            let isStored = try keychain.hasItem(forKey: "articles")
-            if isStored == false {
-                return []
+            guard try isArticleStored() else {
+                completion(.success([]))
+                return
             }
             
             let data = try keychain.data(forKey: "articles")
             let articles = try JSONDecoder().decode([SecretArticle].self, from: data)
-            return articles
+            completion(.success(articles))
         } catch {
-            print("Error retrieving articles from keychain: \(error.localizedDescription)")
-            return []
+            completion(.failure(error))
         }
     }
     
-    func remove() throws {
-//        let simpleKeychain = SimpleKeychain(service: Localizable.Keychain.auth0Service)
-//        do {
-//            try simpleKeychain.deleteItem(forKey: Localizable.Keychain.auth0AccessTokenAccount)
-//        } catch let error as SimpleKeychainError {
-//            throw error
-//        }
+    func removeAt(index: Int, completion: @escaping (Swift.Result<Bool, Error>) -> Void) {
+        do {
+            let keychain = SimpleKeychain(service: "serviceIdentifier")
+            var existingArticles = [SecretArticle]()
+            retrieveArticles { result in
+                if case let .success(data) = result {
+                    existingArticles = data
+                }
+            }
+            
+            existingArticles.remove(at: index)
+            
+            let data = try JSONEncoder().encode(existingArticles)
+            try keychain.set(data, forKey: "articles")
+        } catch {
+            completion(.failure(error))
+        }
+        completion(.success(true))
+    }
+    
+    func removeAll(completion: @escaping (Swift.Result<Bool, Error>) -> Void) {
+        do {
+            let keychain = SimpleKeychain(service: "serviceIdentifier")
+            try keychain.deleteItem(forKey: "articles")
+        } catch {
+            completion(.failure(error))
+        }
+        completion(.success(true))
+    }
+    
+    private func isArticleStored() throws -> Bool {
+        do {
+            let keychain = SimpleKeychain(service: "serviceIdentifier")
+            return try keychain.hasItem(forKey: "articles")
+        } catch {
+            throw error
+        }
     }
 }
