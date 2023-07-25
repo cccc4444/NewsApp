@@ -70,6 +70,8 @@
 		1B44BD992A6A95EE00A0E3C8 /* SimpleKeychain in Frameworks */ = {isa = PBXBuildFile; productRef = 1B44BD982A6A95EE00A0E3C8 /* SimpleKeychain */; };
 		1B44BD9C2A6A960D00A0E3C8 /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B44BD9B2A6A960D00A0E3C8 /* KeychainService.swift */; };
 		1B44BD9E2A6ACC4E00A0E3C8 /* SecretArticle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B44BD9D2A6ACC4E00A0E3C8 /* SecretArticle.swift */; };
+		1B44BDA22A6FE54700A0E3C8 /* PasscodeSettingsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B44BDA12A6FE54700A0E3C8 /* PasscodeSettingsCoordinator.swift */; };
+		1B44BDA42A70050C00A0E3C8 /* String+DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B44BDA32A70050C00A0E3C8 /* String+DateFormatter.swift */; };
 		1BA046982A58762400E63F46 /* DisplayableArticle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA046972A58762400E63F46 /* DisplayableArticle.swift */; };
 		1BA0469A2A5952DC00E63F46 /* String+isNotEmpty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA046992A5952DC00E63F46 /* String+isNotEmpty.swift */; };
 		1BA0469D2A59574C00E63F46 /* AlertProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA0469C2A59574C00E63F46 /* AlertProtocol.swift */; };
@@ -152,6 +154,8 @@
 		1B44BD922A6A84FB00A0E3C8 /* PasscodeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasscodeView.swift; sourceTree = "<group>"; };
 		1B44BD9B2A6A960D00A0E3C8 /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
 		1B44BD9D2A6ACC4E00A0E3C8 /* SecretArticle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretArticle.swift; sourceTree = "<group>"; };
+		1B44BDA12A6FE54700A0E3C8 /* PasscodeSettingsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasscodeSettingsCoordinator.swift; sourceTree = "<group>"; };
+		1B44BDA32A70050C00A0E3C8 /* String+DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+DateFormatter.swift"; sourceTree = "<group>"; };
 		1BA046972A58762400E63F46 /* DisplayableArticle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayableArticle.swift; sourceTree = "<group>"; };
 		1BA046992A5952DC00E63F46 /* String+isNotEmpty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+isNotEmpty.swift"; sourceTree = "<group>"; };
 		1BA0469C2A59574C00E63F46 /* AlertProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertProtocol.swift; sourceTree = "<group>"; };
@@ -320,6 +324,7 @@
 				1BA046992A5952DC00E63F46 /* String+isNotEmpty.swift */,
 				1B44BD222A60429000A0E3C8 /* NSManagedObject+value.swift */,
 				1B44BD312A65ABDB00A0E3C8 /* UIView+ShowHIde.swift */,
+				1B44BDA32A70050C00A0E3C8 /* String+DateFormatter.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -453,6 +458,7 @@
 				1B44BD632A69619200A0E3C8 /* ThemesCoordinator.swift */,
 				1B44BD652A696C7500A0E3C8 /* LikedArticlesCoordinator.swift */,
 				1B44BD672A6975FD00A0E3C8 /* ArticleDetailsCoordinator.swift */,
+				1B44BDA12A6FE54700A0E3C8 /* PasscodeSettingsCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -669,6 +675,7 @@
 				1B44BD1F2A60225D00A0E3C8 /* LikedArticlesViewModel.swift in Sources */,
 				1B3D75532A4D668000235968 /* StoriesNetworkService.swift in Sources */,
 				1BA046A82A5C360700E63F46 /* DetailViewController.swift in Sources */,
+				1B44BDA42A70050C00A0E3C8 /* String+DateFormatter.swift in Sources */,
 				1B44BD452A66CCAE00A0E3C8 /* UserDefaults+theme.swift in Sources */,
 				1B3D756B2A4D7AEB00235968 /* StoriesURLs.swift in Sources */,
 				1B3D75692A4D79F300235968 /* HeaderType.swift in Sources */,
@@ -679,6 +686,7 @@
 				1B44BD662A696C7500A0E3C8 /* LikedArticlesCoordinator.swift in Sources */,
 				1B44BD212A60236200A0E3C8 /* CoreDataError.swift in Sources */,
 				1B44BD882A6A84E600A0E3C8 /* PasscodeKitCreate.swift in Sources */,
+				1B44BDA22A6FE54700A0E3C8 /* PasscodeSettingsCoordinator.swift in Sources */,
 				1B44BD1B2A5FFE3E00A0E3C8 /* LikedArticlePersistentService.swift in Sources */,
 				1BA0469D2A59574C00E63F46 /* AlertProtocol.swift in Sources */,
 				1B44BD9C2A6A960D00A0E3C8 /* KeychainService.swift in Sources */,

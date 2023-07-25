@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         let options: UNAuthorizationOptions = [.alert, .sound, .badge]
         notificationCenter.delegate = self
-        notificationCenter.requestAuthorization(options: options) { _ ,_ in }
+        notificationCenter.requestAuthorization(options: options) { _, _ in }
         scheduleNotification()
         
         return true

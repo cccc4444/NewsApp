@@ -158,12 +158,30 @@ class HomeViewController: UIViewController, HomeViewContollerProtocol {
     }
     
     func showLikeWarning() {
-        let banner = NotificationBanner(title: "Hey", subtitle: "Reconsider your life choices!", style: .warning)
+        let banner = NotificationBanner(title: Constants.NotificationBannerConstants.title, subtitle: Constants.NotificationBannerConstants.subtitle, style: .warning)
         banner.show()
     }
     
-    // MARK: - Actions
+    private func setTableTrailingActions(indexPath: IndexPath) -> UISwipeActionsConfiguration {
+        let archive = UIContextualAction(
+            style: .normal,
+            title: Constants.HomeViewController.trailingArchieveActionTitle) { [weak self] (_, _, completionHandler) in
+                self?.viewModel.likeArticle(at: indexPath)
+                completionHandler(true)
+        }
+        
+        let secret = UIContextualAction(
+            style: .normal,
+            title: Constants.HomeViewController.trailingSecretActionTitle) { [weak self] (_, _, completionHandler) in
+                self?.viewModel.likeSecretArticle(at: indexPath)
+                completionHandler(true)
+        }
+        archive.backgroundColor = .systemGreen
+        secret.backgroundColor = .systemGray
+        return UISwipeActionsConfiguration(actions: [archive, secret])
+    }
     
+    // MARK: - Actions
     @objc
     private func refresh() {
         viewModel.refreshStories()
@@ -181,12 +199,10 @@ class HomeViewController: UIViewController, HomeViewContollerProtocol {
     
     @objc
     private func displayPassCodeSettings() {
-        let viewController = ViewController(nibName: "ViewController", bundle: nil)
-        navigationController?.pushViewController(viewController, animated: true)
+        viewModel.delegate?.presentPassCodeSettings()
     }
     
     // MARK: - Configurational methods
-    
     private func setupUI() {
         view.backgroundColor = .systemGray6
         setupNavigationController()
@@ -222,9 +238,7 @@ class HomeViewController: UIViewController, HomeViewContollerProtocol {
 }
 
 // MARK: - UITableView
-
 extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.storiesCount
     }
@@ -242,19 +256,6 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let archive = UIContextualAction(style: .normal,
-                                         title: "Archive") { [weak self] (_, _, completionHandler) in
-            self?.viewModel.likeArticle(at: indexPath)
-            completionHandler(true)
-        }
-        
-        let secret = UIContextualAction(style: .normal,
-                                         title: "Secret") { [weak self] (_, _, completionHandler) in
-            self?.viewModel.likeSecretArticle(at: indexPath)
-            completionHandler(true)
-        }
-        archive.backgroundColor = .systemGreen
-        secret.backgroundColor = .systemGray
-        return UISwipeActionsConfiguration(actions: [archive, secret])
+        setTableTrailingActions(indexPath: indexPath)
     }
 }
