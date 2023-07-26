@@ -18,7 +18,7 @@ protocol HomeNavigationDelegate: AnyObject {
 
 protocol HomeViewModelProtocol: AnyObject {
     var controller: (AlertProtocol & HomeViewContollerProtocol)? { get set }
-    var delegate: HomeNavigationDelegate? { get set }
+    var coordinator: HomeNavigationDelegate? { get set }
     var networkService: StoriesNetworkServiceProtocol { get }
     
     var sectionsPublisher: Published<[SectionModel]?>.Publisher { get }
@@ -68,7 +68,7 @@ class HomeViewModel: HomeViewModelProtocol, HomeViewModelNetworkingProtocol, Hom
     
     var networkService: StoriesNetworkServiceProtocol
     weak var controller: (AlertProtocol & HomeViewContollerProtocol)?
-    weak var delegate: HomeNavigationDelegate?
+    weak var coordinator: HomeNavigationDelegate?
     
     var selectedSectionType: HomeViewModel.SectionType = HomeViewModel.SectionType.defaultValue
     private var selectedSectionName: String

@@ -15,7 +15,7 @@ protocol LikedArticlesNavigationProtocol: AnyObject {
 
 protocol LikedArticlesViewModelProtocol {
     var controller: (AlertProtocol & LikedArticleProtocol)? { get set }
-    var delegate: LikedArticlesNavigationProtocol? { get set }
+    var coordinator: LikedArticlesNavigationProtocol? { get set }
     
     var isLocked: Bool { get }
     var secretStatus: LikedArticlesViewModel.SecretStatus { get set }
@@ -58,7 +58,7 @@ class LikedArticlesViewModel: LikedArticlesViewModelProtocol, LikedArticlesPersi
     }
     
     weak var controller: (AlertProtocol & LikedArticleProtocol)?
-    weak var delegate: LikedArticlesNavigationProtocol?
+    weak var coordinator: LikedArticlesNavigationProtocol?
     
     private var likedArticles: [NSManagedObject] = []
     private var likedarticlesSections = [Section]()
