@@ -11,9 +11,11 @@ import UIKit
 protocol HomeNavigationDelegate: AnyObject {
     func presentLikedArticles()
     func presentThemes()
+    func presentPassCodeSettings()
     func presentArticleDetails(for article: DisplayableArticle,
                                with homeViewModel: HomeViewModelProtocolAlias)
-    func presentPassCodeSettings()
+    func presentViperArticleDetails(for article: DisplayableArticle,
+                                    with homeViewModel: HomeViewModelProtocolAlias)
 }
 
 class HomeCoordinator: Coordinator {
@@ -53,6 +55,15 @@ extension HomeCoordinator: HomeNavigationDelegate {
         )
         childCoordinators.append(articleDetailsCoordinator)
         articleDetailsCoordinator.start()
+    }
+    
+    func presentViperArticleDetails(for article: DisplayableArticle, with homeViewModel: HomeViewModelProtocolAlias) {
+        let articleDetailsRouter = ArticleDetailsRouter(
+            navigationController: navigationController,
+            homeViewModel: homeViewModel,
+            article: article)
+        childCoordinators.append(articleDetailsRouter)
+        articleDetailsRouter.start()
     }
     
     func presentPassCodeSettings() {
