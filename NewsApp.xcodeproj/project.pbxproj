@@ -214,10 +214,9 @@
 		1B037F142A7036640017C798 /* Details */ = {
 			isa = PBXGroup;
 			children = (
+				1B5B6BD92A71A6AE00754A86 /* MVVM */,
 				1B5B6BCD2A71732700754A86 /* VIP */,
 				1B5B6BBF2A7129B500754A86 /* VIPER */,
-				1B037F1E2A7037AC0017C798 /* ViewModels */,
-				1B037F1D2A7037A70017C798 /* Views */,
 			);
 			path = Details;
 			sourceTree = "<group>";
@@ -674,6 +673,15 @@
 				1B5B6BD72A71746800754A86 /* VIPDetailsConfigurator.swift */,
 			);
 			path = VIP;
+			sourceTree = "<group>";
+		};
+		1B5B6BD92A71A6AE00754A86 /* MVVM */ = {
+			isa = PBXGroup;
+			children = (
+				1B037F1E2A7037AC0017C798 /* ViewModels */,
+				1B037F1D2A7037A70017C798 /* Views */,
+			);
+			path = MVVM;
 			sourceTree = "<group>";
 		};
 		1BA0469B2A59573700E63F46 /* UI */ = {
