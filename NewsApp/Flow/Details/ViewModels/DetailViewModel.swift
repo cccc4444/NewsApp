@@ -14,8 +14,6 @@ protocol DetailViewModelProtocol {
     var coordinator: DetailNavigationProtocol? { get set }
     
     var article: DisplayableArticle { get }
-    var numberOfSections: Int { get }
-    var numberOfItemsInSections: Int { get }
     var selectedSectionType: HomeViewModel.SectionType? { get }
     var selectedArticleURL: String { get }
     var articleLikedState: DetailViewModel.ArticleState { get }
@@ -42,8 +40,6 @@ class DetailViewModel: DetailViewModelProtocol {
     weak var coordinator: DetailNavigationProtocol?
     
     var article: DisplayableArticle
-    var numberOfSections: Int = 2
-    var numberOfItemsInSections: Int = 1
     
     var selectedSectionType: HomeViewModel.SectionType? {
         homeViewModel?.selectedSectionType
