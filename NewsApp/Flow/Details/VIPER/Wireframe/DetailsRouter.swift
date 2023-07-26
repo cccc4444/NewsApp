@@ -32,10 +32,7 @@ class ArticleDetailsRouter: Coordinator {
     
     func start() {
         guard let homeViewModel, let article else { return }
-        let controller = VDetailViewController()
-        let interactor = DetailInteractor()
-        let presenter = DetailPresenter(controller: controller, interactor: interactor, router: self, homeViewModel: homeViewModel, article: article)
-        controller.presenter = presenter
+        let controller = DetailAssembly.createDetailsModule(with: self, homeViewModel: homeViewModel, article: article)
         navigationController.pushViewController(controller, animated: true)
     }
 }
