@@ -189,17 +189,17 @@ class HomeViewController: UIViewController, HomeViewContollerProtocol {
     
     @objc
     private func displayLikedArticles() {
-        viewModel.delegate?.presentLikedArticles()
+        viewModel.coordinator?.presentLikedArticles()
     }
     
     @objc
     private func displayThemesScreen() {
-        viewModel.delegate?.presentThemes()
+        viewModel.coordinator?.presentThemes()
     }
     
     @objc
     private func displayPassCodeSettings() {
-        viewModel.delegate?.presentPassCodeSettings()
+        viewModel.coordinator?.presentPassCodeSettings()
     }
     
     // MARK: - Configurational methods
@@ -252,7 +252,7 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let article = viewModel.getArticle(for: indexPath) else { return }
-        viewModel.delegate?.presentArticleDetails(for: article, with: viewModel)
+        viewModel.coordinator?.presentArticleDetails(for: article, with: viewModel)
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {

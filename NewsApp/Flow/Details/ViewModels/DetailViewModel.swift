@@ -16,7 +16,7 @@ protocol DetailNavigationProtocol: AnyObject {
 
 protocol DetailViewModelProtocol {
     var controller: AlertProtocol? { get set }
-    var delegate: DetailNavigationProtocol? { get set }
+    var coordinator: DetailNavigationProtocol? { get set }
     
     var article: DisplayableArticle { get }
     var numberOfSections: Int { get }
@@ -44,7 +44,7 @@ class DetailViewModel: DetailViewModelProtocol {
     
     weak var controller: AlertProtocol?
     weak var homeViewModel: (HomeViewModelProtocol & HomeViewModelNetworkingProtocol)?
-    weak var delegate: DetailNavigationProtocol?
+    weak var coordinator: DetailNavigationProtocol?
     
     var article: DisplayableArticle
     var numberOfSections: Int = 2

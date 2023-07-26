@@ -28,7 +28,7 @@ class ArticleDetailsCoordinator: Coordinator {
     func start() {
         guard let homeViewModel, let article else { return }
         let viewModel = DetailViewModel(homeViewModel: homeViewModel, article: article)
-        viewModel.delegate = self
+        viewModel.coordinator = self
         let detailVC = DetailViewController(viewModel: viewModel)
         navigationController.pushViewController(detailVC, animated: true)
     }

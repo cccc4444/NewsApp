@@ -24,7 +24,7 @@ class LikedArticlesCoordinator: Coordinator {
     
     func start() {
         let viewModel = LikedArticlesViewModel()
-        viewModel.delegate = self
+        viewModel.coordinator = self
         let likedVC = LikedArticlesViewController(viewModel: viewModel)
         navigationController.pushViewController(likedVC, animated: true)
     }

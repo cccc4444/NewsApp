@@ -98,7 +98,7 @@ class LikedArticlesViewController: UIViewController, LikedArticleProtocol {
     }
     
     func articleTapped(article: LikedArticleModel) {
-        viewModel.delegate?.presentArticle(at: article.url)
+        viewModel.coordinator?.presentArticle(at: article.url)
     }
     
     private func setTableTrailingActions(at indexPath: IndexPath) -> UISwipeActionsConfiguration {
