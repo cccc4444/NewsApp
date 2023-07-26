@@ -253,6 +253,7 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let article = viewModel.getArticle(for: indexPath) else { return }
         viewModel.coordinator?.presentArticleDetails(for: article, with: viewModel)
+//        viewModel.coordinator?.presentViperArticleDetails(for: article, with: viewModel)
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
