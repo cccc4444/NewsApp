@@ -30,7 +30,7 @@ protocol DetailPresenterProtocol: AnyObject {
 class DetailPresenter {
     private weak var controller: (VDetailViewControllerProtocol & AlertProtocol)?
     private var interactor: DetailInteractorProtocol?
-    private var router: ArticleDetailsRouter?
+    private var router: ArticleDetailsRouterProtocol?
     
     private var homeViewModel: HomeViewModelProtocol
     private var article: DisplayableArticle
@@ -49,7 +49,7 @@ class DetailPresenter {
     
     init(controller: (VDetailViewControllerProtocol & AlertProtocol)?,
          interactor: DetailInteractorProtocol?,
-         router: ArticleDetailsRouter?,
+         router: ArticleDetailsRouterProtocol?,
          homeViewModel: HomeViewModelProtocol,
          article: DisplayableArticle) {
         self.controller = controller

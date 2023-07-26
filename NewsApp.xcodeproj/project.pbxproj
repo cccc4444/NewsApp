@@ -76,6 +76,7 @@
 		1B5B6BC32A7129FD00754A86 /* DetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5B6BC22A7129FD00754A86 /* DetailPresenter.swift */; };
 		1B5B6BC52A712A1E00754A86 /* VDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5B6BC42A712A1E00754A86 /* VDetailViewController.swift */; };
 		1B5B6BC92A71354200754A86 /* DetailsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5B6BC82A71354200754A86 /* DetailsRouter.swift */; };
+		1B5B6BCC2A71686D00754A86 /* DetailAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5B6BCB2A71686D00754A86 /* DetailAssembly.swift */; };
 		1BA046982A58762400E63F46 /* DisplayableArticle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA046972A58762400E63F46 /* DisplayableArticle.swift */; };
 		1BA0469A2A5952DC00E63F46 /* String+isNotEmpty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA046992A5952DC00E63F46 /* String+isNotEmpty.swift */; };
 		1BA0469D2A59574C00E63F46 /* AlertProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA0469C2A59574C00E63F46 /* AlertProtocol.swift */; };
@@ -164,6 +165,7 @@
 		1B5B6BC22A7129FD00754A86 /* DetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPresenter.swift; sourceTree = "<group>"; };
 		1B5B6BC42A712A1E00754A86 /* VDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VDetailViewController.swift; sourceTree = "<group>"; };
 		1B5B6BC82A71354200754A86 /* DetailsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsRouter.swift; sourceTree = "<group>"; };
+		1B5B6BCB2A71686D00754A86 /* DetailAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailAssembly.swift; sourceTree = "<group>"; };
 		1BA046972A58762400E63F46 /* DisplayableArticle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayableArticle.swift; sourceTree = "<group>"; };
 		1BA046992A5952DC00E63F46 /* String+isNotEmpty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+isNotEmpty.swift"; sourceTree = "<group>"; };
 		1BA0469C2A59574C00E63F46 /* AlertProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertProtocol.swift; sourceTree = "<group>"; };
@@ -634,12 +636,21 @@
 		1B5B6BBF2A7129B500754A86 /* VIPER */ = {
 			isa = PBXGroup;
 			children = (
-				1B5B6BC82A71354200754A86 /* DetailsRouter.swift */,
+				1B5B6BCA2A71683A00754A86 /* Wireframe */,
 				1B5B6BC02A7129F500754A86 /* DetailInteractor.swift */,
 				1B5B6BC22A7129FD00754A86 /* DetailPresenter.swift */,
 				1B5B6BC42A712A1E00754A86 /* VDetailViewController.swift */,
 			);
 			path = VIPER;
+			sourceTree = "<group>";
+		};
+		1B5B6BCA2A71683A00754A86 /* Wireframe */ = {
+			isa = PBXGroup;
+			children = (
+				1B5B6BCB2A71686D00754A86 /* DetailAssembly.swift */,
+				1B5B6BC82A71354200754A86 /* DetailsRouter.swift */,
+			);
+			path = Wireframe;
 			sourceTree = "<group>";
 		};
 		1BA0469B2A59573700E63F46 /* UI */ = {
@@ -833,6 +844,7 @@
 				1B44BD432A66CC5A00A0E3C8 /* ThemeViewController.swift in Sources */,
 				1B3D75502A4D642100235968 /* NetworkError.swift in Sources */,
 				1B44BD142A5ECEBE00A0E3C8 /* ShimmerEffectProtocol.swift in Sources */,
+				1B5B6BCC2A71686D00754A86 /* DetailAssembly.swift in Sources */,
 				1BAE184F2A55A08000466360 /* String+lowercased.swift in Sources */,
 				1B44BD232A60429000A0E3C8 /* NSManagedObject+value.swift in Sources */,
 				1B3D75672A4D790A00235968 /* HTTPMethod.swift in Sources */,
