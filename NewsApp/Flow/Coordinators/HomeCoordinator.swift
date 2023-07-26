@@ -12,10 +12,15 @@ protocol HomeNavigationDelegate: AnyObject {
     func presentLikedArticles()
     func presentThemes()
     func presentPassCodeSettings()
-    func presentArticleDetails(for article: DisplayableArticle,
-                               with homeViewModel: HomeViewModelProtocolAlias)
-    func presentViperArticleDetails(for article: DisplayableArticle,
-                                    with homeViewModel: HomeViewModelProtocolAlias)
+    func presentArticleDetails(
+        for article: DisplayableArticle,
+        with homeViewModel: HomeViewModelProtocolAlias)
+    func presentViperArticleDetails(
+        for article: DisplayableArticle,
+        with homeViewModel: HomeViewModelProtocolAlias)
+    func presentVIPArticleDetails(
+        for article: DisplayableArticle,
+        with homeViewModel: HomeViewModelProtocolAlias)
 }
 
 class HomeCoordinator: Coordinator {
@@ -64,6 +69,15 @@ extension HomeCoordinator: HomeNavigationDelegate {
             article: article)
         childCoordinators.append(articleDetailsRouter)
         articleDetailsRouter.start()
+    }
+    
+    func presentVIPArticleDetails(for article: DisplayableArticle, with homeViewModel: HomeViewModelProtocolAlias) {
+        let vipDetailsRouter = VIPArticleDetailsRouter(
+            navigationController: navigationController,
+            homeViewModel: homeViewModel,
+            article: article)
+        childCoordinators.append(vipDetailsRouter)
+        vipDetailsRouter.start()
     }
     
     func presentPassCodeSettings() {
