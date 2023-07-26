@@ -9,6 +9,11 @@ import Foundation
 import UIKit
 import SafariServices
 
+protocol DetailNavigationProtocol: AnyObject {
+    func presentShareScreen(with url: String)
+    func presentArticle(at url: String)
+}
+
 class ArticleDetailsCoordinator: Coordinator {
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
@@ -34,7 +39,6 @@ class ArticleDetailsCoordinator: Coordinator {
     }
 }
 
-// MARK: - Delegate Methods
 extension ArticleDetailsCoordinator: DetailNavigationProtocol {
     func presentShareScreen(with url: String) {
         let items = [URL(string: url)]

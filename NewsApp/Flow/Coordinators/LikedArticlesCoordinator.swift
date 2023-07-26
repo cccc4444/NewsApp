@@ -13,6 +13,10 @@ protocol BackToHomeViewControllerDelegate: AnyObject {
     func navigateBackToHomePage(newOrderCoordinator: LikedArticlesCoordinator)
 }
 
+protocol LikedArticlesNavigationProtocol: AnyObject {
+    func presentArticle(at url: String)
+}
+
 class LikedArticlesCoordinator: Coordinator {
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController

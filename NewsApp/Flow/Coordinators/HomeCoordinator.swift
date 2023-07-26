@@ -8,6 +8,14 @@
 import Foundation
 import UIKit
 
+protocol HomeNavigationDelegate: AnyObject {
+    func presentLikedArticles()
+    func presentThemes()
+    func presentArticleDetails(for article: DisplayableArticle,
+                               with homeViewModel: HomeViewModelProtocolAlias)
+    func presentPassCodeSettings()
+}
+
 class HomeCoordinator: Coordinator {
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
@@ -24,7 +32,6 @@ class HomeCoordinator: Coordinator {
     }
 }
 
-// MARK: - Delegate Methods
 extension HomeCoordinator: HomeNavigationDelegate {
     func presentLikedArticles() {
         let likedCoordinator = LikedArticlesCoordinator(navigationController: navigationController)

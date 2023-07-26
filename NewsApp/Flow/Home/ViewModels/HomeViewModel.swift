@@ -8,14 +8,6 @@
 import Foundation
 import Combine
 
-protocol HomeNavigationDelegate: AnyObject {
-    func presentLikedArticles()
-    func presentThemes()
-    func presentArticleDetails(for article: DisplayableArticle,
-                               with homeViewModel: HomeViewModelProtocolAlias)
-    func presentPassCodeSettings()
-}
-
 protocol HomeViewModelProtocol: AnyObject {
     var controller: (AlertProtocol & HomeViewContollerProtocol)? { get set }
     var coordinator: HomeNavigationDelegate? { get set }

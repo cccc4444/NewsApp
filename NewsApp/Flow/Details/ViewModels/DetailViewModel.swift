@@ -9,11 +9,6 @@ import Foundation
 import UIKit
 import CoreData
 
-protocol DetailNavigationProtocol: AnyObject {
-    func presentShareScreen(with url: String)
-    func presentArticle(at url: String)
-}
-
 protocol DetailViewModelProtocol {
     var controller: AlertProtocol? { get set }
     var coordinator: DetailNavigationProtocol? { get set }

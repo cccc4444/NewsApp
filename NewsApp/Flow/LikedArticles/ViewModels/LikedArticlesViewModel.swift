@@ -9,10 +9,6 @@ import Foundation
 import CoreData
 import OrderedCollections
 
-protocol LikedArticlesNavigationProtocol: AnyObject {
-    func presentArticle(at url: String)
-}
-
 protocol LikedArticlesViewModelProtocol {
     var controller: (AlertProtocol & LikedArticleProtocol)? { get set }
     var coordinator: LikedArticlesNavigationProtocol? { get set }
