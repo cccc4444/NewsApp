@@ -82,8 +82,6 @@
 		1B5B6BD32A71742D00754A86 /* VIPDetailsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5B6BD22A71742D00754A86 /* VIPDetailsInteractor.swift */; };
 		1B5B6BD62A71745300754A86 /* VIPDetailsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5B6BD52A71745300754A86 /* VIPDetailsRouter.swift */; };
 		1B5B6BD82A71746800754A86 /* VIPDetailsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5B6BD72A71746800754A86 /* VIPDetailsConfigurator.swift */; };
-		1B5B6BDC2A726BFE00754A86 /* Quick in Frameworks */ = {isa = PBXBuildFile; productRef = 1B5B6BDB2A726BFE00754A86 /* Quick */; };
-		1B5B6BDF2A726C7100754A86 /* Nimble in Frameworks */ = {isa = PBXBuildFile; productRef = 1B5B6BDE2A726C7100754A86 /* Nimble */; };
 		1BA046982A58762400E63F46 /* DisplayableArticle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA046972A58762400E63F46 /* DisplayableArticle.swift */; };
 		1BA0469A2A5952DC00E63F46 /* String+isNotEmpty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA046992A5952DC00E63F46 /* String+isNotEmpty.swift */; };
 		1BA0469D2A59574C00E63F46 /* AlertProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA0469C2A59574C00E63F46 /* AlertProtocol.swift */; };
@@ -202,8 +200,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1B5B6BDC2A726BFE00754A86 /* Quick in Frameworks */,
-				1B5B6BDF2A726C7100754A86 /* Nimble in Frameworks */,
 				1BAE184B2A558B1300466360 /* OrderedCollections in Frameworks */,
 				1B44BD2D2A6576DA00A0E3C8 /* NotificationBannerSwift in Frameworks */,
 				1B3D754C2A4D60E500235968 /* SnapKit in Frameworks */,
@@ -746,8 +742,6 @@
 				1B44BD2C2A6576DA00A0E3C8 /* NotificationBannerSwift */,
 				1B44BD2F2A657C7B00A0E3C8 /* Lottie */,
 				1B44BD982A6A95EE00A0E3C8 /* SimpleKeychain */,
-				1B5B6BDB2A726BFE00754A86 /* Quick */,
-				1B5B6BDE2A726C7100754A86 /* Nimble */,
 			);
 			productName = NewsApp;
 			productReference = 1B3D752D2A4D5F0000235968 /* NewsApp.app */;
@@ -784,8 +778,6 @@
 				1B44BD2B2A6576DA00A0E3C8 /* XCRemoteSwiftPackageReference "NotificationBanner" */,
 				1B44BD2E2A657C7B00A0E3C8 /* XCRemoteSwiftPackageReference "lottie-spm" */,
 				1B44BD972A6A95EE00A0E3C8 /* XCRemoteSwiftPackageReference "SimpleKeychain" */,
-				1B5B6BDA2A726BFE00754A86 /* XCRemoteSwiftPackageReference "Quick" */,
-				1B5B6BDD2A726C7100754A86 /* XCRemoteSwiftPackageReference "Nimble" */,
 			);
 			productRefGroup = 1B3D752E2A4D5F0000235968 /* Products */;
 			projectDirPath = "";
@@ -1162,22 +1154,6 @@
 				minimumVersion = 1.1.0;
 			};
 		};
-		1B5B6BDA2A726BFE00754A86 /* XCRemoteSwiftPackageReference "Quick" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Quick/Quick.git";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
-		1B5B6BDD2A726C7100754A86 /* XCRemoteSwiftPackageReference "Nimble" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Quick/Nimble.git";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
 		1BA046A22A59684100E63F46 /* XCRemoteSwiftPackageReference "SwiftLint" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/SwiftLint.git";
@@ -1216,16 +1192,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1B44BD972A6A95EE00A0E3C8 /* XCRemoteSwiftPackageReference "SimpleKeychain" */;
 			productName = SimpleKeychain;
-		};
-		1B5B6BDB2A726BFE00754A86 /* Quick */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1B5B6BDA2A726BFE00754A86 /* XCRemoteSwiftPackageReference "Quick" */;
-			productName = Quick;
-		};
-		1B5B6BDE2A726C7100754A86 /* Nimble */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1B5B6BDD2A726C7100754A86 /* XCRemoteSwiftPackageReference "Nimble" */;
-			productName = Nimble;
 		};
 		1BA046A32A59688100E63F46 /* SwiftLintPlugin */ = {
 			isa = XCSwiftPackageProductDependency;
