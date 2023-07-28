@@ -9,6 +9,14 @@ import Foundation
 import CoreData
 import UIKit
 
+protocol LikedArticlePersistentProtocol {
+    func saveArticle(with likedArticle: DisplayableArticle, completion: @escaping (Swift.Result<Bool, Error>) -> Void)
+    func fetchArticles(completion: @escaping (Swift.Result<[NSManagedObject], Error>) -> Void)
+    func isArticleSaved(with likedArticle: DisplayableArticle, completion: @escaping (Swift.Result<Bool, Error>) -> Void)
+    func deleteArticle(with likedArticle: DisplayableArticle, completion: @escaping (Swift.Result<Bool, Error>) -> Void)
+    func deleteAllArticles(completion: @escaping (Swift.Result<Bool, Error>) -> Void)
+}
+
 class LikedArticlePersistentService {
     // MARK: - Properties
     static var shared: LikedArticlePersistentService {
