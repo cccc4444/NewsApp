@@ -102,6 +102,8 @@
 		1BAE18632A573D9B00466360 /* UIView+Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BAE18622A573D9B00466360 /* UIView+Appearance.swift */; };
 		1BCB11902A72904300295548 /* ArticleKeychainServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCB118F2A72904300295548 /* ArticleKeychainServiceTests.swift */; };
 		1BCB11982A739C3200295548 /* MockKeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCB11972A739C3200295548 /* MockKeychainService.swift */; };
+		1BCB119B2A73C2EB00295548 /* LikedArticlePersistentServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCB119A2A73C2EB00295548 /* LikedArticlePersistentServiceTests.swift */; };
+		1BCB119D2A73C41C00295548 /* MockLikedArticlePersistentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCB119C2A73C41C00295548 /* MockLikedArticlePersistentService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -208,6 +210,8 @@
 		1BCB118D2A72904300295548 /* NewsAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NewsAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BCB118F2A72904300295548 /* ArticleKeychainServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleKeychainServiceTests.swift; sourceTree = "<group>"; };
 		1BCB11972A739C3200295548 /* MockKeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockKeychainService.swift; sourceTree = "<group>"; };
+		1BCB119A2A73C2EB00295548 /* LikedArticlePersistentServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedArticlePersistentServiceTests.swift; sourceTree = "<group>"; };
+		1BCB119C2A73C41C00295548 /* MockLikedArticlePersistentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLikedArticlePersistentService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -746,6 +750,7 @@
 		1BCB118E2A72904300295548 /* NewsAppTests */ = {
 			isa = PBXGroup;
 			children = (
+				1BCB11992A73B46F00295548 /* CoreDataService */,
 				1BCB11962A739C1200295548 /* KeychainService */,
 			);
 			path = NewsAppTests;
@@ -758,6 +763,15 @@
 				1BCB11972A739C3200295548 /* MockKeychainService.swift */,
 			);
 			path = KeychainService;
+			sourceTree = "<group>";
+		};
+		1BCB11992A73B46F00295548 /* CoreDataService */ = {
+			isa = PBXGroup;
+			children = (
+				1BCB119A2A73C2EB00295548 /* LikedArticlePersistentServiceTests.swift */,
+				1BCB119C2A73C41C00295548 /* MockLikedArticlePersistentService.swift */,
+			);
+			path = CoreDataService;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -970,7 +984,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				1BCB11902A72904300295548 /* ArticleKeychainServiceTests.swift in Sources */,
+				1BCB119B2A73C2EB00295548 /* LikedArticlePersistentServiceTests.swift in Sources */,
 				1BCB11982A739C3200295548 /* MockKeychainService.swift in Sources */,
+				1BCB119D2A73C41C00295548 /* MockLikedArticlePersistentService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
