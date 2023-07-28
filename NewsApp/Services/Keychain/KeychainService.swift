@@ -9,7 +9,7 @@ import Foundation
 import Security
 import SimpleKeychain
 
-protocol KeychainServiceInterface {
+protocol KeychainServiceProtocol {
     func store(article: SecretArticle, completion: @escaping (Swift.Result<Bool, Error>) -> Void)
     func retrieveArticles(completion: @escaping (Swift.Result<[SecretArticle], Error>) -> Void)
     func removeAt(index: Int, completion: @escaping (Swift.Result<Bool, Error>) -> Void)
@@ -17,7 +17,7 @@ protocol KeychainServiceInterface {
     func isSaved(article: SecretArticle, completion: @escaping (Swift.Result<Bool, Error>) -> Void)
 }
 
-class ArticleKeychainService: KeychainServiceInterface {
+class ArticleKeychainService: KeychainServiceProtocol {
     
     static let shared = ArticleKeychainService()
     

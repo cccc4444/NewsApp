@@ -100,7 +100,8 @@
 		1BAE185F2A572D6B00466360 /* CustomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BAE185E2A572D6B00466360 /* CustomImageView.swift */; };
 		1BAE18612A573D5300466360 /* UIImageVIew+setImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BAE18602A573D5300466360 /* UIImageVIew+setImage.swift */; };
 		1BAE18632A573D9B00466360 /* UIView+Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BAE18622A573D9B00466360 /* UIView+Appearance.swift */; };
-		1BCB11902A72904300295548 /* NewsAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCB118F2A72904300295548 /* NewsAppTests.swift */; };
+		1BCB11902A72904300295548 /* ArticleKeychainServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCB118F2A72904300295548 /* ArticleKeychainServiceTests.swift */; };
+		1BCB11982A739C3200295548 /* MockKeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCB11972A739C3200295548 /* MockKeychainService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -205,7 +206,8 @@
 		1BAE18602A573D5300466360 /* UIImageVIew+setImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageVIew+setImage.swift"; sourceTree = "<group>"; };
 		1BAE18622A573D9B00466360 /* UIView+Appearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Appearance.swift"; sourceTree = "<group>"; };
 		1BCB118D2A72904300295548 /* NewsAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NewsAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		1BCB118F2A72904300295548 /* NewsAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsAppTests.swift; sourceTree = "<group>"; };
+		1BCB118F2A72904300295548 /* ArticleKeychainServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleKeychainServiceTests.swift; sourceTree = "<group>"; };
+		1BCB11972A739C3200295548 /* MockKeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockKeychainService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -744,9 +746,18 @@
 		1BCB118E2A72904300295548 /* NewsAppTests */ = {
 			isa = PBXGroup;
 			children = (
-				1BCB118F2A72904300295548 /* NewsAppTests.swift */,
+				1BCB11962A739C1200295548 /* KeychainService */,
 			);
 			path = NewsAppTests;
+			sourceTree = "<group>";
+		};
+		1BCB11962A739C1200295548 /* KeychainService */ = {
+			isa = PBXGroup;
+			children = (
+				1BCB118F2A72904300295548 /* ArticleKeychainServiceTests.swift */,
+				1BCB11972A739C3200295548 /* MockKeychainService.swift */,
+			);
+			path = KeychainService;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -958,7 +969,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1BCB11902A72904300295548 /* NewsAppTests.swift in Sources */,
+				1BCB11902A72904300295548 /* ArticleKeychainServiceTests.swift in Sources */,
+				1BCB11982A739C3200295548 /* MockKeychainService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
