@@ -36,7 +36,7 @@ final class ArticleKeychainServiceTests: XCTestCase {
         
         mockKeychainService.store(article: article) { result in
             if case .failure(let error) = result {
-                XCTAssertEqual(error as? MockError, .storeError)
+                XCTAssertEqual(error as? MockKeychainError, .storeError)
             }
         }
         
@@ -70,7 +70,7 @@ final class ArticleKeychainServiceTests: XCTestCase {
         
         mockKeychainService.retrieveArticles { result in
             if case .failure(let error) = result {
-                XCTAssertEqual(error as? MockError, .retrieveError)
+                XCTAssertEqual(error as? MockKeychainError, .retrieveError)
             }
         }
     }
@@ -99,7 +99,7 @@ final class ArticleKeychainServiceTests: XCTestCase {
         
         mockKeychainService.removeAt(index: 0) { result in
             if case .failure(let error) = result {
-                XCTAssertEqual(error as? MockError, .removeError)
+                XCTAssertEqual(error as? MockKeychainError, .removeError)
             }
         }
     }
@@ -113,7 +113,7 @@ final class ArticleKeychainServiceTests: XCTestCase {
         
         mockKeychainService.removeAt(index: 2) { result in
             if case .failure(let error) = result {
-                XCTAssertEqual(error as? MockError, .removeError)
+                XCTAssertEqual(error as? MockKeychainError, .removeError)
             }
         }
     }
@@ -139,7 +139,7 @@ final class ArticleKeychainServiceTests: XCTestCase {
         
         mockKeychainService.removeAll { result in
             if case .failure(let error) = result {
-                XCTAssertEqual(error as? MockError, .removeAllError)
+                XCTAssertEqual(error as? MockKeychainError, .removeAllError)
             }
         }
     }
@@ -184,7 +184,7 @@ final class ArticleKeychainServiceTests: XCTestCase {
         
         mockKeychainService.isSaved(article: article1) { result in
             if case .failure(let error) = result {
-                XCTAssertEqual(error as? MockError, .isSavedError)
+                XCTAssertEqual(error as? MockKeychainError, .isSavedError)
             }
         }
     }

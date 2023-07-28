@@ -21,7 +21,7 @@ struct SectionListModel: Codable {
     }
 }
 
-struct SectionModel: Codable {
+struct SectionModel: Codable, Equatable {
     let section: String
     let displayName: String
     
