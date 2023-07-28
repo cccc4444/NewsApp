@@ -14,7 +14,7 @@ class MockKeychainService: KeychainServiceProtocol{
     
     func store(article: SecretArticle, completion: @escaping (Swift.Result<Bool, Error>) -> Void) {
         if shouldFail {
-            completion(.failure(MockError.storeError))
+            completion(.failure(MockKeychainError.storeError))
         } else {
             articles.append(article)
             completion(.success(true))
@@ -23,7 +23,7 @@ class MockKeychainService: KeychainServiceProtocol{
     
     func retrieveArticles(completion: @escaping (Swift.Result<[SecretArticle], Error>) -> Void) {
         if shouldFail {
-            completion(.failure(MockError.retrieveError))
+            completion(.failure(MockKeychainError.retrieveError))
         } else {
             completion(.success(articles))
         }
@@ -31,7 +31,7 @@ class MockKeychainService: KeychainServiceProtocol{
     
     func removeAt(index: Int, completion: @escaping (Swift.Result<Bool, Error>) -> Void) {
         if shouldFail || index < 0 || index >= articles.count {
-            completion(.failure(MockError.removeError))
+            completion(.failure(MockKeychainError.removeError))
         } else {
             articles.remove(at: index)
             completion(.success(true))
@@ -40,7 +40,7 @@ class MockKeychainService: KeychainServiceProtocol{
     
     func removeAll(completion: @escaping (Swift.Result<Bool, Error>) -> Void) {
         if shouldFail {
-            completion(.failure(MockError.removeAllError))
+            completion(.failure(MockKeychainError.removeAllError))
         } else {
             articles.removeAll()
             completion(.success(true))
@@ -49,24 +49,10 @@ class MockKeychainService: KeychainServiceProtocol{
     
     func isSaved(article: SecretArticle, completion: @escaping (Swift.Result<Bool, Error>) -> Void) {
         if shouldFail {
-            completion(.failure(MockError.isSavedError))
+            completion(.failure(MockKeychainError.isSavedError))
         } else {
             completion(.success(articles.contains { $0.title == article.title }))
         }
-    }
-}
-
-enum MockError: Error {
-    case storeError
-    case retrieveError
-    case removeError
-    case removeAllError
-    case isSavedError
-}
-
-extension SecretArticle {
-    static func createStubArticle(title: String) -> Self {
-        return .init(displayableArticle: ArticleModel(section: "test", subsection: "test", title: title, abstract: "abstract", url: "", uri: "", byline: "", itemType: "", updatedDate: "", createdDate: "", publishedDate: "", materialTypeFacet: "", kicker: "", desFacet: [], orgFacet: [], perFacet: [], geoFacet: [], multimedia: [], shortUrl: ""))
     }
 }
 
