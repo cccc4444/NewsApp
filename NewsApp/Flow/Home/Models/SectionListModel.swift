@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SectionListModel: Codable {
+struct SectionListModel: Codable, NetworkResponse {
     let status: String
     let copyright: String
     let numResults: Int

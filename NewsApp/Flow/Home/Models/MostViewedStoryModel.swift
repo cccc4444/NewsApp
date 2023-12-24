@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MostViewedStoryModel: Codable {
+struct MostViewedStoryModel: Codable, NetworkResponse {
     let status: String
     let copyright: String
     let numResults: Int

@@ -35,6 +35,7 @@ protocol HomeViewPersistentProtocol: AnyObject {
 
 protocol HomeViewModelNetworkingProtocol: AnyObject {
     func fetchStoriesSections()
+    func fetchStoriesSectionsAsync()
     func fetchStories(for section: String, isRefresh: Bool)
     func fetchMostViewedStories(isRefresh: Bool)
     func getArticle(for indexPath: IndexPath) -> DisplayableArticle?
@@ -59,6 +60,7 @@ class HomeViewModel: HomeViewModelProtocol, HomeViewModelNetworkingProtocol, Hom
     private var cancellableSet: Set<AnyCancellable> = []
     
     var networkService: StoriesNetworkServiceProtocol
+    var networkManager = NetworkManager()
     weak var controller: (AlertProtocol & HomeViewContollerProtocol)?
     weak var coordinator: HomeNavigationDelegate?
     
@@ -172,6 +174,18 @@ class HomeViewModel: HomeViewModelProtocol, HomeViewModelNetworkingProtocol, Hom
     }
     
     // MARK: - Networking Methods
+    func fetchStoriesSectionsAsync() {
+        Task {
+            do {
+                sectionViewModel = try await networkManager.performRequest(.fetchSectionList()).results
+            } catch {
+                if let error = error as? HTTPErrorResponse {
+                    self.controller?.present(alert: .rateLimit(message: error.fault.faultString))
+                }
+            }
+        }
+    }
+    
     func fetchStoriesSections() {
         do {
             try networkService.fetchSectionList()

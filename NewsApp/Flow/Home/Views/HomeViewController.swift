@@ -77,7 +77,8 @@ class HomeViewController: UIViewController, HomeViewContollerProtocol {
         trackGeneralStories() 
         
         viewModel.fetchMostViewedStories()
-        viewModel.fetchStoriesSections()
+//        viewModel.fetchStoriesSections()
+        viewModel.fetchStoriesSectionsAsync()
     }
     
     private func trackSections() {
